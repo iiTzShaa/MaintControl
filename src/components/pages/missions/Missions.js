@@ -35,6 +35,7 @@ const Missions = (props) => {
   const [sortingOrderAlph, setSortingOrderAlph] = useState('asc');
   const [sortingOrderCity, setSortingOrderCity] = useState('asc');
   const [sortingOrderUrg, setSortingOrderUrg] = useState('asc');
+  const [searchCity, setSearchCity] = useState('');
 
   const [filter, setFilter] = useState('created_date');
 
@@ -76,8 +77,9 @@ const Missions = (props) => {
 
   // set filter
 
-  let filteredMissions = missionsJson;
-
+  let filteredMissions = missionsJson.filter((mission) =>
+    mission.city.toLowerCase().includes(searchCity.toLowerCase())
+  );
   if (filter === 'abc' && sortingOrderAlph === 'asc') {
     filteredMissions = filteredMissions.sort((a, b) =>
       a.title.localeCompare(b.title)
@@ -154,6 +156,14 @@ const Missions = (props) => {
         <div className="Welcome">
           Welcome Admin, Total missions: {missionsJson.length}
         </div>
+        <input 
+          type="text"
+          placeholder="Search by city"
+          value={searchCity}
+          onChange={(e) => setSearchCity(e.target.value)}
+          className="searchBar"
+          
+        />
         <div className="filtersBtns">
           <div className="actionBtns">
             <Link className="newMission" to={`/missions/newMission`}>
