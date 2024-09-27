@@ -1,92 +1,21 @@
-/*require('dotenv').config({ path: 'C:/Users/wwera/OneDrive/שולחן העבודה/Maintenance HIT/MaintControl/.env' });
-console.log('MongoDB URI from .env:', process.env.MONGODB_URI); // Check if it's loading
-
-const mongoose = require('mongoose');
-const uri = process.env.MONGODB_URI; 
-
-if (!uri) {
-  console.error('MongoDB URI is not defined! Ensure the .env file is properly configured.');
-  process.exit(1); // Exit the process if the URI is not defined
-}
+const User = require('./models/User');
 
 
-// Function to connect to MongoDB
-const connectMaintControlDB = () => {
-  return new Promise((resolve, reject) => {
-    try {
-      // Connect to MongoDB using mongoose
-      mongoose.connect(uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
-
-      // Get the database connection instance
-      const db = mongoose.connection;
-      // If an error occurs while connecting
-      db.on('error', (err) => {
-        console.log('Error connecting to the database: ', err);
-        reject(err);
-      });
-
-      // Once successfully connected
-      db.once('open', () => {
-        console.log('Connected to MongoDB');
-        resolve();
-      });
-    } catch (error) {
-      console.log('Connection failure:', error);
-      reject(error);
-    }
-  });
-};*/
-
-
-/*connectMaintControlDB();
-// Export the database connection function
-module.exports = {
-  connectMaintControlDB,
-};*/
-
-
-
-/*const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://evyataravni24:0604@cluster0.e546c.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
-
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-run().catch(console.dir);*/
-
-
-
-
-
-require('dotenv').config(); // Load environment variables from .env
-console.log('MongoDB URI from .env:', process.env.MONGODB_URI); // Debugging line
-const mongoose = require('mongoose');
+require('dotenv').config();
 const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors'); // Import CORS
 
 const app = express();
+
+// Enable CORS for specific origin (replace 'http://localhost:3000' with your frontend URL)
+app.use(cors({
+  origin: 'http://localhost:3000' // Replace this with the actual URL of your frontend
+}));
+
 app.use(express.json()); // Middleware to parse JSON
 
+// MongoDB connection
 const uri = process.env.MONGODB_URI;
 
 if (!uri) {
@@ -107,17 +36,46 @@ async function connectDB() {
   }
 }
 
-// Connect to the database
-connectDB();
+connectDB().then(() => addTestUser());
 
-// Define routes or import them
-// Example route
+// Function to add a test user to the database
+async function addTestUser() {
+  try {
+    // Define the test user details
+    const testUser = new User ({
+      username: 'testUser',
+      password: 'testPassword123',
+      firstName: 'Test',
+      lastName: 'User',
+      email: 'test@example.com',
+      phoneNumber: '1234567890',
+      livingAddress: '123 Test St',
+      geographicArea: 'Test Area',
+      authorization: 'admin',
+      companyId: '12345'
+    });
+
+    // Save the user to the database
+    await testUser.save();
+    console.log('Test user added successfully!');
+  } catch (error) {
+    console.error('Error adding test user:', error.message);
+  }
+}
+
+// Define your routes
 app.get('/', (req, res) => {
   res.send('API is running!');
 });
+
+// Example of using your routes
+const userRoutes = require('./routes/userRoutes'); // Assuming you have user routes
+app.use('/api/users', userRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+
