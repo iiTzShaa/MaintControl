@@ -45,7 +45,7 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   companyId: {
-    type: mongoose.Schema.Types.ObjectId, // Assuming it's a reference to a Company document
+    type: String, // Assuming it's a reference to a Company document
     ref: 'Company',
     required: true,
   },

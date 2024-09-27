@@ -4,6 +4,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
 import './AddUser.css';
 
+
 const AddUser = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -67,8 +68,9 @@ const AddUser = () => {
   async function addUserFetch() {
     try {
       const response = await fetch(
-        'https://maint-control-docker-image-2n3aq2y4ja-zf.a.run.app/users/addUser',
+       'http://localhost:3000/admin/addUser',
         {
+          
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
