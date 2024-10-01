@@ -83,6 +83,8 @@ require('dotenv').config(); // Load environment variables from .env
 console.log('MongoDB URI from .env:', process.env.MONGODB_URI); // Debugging line
 const mongoose = require('mongoose');
 const express = require('express');
+const userRoutes = require('./routes/userRoutes');
+ 
 
 const app = express();
 app.use(express.json()); // Middleware to parse JSON
@@ -106,9 +108,11 @@ async function connectDB() {
     process.exit(1);
   }
 }
-
+ 
 // Connect to the database
 connectDB();
+
+app.use('/users', userRoutes);
 
 // Define routes or import them
 // Example route
@@ -116,8 +120,13 @@ app.get('/', (req, res) => {
   res.send('API is running!');
 });
 
+
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+
+
