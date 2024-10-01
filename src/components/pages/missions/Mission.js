@@ -10,12 +10,16 @@ import { useNavigate } from 'react-router-dom';
 const Mission = (props) => {
   const [showDescription, setShowDescription] = useState(false);
   const [isDone, setIsDone] = useState(false);
+  const [comments, setComments] = useState({});
+  const [draftComments, setDraftComments] = useState({});
+  const [showCommentBox, setShowCommentBox] = useState(null);
+  const [isSaved, setIsSaved] = useState(false); 
+
   const label = { inputProps: { 'aria-label': 'Mission Checkbox' } };
   const navigate = useNavigate();
 
-  const formattedDate = new Date().getTime(); // Get the current date in milliseconds
-  const missionCreatedDate = new Date(props.mission.created_date).getTime(); // Get the mission's created date in milliseconds
-  // Calculate the number of days left
+  const formattedDate = new Date().getTime();
+  const missionCreatedDate = new Date(props.mission.created_date).getTime();
   const pastDays =
     Math.round((formattedDate - missionCreatedDate) / (1000 * 60 * 60 * 24)) <
     9999
@@ -29,8 +33,7 @@ const Mission = (props) => {
   };
 
   const missionChangeHandler = () => {
-    if (props.editMissionClicked)
-      navigate(`/missions/edit/${props.mission.id}`);
+    if (props.editMissionClicked) navigate(`/missions/edit/${props.mission.id}`);
   };
 
   const checkBoxHandler = (event) => {
@@ -46,6 +49,23 @@ const Mission = (props) => {
       : props.mission.urgency === 'Low'
       ? 'UrgencyLow'
       : 'Urgency';
+
+  const handleSaveComment = (missionId) => {
+    setComments((prevComments) => ({
+      ...prevComments,
+      [missionId]: draftComments[missionId],
+    }));
+    alert('Comment saved!');
+    setIsSaved(true); 
+    setShowCommentBox(null); 
+  };
+
+  const handleCommentChange = (missionId, value) => {
+    setDraftComments((prevDraft) => ({
+      ...prevDraft,
+      [missionId]: value,
+    }));
+  };
 
   return (
     <li
@@ -125,6 +145,41 @@ const Mission = (props) => {
               </div>
             </div>
           </div>
+
+          {/* הוספת כפתור ההערה */}
+          <div className="comment-controls">
+            <button
+              className="add-comment-button"
+              onClick={() => {
+                if (showCommentBox === props.mission.id) {
+                  setShowCommentBox(null);
+                } else {
+                  setShowCommentBox(props.mission.id);
+                }
+              }}
+            >
+              +
+            </button>
+
+            {showCommentBox === props.mission.id && (
+              <div className="comment-box">
+                <textarea
+                  value={draftComments[props.mission.id] || ''}
+                  onChange={(e) =>
+                    handleCommentChange(props.mission.id, e.target.value)
+                  }
+                  placeholder="Write a note here"
+                />
+                <button
+                  onClick={() => handleSaveComment(props.mission.id)}
+                  className={isSaved ? 'save-button saved' : 'save-button'} // משנה את המחלקה בהתאם למצב
+                >
+                  Save
+                </button>
+              </div>
+            )}
+          </div>
+
           <WorkerSelector />
           <Link
             className="taskBtn"
