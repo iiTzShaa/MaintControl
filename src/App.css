@@ -44,3 +44,191 @@
     height: unset;
   }
 }
+body.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+.App.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+.dark-mode-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.toggle-switch {
+  width: 50px;
+  height: 25px;
+  background-color: #ccc;
+  border-radius: 25px;
+  position: relative;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.toggle-switch.active {
+  background-color: #333;
+}
+
+.toggle-switch::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%);
+  transition: left 0.3s ease;
+}
+
+.toggle-switch.active::before {
+  left: 27px;
+}
+
+.toggle-label {
+  font-size: 14px;
+  color: #333;
+}
+
+.dark-mode .toggle-label {
+  color: white;
+}
+
+.dark-mode .toggle-switch {
+  background-color: #555;
+}
+
+.dark-mode .toggle-switch::before {
+  background-color: #bbb;
+}
+.dark-mode .toggle-switch {
+  background-color: #555; 
+}
+
+.dark-mode .toggle-switch::before {
+  background-color: #bbb;
+}
+
+.dark-mode .toggle-label {
+  color: white;
+}
+
+.toggle-switch {
+  width: 50px;
+  height: 25px;
+  background-color: #ccc;
+  border-radius: 25px;
+  position: relative;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.toggle-switch::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%);
+  transition: left 0.3s ease;
+}
+
+.toggle-switch.active::before {
+  left: 27px;
+}
+.toggle-label {
+  font-size: 14px;
+  color: black; 
+}
+.light-mode .listItemText {
+  color: black; 
+}
+
+.dark-mode .listItemText {
+  color: white; 
+
+}
+.light-mode .formControlLabel {
+  color: black; 
+}
+
+.dark-mode .formControlLabel {
+  color: white;}
+  .dark-mode .list {
+    background-color: #2e2e2e; 
+    color: white; 
+  }
+  
+  .dark-mode .listItemText {
+    color: white !important; 
+  }
+  
+  .light-mode .list {
+    background-color: white;
+    color: black;
+  }
+  .light-mode .searchBar {
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+  }
+  
+  .dark-mode .searchBar {
+    background-color: #333; 
+    color: white; 
+    border: 1px solid #555; 
+  }
+  
+  .dark-mode .searchBar::placeholder {
+    color: #888;
+  }
+  .dark-mode .MuiSelect-select {
+    background-color: #333; 
+    color: white;  
+  }
+  
+  .dark-mode .MuiOutlinedInput-input {
+    border-color: #555;  
+  }
+  
+  .dark-mode .MuiSelect-select:hover {
+    background-color: #444; 
+  }
+  
+  .dark-mode .MuiList-root {
+    background-color: #333;  
+    color: white;  
+  }
+  .dark-mode .MuiList-root, 
+.dark-mode .MuiMenuItem-root, 
+.dark-mode .MuiListItemIcon-root, 
+.dark-mode .MuiListItemText-primary {
+  color: white !important; 
+}
+
+.dark-mode .MuiList-root {
+  background-color: #333; 
+}
+.searchUser {
+  background-color: #f0f0f0;
+  color: #000;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.dark-mode .searchUser {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+}
