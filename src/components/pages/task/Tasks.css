@@ -238,8 +238,6 @@
   .tasksList .actionBtns {
     gap: 0.5rem;
   }
-<<<<<<< Updated upstream
-=======
 }
 
 .uploadIcon {
@@ -267,13 +265,12 @@
 }
 .imageUpload {
   display: flex;
-  align-items: center; /* Vertically centers the text and icon */
-  gap: 10px; /* Adds spacing between the text and icon */
-  margin-top: 10px; /* Optional margin to add spacing from other elements */
+  align-items: center; 
+  gap: 10px; 
+  margin-top: 10px; 
 }
 
 .imageUpload p {
   margin: 0;
-  font-size: 1rem; /* Adjust font size if needed */
->>>>>>> Stashed changes
+  font-size: 1rem; 
 }
