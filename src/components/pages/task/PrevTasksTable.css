@@ -38,10 +38,6 @@ td {
   cursor: pointer;
 }
 
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
 tr:hover {
   background-color: #d9d9d9;
 }

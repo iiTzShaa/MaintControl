@@ -204,8 +204,8 @@
   border-radius: 5px;
 }
 .light-mode .MissionsTableBox {
-  background-color: #add8e6; /* Light blue background */
-  color: black; /* Text color for light mode */
+  background-color: #add8e6;
+  color: black;
 }
 
 .light-mode .Welcome {
@@ -220,4 +220,3 @@
 .dark-mode .Welcome {
   color: white; /* Lighter color for text in dark mode */
 }
-
