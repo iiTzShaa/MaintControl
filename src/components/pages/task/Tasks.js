@@ -46,11 +46,8 @@ const Tasks = () => {
     }
   };
   const exportToExcel = () => {
-    // Create a new workbook
     const wb = XLSX.utils.book_new();
-  
-    // Map task data to a 2D array for Excel
-    const wsData = [
+      const wsData = [
       ['ID', 'Product Type', 'Problem', 'Serial Number', 'Date Updated', 'Status'],
       ...filteredTasks.map((task) => [
         task.task_id,
@@ -62,16 +59,12 @@ const Tasks = () => {
       ]),
     ];
   
-    // Create a worksheet from the data
     const ws = XLSX.utils.aoa_to_sheet(wsData);
   
-    // Append the worksheet to the workbook
     XLSX.utils.book_append_sheet(wb, ws, 'Tasks');
   
-    // Write the Excel file and prompt a download
     XLSX.writeFile(wb, 'tasks_list.xlsx');
   };
-  // sort asc or desc by clicking on filter
   const sortingHandlerDate = () => {
     if (tasksSortingOrderDate === 'asc') {
       setTasksSortingOrderDate('desc');
@@ -100,8 +93,6 @@ const Tasks = () => {
       setTasksSortingOrderStatus('asc');
     }
   };
-
-  // set filters
 
   let filteredTasks = tasksState;
 
@@ -267,7 +258,7 @@ const Tasks = () => {
             size="small"
             color="primary"
             aria-label="exportToExcel"
-            onClick={exportToExcel} // Add the export function
+            onClick={exportToExcel}
           >
             <ImportExportIcon />
           </Fab>
