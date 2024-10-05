@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Tasks.css';
 import tasks from './tasks.json';
+import * as XLSX from 'xlsx';
+import ImportExportIcon from '@mui/icons-material/ImportExport';
 import PrevTasksTable from './PrevTasksTable';
 import { useNavigate, Link } from 'react-router-dom';
 import Fab from '@mui/material/Fab';
@@ -43,7 +45,32 @@ const Tasks = () => {
       setFilter(newFilter);
     }
   };
-
+  const exportToExcel = () => {
+    // Create a new workbook
+    const wb = XLSX.utils.book_new();
+  
+    // Map task data to a 2D array for Excel
+    const wsData = [
+      ['ID', 'Product Type', 'Problem', 'Serial Number', 'Date Updated', 'Status'],
+      ...filteredTasks.map((task) => [
+        task.task_id,
+        task.product_type,
+        task.problem,
+        task.product_serial_number,
+        task.date_updated,
+        task.status,
+      ]),
+    ];
+  
+    // Create a worksheet from the data
+    const ws = XLSX.utils.aoa_to_sheet(wsData);
+  
+    // Append the worksheet to the workbook
+    XLSX.utils.book_append_sheet(wb, ws, 'Tasks');
+  
+    // Write the Excel file and prompt a download
+    XLSX.writeFile(wb, 'tasks_list.xlsx');
+  };
   // sort asc or desc by clicking on filter
   const sortingHandlerDate = () => {
     if (tasksSortingOrderDate === 'asc') {
@@ -235,7 +262,15 @@ const Tasks = () => {
               </ToggleButton>
             </ToggleButtonGroup>
           </div>
-          <div className="actionBtns">
+          <div className="actionBtns">   
+          <Fab
+            size="small"
+            color="primary"
+            aria-label="exportToExcel"
+            onClick={exportToExcel} // Add the export function
+          >
+            <ImportExportIcon />
+          </Fab>
             <Fab
               size="small"
               color={deleteTaskClickedClass}
@@ -290,6 +325,7 @@ const Tasks = () => {
         />
         <div className="prevTasksTable">
           <PrevTasksTable />
+
         </div>
       </div>
     </div>

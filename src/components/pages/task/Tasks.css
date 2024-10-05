@@ -238,4 +238,42 @@
   .tasksList .actionBtns {
     gap: 0.5rem;
   }
+<<<<<<< Updated upstream
+=======
+}
+
+.uploadIcon {
+  display: inline-block;
+  background-color: purple;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.customIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploadIcon:hover {
+  background-color: orange;
+}
+
+.imagePreview img {
+  border: 1px solid #ddd;
+  padding: 5px;
+  margin-top: 10px;
+}
+.imageUpload {
+  display: flex;
+  align-items: center; /* Vertically centers the text and icon */
+  gap: 10px; /* Adds spacing between the text and icon */
+  margin-top: 10px; /* Optional margin to add spacing from other elements */
+}
+
+.imageUpload p {
+  margin: 0;
+  font-size: 1rem; /* Adjust font size if needed */
+>>>>>>> Stashed changes
 }
