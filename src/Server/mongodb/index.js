@@ -84,12 +84,14 @@ console.log('MongoDB URI from .env:', process.env.MONGODB_URI); // Debugging lin
 const mongoose = require('mongoose');
 const express = require('express');
 const userRoutes = require('./routes/userRoutes');
- 
+const cors = require('cors');
+
 
 const app = express();
 app.use(express.json()); // Middleware to parse JSON
 
 const uri = process.env.MONGODB_URI;
+app.use(cors());
 
 if (!uri) {
   console.error('MongoDB URI is not defined! Make sure to configure .env file.');
