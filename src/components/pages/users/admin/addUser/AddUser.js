@@ -65,43 +65,43 @@ const AddUser = () => {
   const token = localStorage.getItem('token');
 
   async function addUserFetch() {
+    const userData = {
+      username: username,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNumber: phoneNumber,
+      livingAddress: address,
+      geographicArea: area,
+      authorization: authorization,
+      companyId: companyId,
+    };
+  
+    // Print the body to the console
+    console.log("Request Body:", JSON.stringify(userData, null, 2));
+  
     try {
       const response = await fetch(
-        'http://localhost:3000/users',
+        'http://localhost:3000/users', // Ensure this points to the correct endpoint
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            user_name: username,
-            first_name: firstName,
-            last_name: lastName,
-            email: email,
-            password: password,
-            phone: phoneNumber,
-            role: authorization,
-            company_id: companyId,
-            location: {
-              address_name: address,
-              zone_name: area,
-              city: 'Holon',
-              country: 'Israel',
-              latitude: 34.052235,
-              longitude: -118.243683,
-            },
-          }),
+          }, 
+          credentials: 'include',
+          body: JSON.stringify(userData), // Send the body
         }
       );
-
+  
       if (!response.ok) {
         if (response.statusText === 'Unauthorized') {
           setError('Please login again');
         }
         throw new Error(response.statusText);
       }
-
+  
       console.log(response);
       navigate('/admin');
       return true;
@@ -110,6 +110,7 @@ const AddUser = () => {
       throw err;
     }
   }
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();

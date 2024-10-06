@@ -6,6 +6,7 @@ const router = express.Router();
 
 // Route to create a new user
 router.post('/', async (req, res) => {
+  console.log("hello post")
   try {
     const { username, password, firstName, lastName, email, phoneNumber, livingAddress, geographicArea, authorization, companyId } = req.body;
 
@@ -28,11 +29,12 @@ router.post('/', async (req, res) => {
       authorization,
       companyId,
     });
-
+    console.log(newUser);
     await newUser.save(); // Save the user in MongoDB
 
     res.status(201).json({ message: 'User created successfully', user: newUser });
   } catch (err) {
+    console.error('Error creating user:', err); // Log the actual error
     res.status(500).json({ error: 'Error creating user' });
   }
 });

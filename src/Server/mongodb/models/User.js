@@ -40,12 +40,12 @@ const userSchema = new mongoose.Schema({
   },
   authorization: {
     type: String,
-    enum: ['user', 'admin'], // Example, can be customized
+    enum: ["administrator"], // 
     default: 'user',
     required: true,
   },
   companyId: {
-    type: mongoose.Schema.Types.ObjectId, // Assuming it's a reference to a Company document
+    type: String, // Assuming it's a reference to a Company document
     ref: 'Company',
     required: true,
   },
