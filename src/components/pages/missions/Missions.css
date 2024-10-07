@@ -203,3 +203,20 @@
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+.light-mode .MissionsTableBox {
+  background-color: #add8e6;
+  color: black;
+}
+
+.light-mode .Welcome {
+  color: #13162b; /* Darker color for text in light mode */
+}
+/* Dark Mode */
+.dark-mode .MissionsTableBox {
+  background-color: #333; /* Darker background for dark mode */
+  color: white; /* White text for dark mode */
+}
+
+.dark-mode .Welcome {
+  color: white; /* Lighter color for text in dark mode */
+}

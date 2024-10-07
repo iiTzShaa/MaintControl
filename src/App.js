@@ -27,8 +27,17 @@ import { useEffect, useState } from 'react';
 function App() {
   const location = useLocation().pathname.replace('/', '');
   const [guides, setGuides] = useState([]);
-
   const token = localStorage.getItem('token');
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    if (!darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  };
 
   useEffect(() => {
     var currentDate = new Date();
@@ -39,12 +48,18 @@ function App() {
       localStorage.removeItem('token');
       localStorage.removeItem('role');
     }
-  }, []);
+  }, [])
+  
 
   return (
     <CartProvider>
-      <div className="App">
-        <Header location={location} />
+
+        <div className={`App ${darkMode ? 'dark-mode' : 'light-mode'}`}>
+        <Header 
+          location={location} 
+          darkMode={darkMode} 
+          toggleDarkMode={toggleDarkMode} 
+        />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="login" element={<Login />} />
@@ -106,6 +121,7 @@ function App() {
         </Routes>
       </div>
     </CartProvider>
+
   );
 }
 

@@ -60,7 +60,7 @@ const Header = (props) => {
               event.currentTarget.nextSibling.firstChild.focus()
             }
           />
-          <div className="searchBar">
+          <div className="searchBarH">
             <TextField
               id="outlined-basic"
               label="Search"
@@ -70,8 +70,15 @@ const Header = (props) => {
           </div>
         </div>
       </div>
+      
       <div className="pageName">{pageNameHandler(props.location)}</div>
       <div className="logoBox">
+
+      <div className="dark-mode-toggle" onClick={props.toggleDarkMode}>
+      <div className={`toggle-switch ${props.darkMode ? 'active' : ''}`}></div>
+      <span className="toggle-label">{props.darkMode ? 'Dark Mode' : 'Light Mode'}</span>
+      </div>
+
         <Link to="/">
           <img className="logo" src={Logo} alt="logo" />
         </Link>
