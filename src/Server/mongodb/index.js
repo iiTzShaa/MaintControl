@@ -4,7 +4,12 @@ console.log('MongoDB URI from .env:', process.env.MONGODB_URI); // Debugging lin
 const mongoose = require('mongoose');
 const express = require('express');
 const userRoutes = require('./routes/userRoutes');
+const missionRoutes = require('./routes/missionRoutes');
 const cors = require('cors');
+
+
+
+
 
 
 const app = express();
@@ -42,6 +47,8 @@ console.log("connecting to the server...");
 connectDB();
 
 app.use('/users', userRoutes);
+app.use('/api/missions', missionRoutes); 
+
 
 // Define routes or import them
 // Example route
@@ -50,12 +57,8 @@ app.get('/', (req, res) => {
 });
 
 
-
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-
-

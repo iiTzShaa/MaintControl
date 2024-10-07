@@ -76,7 +76,7 @@
 
 .missionDesc {
   color: white;
-  text-align: start;
+  text-align: flex-start;
   font-size: 1rem;
   margin-left: 5rem;
   margin-top: 0.5rem;
