@@ -7,7 +7,7 @@ import './AddUser.css';
 const AddUser = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // new state to track whether to show or hide the password
+  const [showPassword, setShowPassword] = useState(false);
   const [companyId, setCompanyId] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -17,100 +17,65 @@ const AddUser = () => {
   const [address, setAddress] = useState('');
   const [authorization, setAuthorization] = useState('');
   const [error, setError] = useState('');
+  const [showPopup, setShowPopup] = useState(false); // New state for popup visibility
   const navigate = useNavigate();
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleCompanyIdChange = (event) => {
-    setCompanyId(event.target.value);
-  };
-
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
-  };
-
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePhoneNumberChange = (event) => {
-    setPhoneNumber(event.target.value);
-  };
-
-  const handleAuthorizationChange = (event) => {
-    setAuthorization(event.target.value);
-  };
-
   const handleShowPassword = () => {
-    setShowPassword(!showPassword); // toggle showPassword state
+    setShowPassword(!showPassword);
   };
 
-  const handleAddressChange = (event) => {
-    setAddress(event.target.value);
+  const handleClosePopup = () => {
+    setShowPopup(false);
   };
 
-  const handleAreaChange = (event) => {
-    setArea(event.target.value);
-  };
   const token = localStorage.getItem('token');
 
   async function addUserFetch() {
     const userData = {
-      username: username,
-      password: password,
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phoneNumber: phoneNumber,
+      username,
+      password,
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
       livingAddress: address,
       geographicArea: area,
-      authorization: authorization,
-      companyId: companyId,
+      authorization,
+      companyId,
     };
-  
-    // Print the body to the console
-    console.log("Request Body:", JSON.stringify(userData, null, 2));
-  
+
     try {
-      const response = await fetch(
-        'http://localhost:3000/users', // Ensure this points to the correct endpoint
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          }, 
-          credentials: 'include',
-          body: JSON.stringify(userData), // Send the body
-        }
-      );
-  
+      const response = await fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        credentials: 'include',
+        body: JSON.stringify(userData),
+      });
+
       if (!response.ok) {
         if (response.statusText === 'Unauthorized') {
           setError('Please login again');
         }
         throw new Error(response.statusText);
       }
-  
-      console.log(response);
-      navigate('/admin');
+
+      // If successful, show the popup
+      setShowPopup(true);
+
+      // Navigate to admin page after a brief delay
+      setTimeout(() => {
+        navigate('/admin');
+      }, 2000);
+
       return true;
     } catch (err) {
       console.error(err);
       throw err;
     }
   }
-  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -133,7 +98,6 @@ const AddUser = () => {
     } else if (address === '') {
       setError('Must enter an address');
     } else {
-      // submit the form
       addUserFetch();
     }
   };
@@ -149,7 +113,7 @@ const AddUser = () => {
               className="addUserInput"
               type="text"
               value={username}
-              onChange={handleUsernameChange}
+              onChange={(e) => setUsername(e.target.value)}
               required
               placeholder="Please enter a username"
             />
@@ -160,16 +124,15 @@ const AddUser = () => {
               <input
                 id="pass"
                 className="addUserInput"
-                type={showPassword ? 'text' : 'password'} // show text if showPassword is true, otherwise show password
+                type={showPassword ? 'text' : 'password'}
                 value={password}
-                onChange={handlePasswordChange}
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="Please enter an 8 characters password"
               />
-              {showPassword && (
+              {showPassword ? (
                 <VisibilityIcon className="eye" onClick={handleShowPassword} />
-              )}
-              {!showPassword && (
+              ) : (
                 <VisibilityOffIcon
                   className="eyeOff"
                   onClick={handleShowPassword}
@@ -184,7 +147,7 @@ const AddUser = () => {
               className="addUserInput"
               type="text"
               value={firstName}
-              onChange={handleFirstNameChange}
+              onChange={(e) => setFirstName(e.target.value)}
               required
               placeholder="Please enter a first name"
             />
@@ -196,19 +159,19 @@ const AddUser = () => {
               className="addUserInput"
               type="text"
               value={lastName}
-              onChange={handleLastNameChange}
+              onChange={(e) => setLastName(e.target.value)}
               required
               placeholder="Please enter a last name"
             />
           </label>
           <label className="addUserLabel" htmlFor="Email">
-            Email adress:
+            Email address:
             <input
               id="email"
               className="addUserInput"
               type="text"
               value={email}
-              onChange={handleEmailChange}
+              onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="Please enter a valid email"
             />
@@ -220,7 +183,7 @@ const AddUser = () => {
               className="addUserInput"
               type="text"
               value={phoneNumber}
-              onChange={handlePhoneNumberChange}
+              onChange={(e) => setPhoneNumber(e.target.value)}
               required
               placeholder="Please enter a valid phone number"
             />
@@ -232,7 +195,7 @@ const AddUser = () => {
               className="addUserInput"
               type="text"
               value={address}
-              onChange={handleAddressChange}
+              onChange={(e) => setAddress(e.target.value)}
               required
               placeholder="Please enter an address"
             />
@@ -244,7 +207,7 @@ const AddUser = () => {
               name="Area"
               className="addUserInput"
               value={area}
-              onChange={handleAreaChange}
+              onChange={(e) => setArea(e.target.value)}
               required
             >
               <option value="choose">Choose Geographic Area</option>
@@ -260,7 +223,7 @@ const AddUser = () => {
               name="authorization"
               className="addUserInput"
               value={authorization}
-              onChange={handleAuthorizationChange}
+              onChange={(e) => setAuthorization(e.target.value)}
               required
             >
               <option value="choose">Choose authorization</option>
@@ -276,7 +239,7 @@ const AddUser = () => {
               className="addUserInput"
               type="text"
               value={companyId}
-              onChange={handleCompanyIdChange}
+              onChange={(e) => setCompanyId(e.target.value)}
               required
               placeholder="Please enter a company id"
             />
@@ -289,6 +252,16 @@ const AddUser = () => {
           </button>
         </div>
       </form>
+
+      {/* Popup Window */}
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <p>User added successfully!</p>
+            <button onClick={handleClosePopup}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
