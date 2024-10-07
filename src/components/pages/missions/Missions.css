@@ -87,7 +87,7 @@
 .Missions li {
   padding: 0.8rem;
   display: flex;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(71, 63, 63, 0.05);
   transition: all 0.2s ease-in-out;
 }
 
@@ -202,4 +202,70 @@
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.comment-box {
+  margin-top: 10px;
+  width: 90%; 
+}
+
+textarea {
+  width: 100%;
+  height: 70px; 
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.comment-controls {
+  display: flex;
+  align-items: flex-start; 
+  gap: 10px; 
+}
+
+.add-comment-button {
+  width: 40px;
+  height: 40px;
+  font-size: 12px;
+  background-color: #7ada97;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.add-comment-button:hover {
+  background-color: #8ee1a8;
+}
+
+.comment-box button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #0a3462;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+
+.save-button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #0a3462;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.save-button:hover {
+  background-color: #3d72ac; 
+  color: rgb(252, 252, 252);
 }
