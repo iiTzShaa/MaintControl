@@ -239,3 +239,38 @@
     gap: 0.5rem;
   }
 }
+
+.uploadIcon {
+  display: inline-block;
+  background-color: purple;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.customIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploadIcon:hover {
+  background-color: orange;
+}
+
+.imagePreview img {
+  border: 1px solid #ddd;
+  padding: 5px;
+  margin-top: 10px;
+}
+.imageUpload {
+  display: flex;
+  align-items: center; 
+  gap: 10px; 
+  margin-top: 10px; 
+}
+
+.imageUpload p {
+  margin: 0;
+  font-size: 1rem; 
+}

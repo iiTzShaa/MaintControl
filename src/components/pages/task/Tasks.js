@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Tasks.css';
 import tasks from './tasks.json';
+import * as XLSX from 'xlsx';
+import ImportExportIcon from '@mui/icons-material/ImportExport';
 import PrevTasksTable from './PrevTasksTable';
 import { useNavigate, Link } from 'react-router-dom';
 import Fab from '@mui/material/Fab';
@@ -43,8 +45,26 @@ const Tasks = () => {
       setFilter(newFilter);
     }
   };
-
-  // sort asc or desc by clicking on filter
+  const exportToExcel = () => {
+    const wb = XLSX.utils.book_new();
+      const wsData = [
+      ['ID', 'Product Type', 'Problem', 'Serial Number', 'Date Updated', 'Status'],
+      ...filteredTasks.map((task) => [
+        task.task_id,
+        task.product_type,
+        task.problem,
+        task.product_serial_number,
+        task.date_updated,
+        task.status,
+      ]),
+    ];
+  
+    const ws = XLSX.utils.aoa_to_sheet(wsData);
+  
+    XLSX.utils.book_append_sheet(wb, ws, 'Tasks');
+  
+    XLSX.writeFile(wb, 'tasks_list.xlsx');
+  };
   const sortingHandlerDate = () => {
     if (tasksSortingOrderDate === 'asc') {
       setTasksSortingOrderDate('desc');
@@ -73,8 +93,6 @@ const Tasks = () => {
       setTasksSortingOrderStatus('asc');
     }
   };
-
-  // set filters
 
   let filteredTasks = tasksState;
 
@@ -235,7 +253,15 @@ const Tasks = () => {
               </ToggleButton>
             </ToggleButtonGroup>
           </div>
-          <div className="actionBtns">
+          <div className="actionBtns">   
+          <Fab
+            size="small"
+            color="primary"
+            aria-label="exportToExcel"
+            onClick={exportToExcel}
+          >
+            <ImportExportIcon />
+          </Fab>
             <Fab
               size="small"
               color={deleteTaskClickedClass}
@@ -290,6 +316,7 @@ const Tasks = () => {
         />
         <div className="prevTasksTable">
           <PrevTasksTable />
+
         </div>
       </div>
     </div>
