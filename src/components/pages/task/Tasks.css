@@ -3,17 +3,57 @@
   height: calc(100% - 6rem);
   width: 95%;
   margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
+@media (max-width: 768px) {
+  .tasksList, .mapsBox {
+    flex-basis: 100%;
+  }
 
+  .taskContent {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .taskProblemContent {
+    max-width: 100%;
+  }
+}
+@media (max-width: 600px) {
+  .taskItem {
+    padding: 0.5rem;
+  }
+
+  .taskItem h3, .taskTitle, .tasksSerialNumber {
+    font-size: 0.7rem;
+  }
+
+  .taskProblemContent {
+    max-width: 100%;
+  }
+}
+@media (max-width: 420px) {
+  .taskTitle, .taskListHeader {
+    font-size: 0.9rem;
+  }
+
+  .tasksList .actionBtns {
+    gap: 0.5rem;
+  }
+}
 .tasksList {
   flex-basis: 50%;
   height: 100%;
   overflow: auto;
   background-color: #f2f6fc;
   padding: 0.5rem;
-  min-width: 30rem;
   cursor: pointer;
   color: white;
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 300px;
 }
 
 .tasksList .actionBtns {
@@ -23,6 +63,9 @@
   margin-bottom: 1.5rem;
   gap: 1rem;
   z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  object-fit: cover;
 }
 
 .taskItem {
@@ -33,6 +76,8 @@
   padding: 1rem;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   min-height: 7rem;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .taskItem:first-child {
@@ -55,6 +100,8 @@
   flex-direction: column;
   background-color: #173f5f;
   border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 
