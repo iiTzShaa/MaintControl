@@ -207,7 +207,7 @@ function NewMission() {
     console.log("Request Body:", JSON.stringify(missionRequestData, null, 2));
 
     try {
-      const response = await fetch('http://localhost:3000/missions', {
+      const response = await fetch('http://localhost:3000/api/missions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -318,9 +318,9 @@ function NewMission() {
             required
           >
             <option value="choose">Choose Priority</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
           </select>
         </div>
 
