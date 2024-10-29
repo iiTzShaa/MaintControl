@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
 // Define the Mission schema with the required parameters
 const missionSchema = new mongoose.Schema({
