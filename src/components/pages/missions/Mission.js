@@ -148,13 +148,12 @@
 
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Fab from '@mui/material/Fab';
 import NextWeekIcon from '@mui/icons-material/NextWeek';
 import WorkerSelector from './WorkerSelector';
 import Checkbox from '@mui/material/Checkbox';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { useNavigate } from 'react-router-dom';
 
 const Mission = (props) => {
   const [showDescription, setShowDescription] = useState(false);
@@ -166,8 +165,7 @@ const Mission = (props) => {
   const missionCreatedDate = new Date(props.mission.created_date).getTime(); // Get the mission's created date in milliseconds
   // Calculate the number of days left
   const pastDays =
-    Math.round((formattedDate - missionCreatedDate) / (1000 * 60 * 60 * 24)) <
-    9999
+    Math.round((formattedDate - missionCreatedDate) / (1000 * 60 * 60 * 24)) < 9999
       ? Math.round((formattedDate - missionCreatedDate) / (1000 * 60 * 60 * 24))
       : '...';
 
@@ -178,8 +176,8 @@ const Mission = (props) => {
   };
 
   const missionChangeHandler = () => {
-    if (props.editMissionClicked)
-      navigate(`/missions/edit/${props.mission.id}`);
+    // Navigate to the edit page for the specific mission ID (_id in MongoDB)
+    navigate(`/missions/edit/${props.mission._id}`);
   };
 
   const checkBoxHandler = (event) => {
@@ -198,10 +196,7 @@ const Mission = (props) => {
       : 'Priority';
 
   return (
-    <li
-      key={props.mission.id}
-      className={`MissionlistItem ${isDone ? 'done' : ''}`}
-    >
+    <li key={props.mission._id} className={`MissionlistItem ${isDone ? 'done' : ''}`}>
       <div className="MissionlistItemContent">
         <Checkbox
           {...label}
@@ -230,46 +225,31 @@ const Mission = (props) => {
             <div className="filters" onClick={missionChangeHandler}>
               <div className="filterContent">
                 <span className="filterTitle">Priority:</span>
-                <span
-                  className={priorityClass}
-                  style={{ fontSize: '1rem', color: '#fff' }}
-                >
+                <span className={priorityClass} style={{ fontSize: '1rem', color: '#fff' }}>
                   {props.mission.priority}
                 </span>
               </div>
               <div className="filterContent">
                 <span className="filterTitle">City:</span>
-                <span
-                  className="City"
-                  style={{ fontSize: '1rem', color: '#fff' }}
-                >
+                <span className="City" style={{ fontSize: '1rem', color: '#fff' }}>
                   {props.mission.city}
                 </span>
               </div>
               <div className="filterContent">
                 <span className="filterTitle">Area:</span>
-                <span
-                  className="Area"
-                  style={{ fontSize: '1rem', color: '#fff' }}
-                >
+                <span className="Area" style={{ fontSize: '1rem', color: '#fff' }}>
                   {props.mission.area}
                 </span>
               </div>
               <div className="filterContent">
                 <span className="filterTitle">Date:</span>
-                <span
-                  className="Date"
-                  style={{ fontSize: '1rem', color: '#fff' }}
-                >
+                <span className="Date" style={{ fontSize: '1rem', color: '#fff' }}>
                   {new Date(props.mission.created_date).toLocaleDateString('en-GB')}
                 </span>
               </div>
               <div className="filterContentPastDays">
                 <span className="filterTitle">Past Days:</span>
-                <span
-                  className="PastDays"
-                  style={{ fontSize: '1rem', color: '#fff' }}
-                >
+                <span className="PastDays" style={{ fontSize: '1rem', color: '#fff' }}>
                   {pastDays}
                 </span>
               </div>
@@ -278,7 +258,7 @@ const Mission = (props) => {
           <WorkerSelector />
           <Link
             className="taskBtn"
-            to={`/task/mission/${props.mission.id}`}
+            to={`/task/mission/${props.mission._id}`}
             onClick={checkBoxHandler}
           >
             <Fab size="small" color="info" aria-label="add">

@@ -292,7 +292,7 @@
   // }
 
   import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
@@ -322,13 +322,14 @@ const Missions = () => {
   const [missions, setMissions] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
-  const [editMissionClicked, setEditMissionClicked] = useState(false);
   const [sortingOrderDate, setSortingOrderDate] = useState('asc');
   const [sortingOrderAlph, setSortingOrderAlph] = useState('asc');
   const [sortingOrderCity, setSortingOrderCity] = useState('asc');
   const [sortingOrderPri, setSortingOrderPri] = useState('asc');
   const [searchCity, setSearchCity] = useState('');
   const [filter, setFilter] = useState('created_date');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMissions = async () => {
@@ -353,6 +354,10 @@ const Missions = () => {
   const sortingHandlerAlph = () => setSortingOrderAlph(sortingOrderAlph === 'asc' ? 'desc' : 'asc');
   const sortingHandlerCity = () => setSortingOrderCity(sortingOrderCity === 'asc' ? 'desc' : 'asc');
   const sortingHandlerPri = () => setSortingOrderPri(sortingOrderPri === 'asc' ? 'desc' : 'asc');
+
+  const handleEditClick = (missionId) => {
+    navigate(`/missions/edit/${missionId}`);
+  };
 
   let filteredMissions = missions.filter((mission) =>
     mission.city.toLowerCase().includes(searchCity.toLowerCase())
@@ -381,8 +386,7 @@ const Missions = () => {
     Medium: 2,
     Low: 1,
   };
-  
-  // Sorting by priority based on priority levels
+
   if (filter === 'priority') {
     filteredMissions = filteredMissions.sort((a, b) => {
       return sortingOrderPri === 'asc'
@@ -391,19 +395,34 @@ const Missions = () => {
     });
   }
 
+  const saveAllMissions = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/missions', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(missions),
+      });
+      if (response.ok) {
+        setOpenSuccess(true);
+        setOpenDialog(false);
+      } else {
+        console.error('Failed to save missions');
+      }
+    } catch (error) {
+      console.error('Error saving missions:', error);
+    }
+  };
+
   const saveHandler = () => setOpenDialog(!openDialog);
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') return;
     setOpenDialog(false);
     setOpenSuccess(false);
   };
-  const handleCloseSaved = () => {
-    setOpenSuccess(true);
-    setOpenDialog(false);
-  };
 
-  const editMissionHandler = () => setEditMissionClicked(!editMissionClicked);
-  const editMissionClickedClass = editMissionClicked ? 'info' : 'white';
+  const handleCloseSaved = () => {
+    saveAllMissions();
+  };
 
   return (
     <div className="MissionsTableBox">
@@ -423,14 +442,6 @@ const Missions = () => {
                 <AddIcon />
               </Fab>
             </Link>
-            <Fab
-              size="small"
-              color={editMissionClickedClass}
-              aria-label="edit"
-              onClick={editMissionHandler}
-            >
-              <EditIcon />
-            </Fab>
             <Fab size="small" color="white" aria-label="delete">
               <DeleteIcon />
             </Fab>
@@ -488,15 +499,23 @@ const Missions = () => {
       <div className="MissionsTable">
         <ul className="Missions">
           {filteredMissions.map((mission) => (
-            <Mission 
-              key={mission._id} 
-              mission={{
-                ...mission,
-                formattedDate: new Date(mission.created_date).toLocaleDateString('en-GB'), // Format date as DD/MM/YYYY
-                priority: mission.priority // Ensure priority is passed to Mission component
-              }} 
-              editMissionClicked={editMissionClicked} 
-            />
+            <li key={mission._id}>
+              <Mission 
+                mission={{
+                  ...mission,
+                  formattedDate: new Date(mission.created_date).toLocaleDateString('en-GB'), // Format date as DD/MM/YYYY
+                  priority: mission.priority // Ensure priority is passed to Mission component
+                }}
+              />
+              <Fab
+                size="small"
+                color="info"
+                aria-label="edit"
+                onClick={() => handleEditClick(mission._id)}
+              >
+                <EditIcon />
+              </Fab>
+            </li>
           ))}
         </ul>
       </div>
