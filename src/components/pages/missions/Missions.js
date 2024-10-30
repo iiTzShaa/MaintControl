@@ -279,7 +279,19 @@
 
 // export default Missions;
 
-import React, { useState, useEffect } from 'react';
+// const urgencyValues = {
+  //   High: 3,
+  //   Medium: 2,
+  //   Low: 1,
+  // };
+
+  // if (filter === 'urgency' && sortingOrderUrg === 'asc') {
+  //   filteredMissions = filteredMissions.sort((a, b) => urgencyValues[a.urgency] - urgencyValues[b.urgency]);
+  // } else if (filter === 'urgency' && sortingOrderUrg === 'desc') {
+  //   filteredMissions = filteredMissions.sort((a, b) => urgencyValues[b.urgency] - urgencyValues[a.urgency]);
+  // }
+
+  import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
@@ -314,7 +326,7 @@ const Missions = () => {
   const [sortingOrderDate, setSortingOrderDate] = useState('asc');
   const [sortingOrderAlph, setSortingOrderAlph] = useState('asc');
   const [sortingOrderCity, setSortingOrderCity] = useState('asc');
-  const [sortingOrderUrg, setSortingOrderUrg] = useState('asc');
+  const [sortingOrderPri, setSortingOrderPri] = useState('asc');
   const [searchCity, setSearchCity] = useState('');
   const [filter, setFilter] = useState('created_date');
 
@@ -340,7 +352,7 @@ const Missions = () => {
   const sortingHandlerDate = () => setSortingOrderDate(sortingOrderDate === 'asc' ? 'desc' : 'asc');
   const sortingHandlerAlph = () => setSortingOrderAlph(sortingOrderAlph === 'asc' ? 'desc' : 'asc');
   const sortingHandlerCity = () => setSortingOrderCity(sortingOrderCity === 'asc' ? 'desc' : 'asc');
-  const sortingHandlerUrg = () => setSortingOrderUrg(sortingOrderUrg === 'asc' ? 'desc' : 'asc');
+  const sortingHandlerPri = () => setSortingOrderPri(sortingOrderPri === 'asc' ? 'desc' : 'asc');
 
   let filteredMissions = missions.filter((mission) =>
     mission.city.toLowerCase().includes(searchCity.toLowerCase())
@@ -364,16 +376,19 @@ const Missions = () => {
     filteredMissions = filteredMissions.sort((a, b) => new Date(b.created_date) - new Date(a.created_date));
   }
 
-  const urgencyValues = {
+  const priorityValues = {
     High: 3,
     Medium: 2,
     Low: 1,
   };
-
-  if (filter === 'urgency' && sortingOrderUrg === 'asc') {
-    filteredMissions = filteredMissions.sort((a, b) => urgencyValues[a.urgency] - urgencyValues[b.urgency]);
-  } else if (filter === 'urgency' && sortingOrderUrg === 'desc') {
-    filteredMissions = filteredMissions.sort((a, b) => urgencyValues[b.urgency] - urgencyValues[a.urgency]);
+  
+  // Sorting by priority based on priority levels
+  if (filter === 'priority') {
+    filteredMissions = filteredMissions.sort((a, b) => {
+      return sortingOrderPri === 'asc'
+        ? priorityValues[a.priority] - priorityValues[b.priority]
+        : priorityValues[b.priority] - priorityValues[a.priority];
+    });
   }
 
   const saveHandler = () => setOpenDialog(!openDialog);
@@ -435,7 +450,7 @@ const Missions = () => {
             <ToggleButton value="city" onClick={sortingHandlerCity}>
               <LocationCityIcon />
             </ToggleButton>
-            <ToggleButton value="urgency" onClick={sortingHandlerUrg}>
+            <ToggleButton value="priority" onClick={sortingHandlerPri}>
               <PriorityHighIcon />
             </ToggleButton>
           </ToggleButtonGroup>
@@ -478,6 +493,7 @@ const Missions = () => {
               mission={{
                 ...mission,
                 formattedDate: new Date(mission.created_date).toLocaleDateString('en-GB'), // Format date as DD/MM/YYYY
+                priority: mission.priority // Ensure priority is passed to Mission component
               }} 
               editMissionClicked={editMissionClicked} 
             />
