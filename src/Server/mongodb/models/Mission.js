@@ -18,13 +18,6 @@ const missionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  /*status: {
-    type: String,
-    enum: ['Pending', 'In Progress', 'Completed'],
-    default: 'Pending',
-    required: true,
-  },*/
-
   description: {
     type: String,
     required: true,
@@ -41,16 +34,6 @@ const missionSchema = new mongoose.Schema({
     required: true,
   },
   
-  /*assignedTo: {
-    type: String,
-    ref: 'User', // הפניה למסמך משתמש 
-    required: false, // לא בהכרח חובה
-  },
-  companyId: {
-    type: String, 
-    ref: 'Company',
-    required: true,
-  },*/
 });
 
 // Create the Mission model

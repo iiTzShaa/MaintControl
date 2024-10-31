@@ -52,16 +52,16 @@ import React, { useState, useEffect } from 'react';
 const WorkerSelector = ({ onSelectUser }) => {
   const [users, setUsers] = useState([]);
 
-  // קריאת API לקבלת המשתמשים
+  
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:3000/users'); // נקודת הקצה של המשתמשים
+        const response = await fetch('http://localhost:3000/users'); 
         if (!response.ok) {
           throw new Error('Failed to fetch users');
         }
         const data = await response.json();
-        console.log('Fetched users:', data); // הדפסה לבדיקה של הנתונים
+        console.log('Fetched users:', data); 
         setUsers(data);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -77,7 +77,7 @@ const WorkerSelector = ({ onSelectUser }) => {
         <option value="">Select User</option>
         {users.map((user) => (
           <option key={user._id} value={user._id}>
-            {user.firstName} {user.lastName} {/* מציג את השמות לפי הסכמה */}
+            {user.firstName} {user.lastName} {}
           </option>
         ))}
       </select>
