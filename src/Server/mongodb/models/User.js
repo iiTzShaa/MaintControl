@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
   },
   authorization: {
     type: String,
-    enum: ["administrator"], // 
+    enum: ["administrator", "manager","maintenance"], 
     default: 'user',
     required: true,
   },
