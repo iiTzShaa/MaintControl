@@ -121,14 +121,23 @@ export default function AccountMenu(props) {
             Add account
           </MenuItem>
         </Link>
-        <Link to="login" onClick={handleLinkClick}>
+        <Link to="/" onClick={handleLinkClick}>
+        <MenuItem>
+        <ListItemIcon>
+        <Logout fontSize="small" />
+        </ListItemIcon>
+         Logout
+       </MenuItem>
+        </Link>
+
+        {/* <Link to="login" onClick={handleLinkClick}>
           <MenuItem>
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>
             Logout
           </MenuItem>
-        </Link>
+        </Link> */}
       </Menu>
     </React.Fragment>
   );
