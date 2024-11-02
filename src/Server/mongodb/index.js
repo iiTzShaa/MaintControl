@@ -65,7 +65,8 @@
 
 
 
-
+const Mission = require('./models/Mission');
+const User = require('./models/User');
 
 require('dotenv').config(); // Load environment variables from .env
 console.log('MongoDB URI from .env:', process.env.MONGODB_URI); // Debugging line
@@ -118,6 +119,7 @@ app.use('/auth', authRoutes); // הגדרת נקודת הקצה לראוטר aut
 app.get('/', (req, res) => {
   res.send('API is running!');
 });
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;

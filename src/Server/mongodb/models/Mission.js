@@ -33,6 +33,10 @@ const missionSchema = new mongoose.Schema({
     default: 'Low',
     required: true,
   },
+  users: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   
 });
 
