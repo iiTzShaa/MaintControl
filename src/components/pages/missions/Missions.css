@@ -32,6 +32,7 @@
 
 .MissionlistItem {
   display: flex;
+  width: 100%;
   flex-direction: column;
   transition: all 0.5s ease-in-out;
 }
@@ -76,7 +77,7 @@
 
 .missionDesc {
   color: white;
-  text-align: flex-start;
+  text-align: start;
   font-size: 1rem;
   margin-left: 5rem;
   margin-top: 0.5rem;
@@ -196,10 +197,12 @@
 .taskBtn {
   margin-left: 2rem;
 }
+
 .searchBar {
-  width: 100%;
+  width: 300px; /* Set a fixed width */
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+

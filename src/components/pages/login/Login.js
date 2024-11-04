@@ -349,6 +349,7 @@ const Login = () => {
       const data = await response.json();
       localStorage.setItem('token', data.token);
       localStorage.setItem('role', data.authorization);
+      localStorage.setItem('username', username);
       setUser(data);
  
       navigate('../missions');

@@ -1,7 +1,7 @@
 const express = require('express');
 const db = require('./mongodb/index'); 
 const fs = require('fs');
-require('dotenv').config({ path: 'C:/Users/wwera/OneDrive/שולחן העבודה/Maintenance HIT/MaintControl/.env' }); 
+require('dotenv').config(); 
 
 // Initialize express app
 const app = express();

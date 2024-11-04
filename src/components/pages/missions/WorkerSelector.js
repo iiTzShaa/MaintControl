@@ -72,7 +72,7 @@ const WorkerSelector = ({ onSelectUser }) => {
 
   return (
     <div className="worker-selector">
-      <label htmlFor="userSelect" style={{ color: '#fff', marginRight: '10px' }}>Available Users</label>
+      <label htmlFor="userSelect" style={{ color: '#fff', marginRight: '10px' }}>Assigen to:</label>
       <select id="userSelect" onChange={(e) => onSelectUser(e.target.value)}>
         <option value="">Select User</option>
         {users.map((user) => (

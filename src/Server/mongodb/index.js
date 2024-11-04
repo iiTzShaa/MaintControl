@@ -1,5 +1,4 @@
 
-// require('dotenv').config(); // Load environment variables from .env
 // console.log('MongoDB URI from .env:', process.env.MONGODB_URI); // Debugging line
 // const mongoose = require('mongoose');
 // const express = require('express');
@@ -61,13 +60,9 @@
 // const PORT = process.env.PORT || 3000;
 // app.listen(PORT, () => {
 //   console.log(`Server running on port ${PORT}`);
-// });
+// })
 
-
-
-
-
-require('dotenv').config(); // Load environment variables from .env
+require('dotenv').config();
 console.log('MongoDB URI from .env:', process.env.MONGODB_URI); // Debugging line
 const mongoose = require('mongoose');
 const express = require('express');
@@ -79,6 +74,7 @@ const cors = require('cors');
 const app = express();
 app.use(express.json()); // Middleware to parse JSON
 
+console.log('JWT_SECRET:', process.env.JWT_SECRET);
 const uri = process.env.MONGODB_URI;
 app.use(cors({
   origin: 'http://localhost:3001', // Replace this with the port your React app is running on
