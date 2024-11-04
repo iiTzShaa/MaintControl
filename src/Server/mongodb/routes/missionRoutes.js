@@ -119,12 +119,11 @@ router.post('/', async (req, res) => {
       address,
       city,
       area,
-     //status,
       description,
       created_date,
       priority,
-      //assignedTo,
-      //companyId
+      
+      
     });
     console.log(newMission);
     await newMission.save(); // Save the mission in MongoDB
@@ -174,11 +173,10 @@ router.put('/:id', async (req, res) => {
     mission.address = address || mission.address;
     mission.city = city || mission.city;
     mission.area = area || mission.area;
-   // mission.status = status || mission.status;
     mission.description = description || mission.description;
     mission.created_date = created_date || mission.created_date;
     mission.priority = priority || mission.priority;
-    //mission.assignedTo = assignedTo || mission.assignedTo;
+    
     
 
     await mission.save();

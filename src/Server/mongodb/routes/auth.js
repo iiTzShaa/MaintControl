@@ -4,13 +4,15 @@ const bcrypt = require('bcrypt');
 
 const jwt = require('jsonwebtoken');
 
-const User = require('../models/User'); // שים לב למיקום של הקובץ
+const User = require('../models/User'); 
  
 const router = express.Router();
  
 router.post('/login', async (req, res) => {
 
   const { username, password, companyId } = req.body;
+
+  console.log("Login attempt:", { username, companyId });
  
   // בדיקה אם כל השדות קיימים
 
@@ -38,7 +40,7 @@ router.post('/login', async (req, res) => {
 
     }
  
-    // יצירת טוקן JWT
+  
 
     const token = jwt.sign(
 
@@ -49,10 +51,12 @@ router.post('/login', async (req, res) => {
       { expiresIn: '1h' }
 
     );
+    console.log("Token created:", token);
  
     res.json({ token, authorization: user.authorization });
 
   } catch (err) {
+    console.error('Error during login:', err);
 
     res.status(500).json({ message: 'Server error.' });
 

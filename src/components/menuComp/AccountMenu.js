@@ -98,10 +98,12 @@ export default function AccountMenu(props) {
             <Avatar />
             Guides
           </MenuItem>
+          </Link>
+        <Link className="link" to="/myAccount" onClick={handleLinkClick}>
+          <MenuItem>
+            <Avatar /> My account
+          </MenuItem>
         </Link>
-        <MenuItem>
-          <Avatar /> My account
-        </MenuItem>
         <Link to="/missions" onClick={handleLinkClick}>
           <MenuItem>
             <Avatar /> Daily Missions

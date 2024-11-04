@@ -32,9 +32,9 @@ import './Main.css';
 
 const Main = () => {
   const handleLogout = () => {
-    localStorage.removeItem('token'); // מחיקת הטוקן
-    localStorage.removeItem('role'); // מחיקת התפקיד
-    localStorage.removeItem('day'); // מחיקת יום
+    localStorage.removeItem('token'); 
+    localStorage.removeItem('role'); 
+    localStorage.removeItem('day'); 
   };
 
   return (

@@ -65,8 +65,6 @@
 
 
 
-const Mission = require('./models/Mission');
-const User = require('./models/User');
 
 require('dotenv').config(); // Load environment variables from .env
 console.log('MongoDB URI from .env:', process.env.MONGODB_URI); // Debugging line
@@ -74,7 +72,9 @@ const mongoose = require('mongoose');
 const express = require('express');
 const userRoutes = require('./routes/userRoutes');
 const missionRoutes = require('./routes/missionRoutes');
-const authRoutes = require('./routes/auth'); // ייבוא של הראוטר auth
+const authRoutes = require('./routes/auth'); 
+const Mission = require('./models/Mission');
+const User = require('./models/User');
 const cors = require('cors');
 
 const app = express();
@@ -113,7 +113,7 @@ connectDB();
 
 app.use('/users', userRoutes);
 app.use('/api/missions', missionRoutes);
-app.use('/auth', authRoutes); // הגדרת נקודת הקצה לראוטר auth
+app.use('/auth', authRoutes); 
 
 // Example route
 app.get('/', (req, res) => {
