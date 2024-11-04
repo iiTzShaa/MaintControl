@@ -1,7 +1,6 @@
 .MissionsTableBox {
   width: 90%;
   height: 70%;
-  min-width: 80rem;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -10,6 +9,13 @@
   border-radius: 15px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
+
+@media (max-width: 1200px) {
+  .MissionsTableBox {
+    min-width: 60rem;
+  }
+}
+
 
 .Welcome {
   text-align: left;
@@ -33,6 +39,7 @@
 .MissionlistItem {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   transition: all 0.5s ease-in-out;
 }
 
@@ -78,12 +85,16 @@
   color: white;
   text-align: flex-start;
   font-size: 1rem;
-  margin-left: 5rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  max-width: 30rem;
+  margin-left: 1rem;
+  max-width: 90%;
 }
-
+@media (max-width: 768px) {
+  .missionDesc {
+    max-width: 100%;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+  }
+}
 .Missions li {
   padding: 0.8rem;
   display: flex;
@@ -202,4 +213,9 @@
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+.MissionsBtnsBox, .MissionContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
