@@ -434,7 +434,7 @@ const Mission = (props) => {
   return (
     <div className={`MissionlistItem ${isDone ? 'done' : ''}`}>
       <div className="MissionlistItemContent">
-        <label className="MissionLabel">
+        <div className="MissionLabel">
           <div className="MissionContent">
             <div className="missionTitle">
               <span className="MissionName">
@@ -479,18 +479,28 @@ const Mission = (props) => {
             missionId={props.mission._id} // Pass missionId to WorkerSelector
             onSelectUser={(userId) => setSelectedUser(userId)} // Update selectedUser when a user is assigned
           />
-          <Link className="taskBtn" to={`/task/mission/${props.mission._id}`} onClick={checkBoxHandler}>
-            <Fab size="small" color="info" aria-label="add">
-              <NextWeekIcon />
+          <div className="buttonContainer">
+            <Link className="taskBtn" to={`/task/mission/${props.mission._id}`} onClick={checkBoxHandler}>
+              <Fab size="small" color="info" aria-label="add">
+                <NextWeekIcon />
+              </Fab>
+            </Link>
+            <Fab
+              size="small"
+              color="info"
+              aria-label="edit"
+              onClick={missionChangeHandler}
+            >
+              <EditIcon />
             </Fab>
           </div>
-        </label>
+        </div>
       </div>
-
       {showDescription && <div className="missionDesc">{props.mission.description}</div>}
     </div>
   );
 };
 
 export default Mission;
+
 
