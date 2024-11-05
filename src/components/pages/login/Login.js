@@ -218,6 +218,7 @@ const Login = () => {
       localStorage.setItem('token', data.token);
       console.log("Token saved to localStorage:", data.token); //
       localStorage.setItem('role', data.authorization);
+      localStorage.setItem('username', username);
       setUser(data);
  
       navigate('../missions');

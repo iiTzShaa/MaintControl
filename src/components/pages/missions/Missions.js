@@ -803,7 +803,7 @@ const Missions = () => {
   const [sortingOrderPri, setSortingOrderPri] = useState('asc');
   const [searchCity, setSearchCity] = useState('');
   const [filter, setFilter] = useState('created_date');
-
+  const [username, setUsername] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -819,6 +819,10 @@ const Missions = () => {
     fetchMissions();
   }, []);
 
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) setUsername(storedUsername);
+  }, []);
   const handleFilter = (event, newFilter) => {
     if (newFilter !== null) {
       setFilter(newFilter);
@@ -929,14 +933,14 @@ const Missions = () => {
   return (
     <div className="MissionsTableBox">
       <div className="MissionsBtnsBox">
-        <div className="Welcome">Welcome Admin, Total missions: {missions.length}</div>
-        <input 
+        <div className="Welcome">Welcome {username}, Total missions: {missions.length}</div>
+        {/* <input 
           type="text"
           placeholder="Search by city"
           value={searchCity}
           onChange={(e) => setSearchCity(e.target.value)}
           className="searchBar"
-        />
+        /> */}
         <div className="filtersBtns">
           <div className="actionBtns">
             <Link className="newMission" to={`/missions/newMission`}>
@@ -1022,14 +1026,7 @@ const Missions = () => {
                   priority: mission.priority 
                 }}
               />
-              <Fab
-                size="small"
-                color="info"
-                aria-label="edit"
-                onClick={() => handleEditClick(mission._id)}
-              >
-                <EditIcon />
-              </Fab>
+             
             </li>
           ))}
         </ul>

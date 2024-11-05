@@ -1,0 +1,42 @@
+
+
+
+
+.MissionName {
+  font-size: 2rem; /* Larger font size for title */
+  color: #fff; /* White text color for contrast */
+  cursor: pointer; /* Cursor to indicate clickable area */
+  padding-left: 2rem; /* Left padding for alignment */
+}
+
+.filterContent {
+  font-size: 1.2rem; /* Font size for filter content */
+  color: #fff; /* White text color */
+}
+
+.priorityClass {
+  font-size: 1.2rem; /* Font size for priority text */
+  color: #fff; /* White text color */
+}
+
+
+.missionDesc {
+  font-size: 0.9rem; /* Font size for description text */
+  color: #ffffff; /* White text color */
+}
+
+.filterContent {
+  margin-right: 20px; /* Adjust this value for desired spacing */
+}
+.buttonContainer {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  align-items: center; /* Center the buttons horizontally; use flex-start to align left */
+  gap: 8px; /* Space between buttons */
+  padding: 0; /* Remove any padding */
+  background-color: transparent; /* Remove background if not needed */
+}
+
+.taskBtn {
+  margin-right: 2rem; /* Add left margin */
+}

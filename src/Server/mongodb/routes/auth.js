@@ -14,7 +14,6 @@ router.post('/login', async (req, res) => {
 
   console.log("Login attempt:", { username, companyId });
  
-  // בדיקה אם כל השדות קיימים
 
   if (!username || !password || !companyId) {
 

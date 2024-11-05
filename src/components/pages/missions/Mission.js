@@ -386,132 +386,22 @@
 
 // export default Mission;
 
-
-// import { useState } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import Fab from '@mui/material/Fab';
-// import NextWeekIcon from '@mui/icons-material/NextWeek';
-// import WorkerSelector from './WorkerSelector';
-// import Checkbox from '@mui/material/Checkbox';
-// import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-
-// const Mission = (props) => {
-//   const [showDescription, setShowDescription] = useState(false);
-//   const [isDone, setIsDone] = useState(false);
-//   const [selectedUser, setSelectedUser] = useState(null); // משתמש נבחר
-//   const label = { inputProps: { 'aria-label': 'Mission Checkbox' } };
-//   const navigate = useNavigate();
-
-//   const toggleDescription = (event) => {
-//     setShowDescription(!showDescription);
-//     event.stopPropagation();
-//   };
-
-//   const missionChangeHandler = () => {
-//     navigate(`/missions/edit/${props.mission._id}`);
-//   };
-
-//   const checkBoxHandler = (event) => {
-//     event.stopPropagation();
-//     setIsDone((prevState) => !prevState);
-//   };
-
-//   const priorityClass =
-//     props.mission.priority === 'High'
-//       ? 'PriorityHigh'
-//       : props.mission.priority === 'Medium'
-//       ? 'PriorityMed'
-//       : props.mission.priority === 'Low'
-//       ? 'PriorityLow'
-//       : 'Priority';
-
-//   return (
-//     <div className={`MissionlistItem ${isDone ? 'done' : ''}`}>
-//       <div className="MissionlistItemContent">
-//         <Checkbox
-//           {...label}
-//           sx={{
-//             color: 'white',
-//             '&.Mui-checked': {
-//               color: 'white',
-//             },
-//           }}
-//           onClick={checkBoxHandler}
-//         />
-//         <label className="MissionLabel">
-//           <div className="MissionContent">
-//             <div className="missionTitle">
-//               <span
-//                 className="MissionName"
-//                 style={{ fontSize: '1.2rem', color: '#fff' }}
-//                 onClick={missionChangeHandler}
-//               >
-//                 {props.mission.title}
-//               </span>
-//               <div
-//                 className={showDescription ? 'expansionArrow' : 'expansionArrowUp'}
-//                 onClick={toggleDescription}
-//               >
-//                 <KeyboardArrowDownIcon />
-//               </div>
-//             </div>
-//             <div className="filters" onClick={missionChangeHandler}>
-//               <div className="filterContent">
-//                 <span className="filterTitle">Priority:</span>
-//                 <span className={priorityClass} style={{ fontSize: '1rem', color: '#fff' }}>
-//                   {props.mission.priority}
-//                 </span>
-//               </div>
-//               <div className="filterContent">
-//                 <span className="filterTitle">City:</span>
-//                 <span className="City" style={{ fontSize: '1rem', color: '#fff' }}>
-//                   {props.mission.city}
-//                 </span>
-//               </div>
-//               <div className="filterContent">
-//                 <span className="filterTitle">Area:</span>
-//                 <span className="Area" style={{ fontSize: '1rem', color: '#fff' }}>
-//                   {props.mission.area}
-//                 </span>
-//               </div>
-//               <div className="filterContent">
-//                 <span className="filterTitle">Date:</span>
-//                 <span className="Date" style={{ fontSize: '1rem', color: '#fff' }}>
-//                   {props.mission.formattedDate}
-//                 </span>
-//               </div>
-//             </div>
-//           </div>
-//           {/* שימוש ב-WorkerSelector כדי לבחור משתמש */}
-//           <WorkerSelector onSelectUser={(userId) => setSelectedUser(userId)} />
-//           <Link className="taskBtn" to={`/task/mission/${props.mission._id}`} onClick={checkBoxHandler}>
-//             <Fab size="small" color="info" aria-label="add">
-//               <NextWeekIcon />
-//             </Fab>
-//           </Link>
-//         </label>
-//       </div>
-//       {showDescription && <div className="missionDesc">{props.mission.description}</div>}
-//       {selectedUser && <div className="selectedUser">Selected User ID: {selectedUser}</div>}
-//     </div>
-//   );
-// };
-
-// export default Mission;
-
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Fab from '@mui/material/Fab';
 import NextWeekIcon from '@mui/icons-material/NextWeek';
+import EditIcon from '@mui/icons-material/Edit';
 import WorkerSelector from './WorkerSelector';
 import Checkbox from '@mui/material/Checkbox';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import './Mission.css';
 
 const Mission = (props) => {
   const [showDescription, setShowDescription] = useState(false);
   const [isDone, setIsDone] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null); // Track selected user ID
   const label = { inputProps: { 'aria-label': 'Mission Checkbox' } };
+
   const navigate = useNavigate();
 
   const toggleDescription = (event) => {
@@ -528,36 +418,26 @@ const Mission = (props) => {
     setIsDone((prevState) => !prevState);
   };
 
+  const handleUserSelect = (userId) => {
+    setSelectedUser(userId);
+  };
+
   const priorityClass =
     props.mission.priority === 'High'
-      ? 'PriorityHigh'
+      ? 'UrgencyHigh'
       : props.mission.priority === 'Medium'
-      ? 'PriorityMed'
+      ? 'UrgencyMed'
       : props.mission.priority === 'Low'
-      ? 'PriorityLow'
+      ? 'UrgencyLow'
       : 'Priority';
 
   return (
     <div className={`MissionlistItem ${isDone ? 'done' : ''}`}>
       <div className="MissionlistItemContent">
-        <Checkbox
-          {...label}
-          sx={{
-            color: 'white',
-            '&.Mui-checked': {
-              color: 'white',
-            },
-          }}
-          onClick={checkBoxHandler}
-        />
         <label className="MissionLabel">
           <div className="MissionContent">
             <div className="missionTitle">
-              <span
-                className="MissionName"
-                style={{ fontSize: '1.2rem', color: '#fff' }}
-                onClick={missionChangeHandler}
-              >
+              <span className="MissionName">
                 {props.mission.title}
               </span>
               <div
@@ -567,28 +447,28 @@ const Mission = (props) => {
                 <KeyboardArrowDownIcon />
               </div>
             </div>
-            <div className="filters" onClick={missionChangeHandler}>
+            <div className="filters" >
               <div className="filterContent">
                 <span className="filterTitle">Priority:</span>
-                <span className={priorityClass} style={{ fontSize: '1rem', color: '#fff' }}>
+                <span className={priorityClass}>
                   {props.mission.priority}
                 </span>
               </div>
               <div className="filterContent">
                 <span className="filterTitle">City:</span>
-                <span className="City" style={{ fontSize: '1rem', color: '#fff' }}>
+                <span className="City">
                   {props.mission.city}
                 </span>
               </div>
               <div className="filterContent">
                 <span className="filterTitle">Area:</span>
-                <span className="Area" style={{ fontSize: '1rem', color: '#fff' }}>
+                <span className="Area">
                   {props.mission.area}
                 </span>
               </div>
               <div className="filterContent">
                 <span className="filterTitle">Date:</span>
-                <span className="Date" style={{ fontSize: '1rem', color: '#fff' }}>
+                <span className="Date">
                   {props.mission.formattedDate}
                 </span>
               </div>
@@ -603,11 +483,11 @@ const Mission = (props) => {
             <Fab size="small" color="info" aria-label="add">
               <NextWeekIcon />
             </Fab>
-          </Link>
+          </div>
         </label>
       </div>
+
       {showDescription && <div className="missionDesc">{props.mission.description}</div>}
-      {selectedUser && <div className="selectedUser">Selected User ID: {selectedUser}</div>}
     </div>
   );
 };
