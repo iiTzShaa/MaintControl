@@ -53,6 +53,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+    missions: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Mission'
+    }],
 });
 
 // Hash the password before saving

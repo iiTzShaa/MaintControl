@@ -68,7 +68,9 @@ const mongoose = require('mongoose');
 const express = require('express');
 const userRoutes = require('./routes/userRoutes');
 const missionRoutes = require('./routes/missionRoutes');
-const authRoutes = require('./routes/auth'); // ייבוא של הראוטר auth
+const authRoutes = require('./routes/auth'); 
+const Mission = require('./models/Mission');
+const User = require('./models/User');
 const cors = require('cors');
 
 const app = express();
@@ -108,12 +110,13 @@ connectDB();
 
 app.use('/users', userRoutes);
 app.use('/api/missions', missionRoutes);
-app.use('/auth', authRoutes); // הגדרת נקודת הקצה לראוטר auth
+app.use('/auth', authRoutes); 
 
 // Example route
 app.get('/', (req, res) => {
   res.send('API is running!');
 });
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;

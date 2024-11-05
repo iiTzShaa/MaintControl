@@ -399,7 +399,9 @@ import './Mission.css';
 const Mission = (props) => {
   const [showDescription, setShowDescription] = useState(false);
   const [isDone, setIsDone] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null); // Track selected user ID
+  const label = { inputProps: { 'aria-label': 'Mission Checkbox' } };
+
   const navigate = useNavigate();
 
   const toggleDescription = (event) => {
@@ -472,26 +474,14 @@ const Mission = (props) => {
               </div>
             </div>
           </div>
-
-          <WorkerSelector onSelectUser={handleUserSelect} />
-
-          <div className="buttonContainer">
-            <Link className="taskBtn" to={`/task/mission/${props.mission._id}`} onClick={checkBoxHandler}>
-              <Fab 
-                size="small" 
-                color="info" 
-                aria-label="add">
-                <NextWeekIcon />
-              </Fab>
-            </Link>
-
-            <Fab
-              size="small"
-              color="info"
-              aria-label="edit"
-              onClick={missionChangeHandler}
-            >
-              <EditIcon />
+          {/* WorkerSelector component to select a user for the mission */}
+          <WorkerSelector
+            missionId={props.mission._id} // Pass missionId to WorkerSelector
+            onSelectUser={(userId) => setSelectedUser(userId)} // Update selectedUser when a user is assigned
+          />
+          <Link className="taskBtn" to={`/task/mission/${props.mission._id}`} onClick={checkBoxHandler}>
+            <Fab size="small" color="info" aria-label="add">
+              <NextWeekIcon />
             </Fab>
           </div>
         </label>
@@ -503,3 +493,4 @@ const Mission = (props) => {
 };
 
 export default Mission;
+

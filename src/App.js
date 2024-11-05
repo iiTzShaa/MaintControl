@@ -22,6 +22,7 @@ import EditMission from './components/pages/missions/EditMission';
 import TaskEditForm from './components/pages/task/TaskEditForm';
 import TaskAddForm from './components/pages/task/TaskAddForm';
 import FillTask from './components/pages/task/fillTask/FillTask';
+import MyAccount from './components/pages/myAccount/myAccount';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -103,6 +104,9 @@ function App() {
           {token && (
             <Route path="admin/showUser/:userId" element={<ShowUser />} />
           )}
+             
+          {token && <Route path="myAccount" element={<MyAccount />} />}
+    
         </Routes>
       </div>
     </CartProvider>

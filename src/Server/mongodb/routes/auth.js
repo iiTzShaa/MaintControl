@@ -11,6 +11,8 @@ const router = express.Router();
 router.post('/login', async (req, res) => {
 
   const { username, password, companyId } = req.body;
+
+  console.log("Login attempt:", { username, companyId });
  
 
   if (!username || !password || !companyId) {
@@ -48,10 +50,12 @@ router.post('/login', async (req, res) => {
       { expiresIn: '1h' }
 
     );
+    console.log("Token created:", token);
  
     res.json({ token, authorization: user.authorization });
 
   } catch (err) {
+    console.error('Error during login:', err);
 
     res.status(500).json({ message: 'Server error.' });
 
