@@ -1,19 +1,14 @@
-// import List from "./List";
 import { useState, useEffect } from "react";
 import AddressList from "./AddressList";
 import "./AddressList.css";
 
-const NOMINATIM_BASE_URL =
-  "https://nominatim.openstreetmap.org/search?q=135+pilkington+avenue,+birmingham&format=xml&polygon_geojson=1&addressdetails=1";
-const params = {
-  q: "",
-  format: "json",
-  addressdetails: "addressdetails",
-};
+const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search";
 
 const SearchAddress = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [listPlace, setListPlace] = useState([]);
+  const [isCustomAddress, setIsCustomAddress] = useState(false);
+
   function useDebounce(value, delay) {
     const [debouncedValue, setDebouncedValue] = useState(value);
 
@@ -29,6 +24,7 @@ const SearchAddress = (props) => {
 
     return debouncedValue;
   }
+
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   const fetchInfo = () => {
@@ -41,18 +37,24 @@ const SearchAddress = (props) => {
 
     const queryString = new URLSearchParams(params).toString();
 
-    const requestOptions = {
+    fetch(`${NOMINATIM_BASE_URL}?${queryString}`, {
       method: "GET",
       redirect: "follow",
-    };
-
-    fetch(`${NOMINATIM_BASE_URL}&${queryString}`, requestOptions)
-      .then((res) => res.text())
-      .then((res) => {
-        setListPlace(JSON.parse(res));
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setListPlace(data);
+          setIsCustomAddress(false);
+        } else {
+          setListPlace([]);
+          setIsCustomAddress(true);
+        }
       })
       .catch((err) => {
-        console.log(err);
+        console.error("Error fetching data:", err);
+        setListPlace([]);
+        setIsCustomAddress(true);
       });
   };
 
@@ -61,8 +63,17 @@ const SearchAddress = (props) => {
       fetchInfo();
     } else {
       setListPlace([]);
+      setIsCustomAddress(false);
     }
   }, [debouncedSearchTerm]);
+
+  const handleAddressSelection = () => {
+    if (isCustomAddress) {
+
+      props.setFullAddress(searchTerm);
+      setListPlace([]);
+    }
+  };
 
   return (
     <div className="SearchBox">
@@ -75,18 +86,18 @@ const SearchAddress = (props) => {
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);
+            setIsCustomAddress(false); 
           }}
+          onBlur={handleAddressSelection}
           onKeyDown={(e) => {
-            if (searchTerm !== "") {
-              if (e.code === "Enter") {
-                fetchInfo();
-              }
+            if (searchTerm !== "" && e.code === "Enter") {
+              fetchInfo();
             }
           }}
           required
         />
       </div>
-      {listPlace && (
+      {listPlace && listPlace.length > 0 && (
         <div className="searchAddressListBox">
           <AddressList
             listPlace={listPlace}

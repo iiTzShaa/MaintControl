@@ -260,6 +260,7 @@ function NewMission() {
           setPicked={setPicked}
           setAddressVal={setAddressVal}
           setFullAddress={setFullAddress}
+          
         />
         <div className="form-group">
           <label htmlFor="city">City</label>
