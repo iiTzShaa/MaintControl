@@ -8,6 +8,7 @@ const SearchAddress = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [listPlace, setListPlace] = useState([]);
   const [isCustomAddress, setIsCustomAddress] = useState(false);
+  const [isAddressSelected, setIsAddressSelected] = useState(false);
 
   function useDebounce(value, delay) {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -46,6 +47,7 @@ const SearchAddress = (props) => {
         if (Array.isArray(data) && data.length > 0) {
           setListPlace(data);
           setIsCustomAddress(false);
+          setIsAddressSelected(false);
         } else {
           setListPlace([]);
           setIsCustomAddress(true);
@@ -59,7 +61,7 @@ const SearchAddress = (props) => {
   };
 
   useEffect(() => {
-    if (debouncedSearchTerm !== "") {
+    if (debouncedSearchTerm !== "" && !isAddressSelected) {
       fetchInfo();
     } else {
       setListPlace([]);
@@ -68,11 +70,18 @@ const SearchAddress = (props) => {
   }, [debouncedSearchTerm]);
 
   const handleAddressSelection = () => {
-    if (isCustomAddress) {
-
+    if (isCustomAddress || listPlace.length === 0) {
       props.setFullAddress(searchTerm);
-      setListPlace([]);
+      setListPlace([]); 
+      setIsAddressSelected(true); 
     }
+  };
+
+  const handleSelectAddress = (address) => {
+    setSearchTerm(address);
+    props.setFullAddress(address);
+    setListPlace([]); 
+    setIsAddressSelected(true); 
   };
 
   return (
@@ -86,7 +95,8 @@ const SearchAddress = (props) => {
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);
-            setIsCustomAddress(false); 
+            setIsCustomAddress(false);
+            setIsAddressSelected(false);
           }}
           onBlur={handleAddressSelection}
           onKeyDown={(e) => {
@@ -101,7 +111,7 @@ const SearchAddress = (props) => {
         <div className="searchAddressListBox">
           <AddressList
             listPlace={listPlace}
-            setSearchTerm={setSearchTerm}
+            setSearchTerm={handleSelectAddress}
             setPicked={props.setPicked}
             setAddressVal={props.setAddressVal}
             setFullAddress={props.setFullAddress}
