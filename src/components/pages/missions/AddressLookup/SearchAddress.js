@@ -94,6 +94,7 @@ const SearchAddress = (props) => {
             setPicked={props.setPicked}
             setAddressVal={props.setAddressVal}
             setFullAddress={props.setFullAddress}
+            setListPlace={setListPlace}
           />
         </div>
       )}
