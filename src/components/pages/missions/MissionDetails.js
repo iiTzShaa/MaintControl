@@ -137,10 +137,182 @@
 
 // export default MissionDetails;
 
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import { useParams } from 'react-router-dom';
+// import { Button, TextField, Chip, Autocomplete } from '@mui/material';
+// import './MissionDetails.css';
+
+// const MissionDetails = () => {
+//   const { missionId } = useParams();
+//   const [mission, setMission] = useState(null);
+//   const [status, setStatus] = useState('');
+//   const [notes, setNotes] = useState([]);
+//   const [newNote, setNewNote] = useState('');
+//   const [users, setUsers] = useState([]); // Store all users from the system
+//   const [assignedUser, setAssignedUser] = useState(null); // Store selected user
+
+//   // Fetch mission details and all users on component mount
+//   useEffect(() => {
+//     const fetchMissionAndUsers = async () => {
+//       try {
+//         const missionResponse = await axios.get(`http://localhost:3000/api/missions/${missionId}`);
+//         setMission(missionResponse.data);
+//         setStatus(missionResponse.data.status);
+//         setNotes(missionResponse.data.notes || []);
+
+//         const usersResponse = await axios.get('http://localhost:3000/api/users');
+//         setUsers(usersResponse.data);
+//         setAssignedUser(missionResponse.data.assignedUser || null); // Load assigned user if exists
+//       } catch (error) {
+//         console.error('Error fetching mission or users:', error);
+//       }
+//     };
+//     fetchMissionAndUsers();
+//   }, [missionId]);
+
+//   // Update mission status in the database
+//   const handleStatusChange = async (newStatus) => {
+//     try {
+//       await axios.put(`http://localhost:3000/api/missions/${missionId}`, { status: newStatus });
+//       setStatus(newStatus);
+//     } catch (error) {
+//       console.error('Failed to update status:', error);
+//     }
+//   };
+
+//   // Add a new note to the mission
+//   const addNote = async () => {
+//     if (!newNote.trim()) return;
+//     const updatedNotes = [...notes, newNote];
+//     try {
+//       await axios.put(`http://localhost:3000/api/missions/${missionId}`, { notes: updatedNotes });
+//       setNotes(updatedNotes);
+//       setNewNote('');
+//     } catch (error) {
+//       console.error('Failed to add note:', error);
+//     }
+//   };
+
+//   // Update assigned user in the database
+//   const handleUserChange = async (user) => {
+//     try {
+//       await axios.put(`http://localhost:3000/api/missions/${missionId}`, { assignedUser: user._id });
+//       setAssignedUser(user);
+//     } catch (error) {
+//       console.error('Failed to update assigned user:', error);
+//     }
+//   };
+
+//   if (!mission) return <div>Loading...</div>;
+
+//   return (
+//     <div>
+//       <h1>{mission.title}</h1>
+//       <p>{mission.description}</p>
+//       <p><strong>Address:</strong> {mission.address}, {mission.city}</p>
+//       <p><strong>Status:</strong> {status}</p>
+
+//       {/* Status buttons */}
+//       <div>
+//         <Button
+//           variant="contained"
+//           style={{
+//             backgroundColor: status === 'To Do' ? 'blue' : status === 'In Progress' ? 'orange' : 'green',
+//             color: '#fff',
+//             marginRight: '0.5rem',
+//           }}
+//           onClick={() => handleStatusChange('To Do')}
+//         >
+//           To Do
+//         </Button>
+//         <Button
+//           variant="contained"
+//           style={{
+//             backgroundColor: status === 'In Progress' ? 'orange' : 'gray',
+//             color: '#fff',
+//             marginRight: '0.5rem',
+//           }}
+//           onClick={() => handleStatusChange('In Progress')}
+//         >
+//           In Progress
+//         </Button>
+//         <Button
+//           variant="contained"
+//           style={{
+//             backgroundColor: status === 'Done' ? 'green' : 'gray',
+//             color: '#fff',
+//           }}
+//           onClick={() => handleStatusChange('Done')}
+//         >
+//           Done
+//         </Button>
+//       </div>
+
+//       {/* User assignment section */}
+//       <div style={{ marginTop: '1rem' }}>
+//         <h3>Assign User</h3>
+//         <Autocomplete
+//           options={users}
+//           getOptionLabel={(user) => user.name}
+//           value={assignedUser}
+//           onChange={(event, newValue) => handleUserChange(newValue)}
+//           renderInput={(params) => <TextField {...params} label="Select User" variant="outlined" />}
+//           renderOption={(props, option) => (
+//             <li {...props} key={option._id}>
+//               {option.name}
+//             </li>
+//           )}
+//         />
+//         {assignedUser && (
+//           <div style={{ marginTop: '0.5rem' }}>
+//             <Chip label={`Assigned to: ${assignedUser.name}`} onDelete={() => handleUserChange(null)} />
+//           </div>
+//         )}
+//       </div>
+
+//       {/* Notes section */}
+//       <div style={{ marginTop: '1rem' }}>
+//         <h3>Notes</h3>
+//         <ul>
+//           {notes.map((note, index) => (
+//             <li key={index}>{note}</li>
+//           ))}
+//         </ul>
+//         <TextField
+//           label="Add a note"
+//           variant="outlined"
+//           size="small"
+//           value={newNote}
+//           onChange={(e) => setNewNote(e.target.value)}
+//           onKeyDown={(e) => {
+//             if (e.key === 'Enter') {
+//               e.preventDefault();
+//               addNote();
+//             }
+//           }}
+//         />
+//         <Button
+//           variant="contained"
+//           size="small"
+//           onClick={addNote}
+//           style={{ marginTop: '0.5rem', marginLeft: '0.5rem' }}
+//         >
+//           Add Note
+//         </Button>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default MissionDetails;
+
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Button, TextField, Chip, Autocomplete } from '@mui/material';
+import { Button, TextField, Chip } from '@mui/material';
+import WorkerSelector from './WorkerSelector';
 import './MissionDetails.css';
 
 const MissionDetails = () => {
@@ -149,26 +321,22 @@ const MissionDetails = () => {
   const [status, setStatus] = useState('');
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState('');
-  const [users, setUsers] = useState([]); // Store all users from the system
-  const [assignedUser, setAssignedUser] = useState(null); // Store selected user
+  const [assignedUser, setAssignedUser] = useState(null);
 
-  // Fetch mission details and all users on component mount
+  // Fetch mission details on component mount
   useEffect(() => {
-    const fetchMissionAndUsers = async () => {
+    const fetchMission = async () => {
       try {
         const missionResponse = await axios.get(`http://localhost:3000/api/missions/${missionId}`);
         setMission(missionResponse.data);
         setStatus(missionResponse.data.status);
         setNotes(missionResponse.data.notes || []);
-
-        const usersResponse = await axios.get('http://localhost:3000/api/users');
-        setUsers(usersResponse.data);
-        setAssignedUser(missionResponse.data.assignedUser || null); // Load assigned user if exists
+        setAssignedUser(missionResponse.data.assignedUser || null);
       } catch (error) {
-        console.error('Error fetching mission or users:', error);
+        console.error('Error fetching mission:', error);
       }
     };
-    fetchMissionAndUsers();
+    fetchMission();
   }, [missionId]);
 
   // Update mission status in the database
@@ -194,10 +362,11 @@ const MissionDetails = () => {
     }
   };
 
-  // Update assigned user in the database
+  // Update assigned user in the UI and database
   const handleUserChange = async (user) => {
+    if (!user) return;
     try {
-      await axios.put(`http://localhost:3000/api/missions/${missionId}`, { assignedUser: user._id });
+      await axios.put(`http://localhost:3000/api/missions/${missionId}/assign-user`, { userId: user._id });
       setAssignedUser(user);
     } catch (error) {
       console.error('Failed to update assigned user:', error);
@@ -217,32 +386,21 @@ const MissionDetails = () => {
       <div>
         <Button
           variant="contained"
-          style={{
-            backgroundColor: status === 'To Do' ? 'blue' : status === 'In Progress' ? 'orange' : 'green',
-            color: '#fff',
-            marginRight: '0.5rem',
-          }}
+          style={{ backgroundColor: status === 'To Do' ? 'blue' : status === 'In Progress' ? 'orange' : 'green', color: '#fff', marginRight: '0.5rem' }}
           onClick={() => handleStatusChange('To Do')}
         >
           To Do
         </Button>
         <Button
           variant="contained"
-          style={{
-            backgroundColor: status === 'In Progress' ? 'orange' : 'gray',
-            color: '#fff',
-            marginRight: '0.5rem',
-          }}
+          style={{ backgroundColor: status === 'In Progress' ? 'orange' : 'gray', color: '#fff', marginRight: '0.5rem' }}
           onClick={() => handleStatusChange('In Progress')}
         >
           In Progress
         </Button>
         <Button
           variant="contained"
-          style={{
-            backgroundColor: status === 'Done' ? 'green' : 'gray',
-            color: '#fff',
-          }}
+          style={{ backgroundColor: status === 'Done' ? 'green' : 'gray', color: '#fff' }}
           onClick={() => handleStatusChange('Done')}
         >
           Done
@@ -252,21 +410,10 @@ const MissionDetails = () => {
       {/* User assignment section */}
       <div style={{ marginTop: '1rem' }}>
         <h3>Assign User</h3>
-        <Autocomplete
-          options={users}
-          getOptionLabel={(user) => user.name}
-          value={assignedUser}
-          onChange={(event, newValue) => handleUserChange(newValue)}
-          renderInput={(params) => <TextField {...params} label="Select User" variant="outlined" />}
-          renderOption={(props, option) => (
-            <li {...props} key={option._id}>
-              {option.name}
-            </li>
-          )}
-        />
+        <WorkerSelector missionId={missionId} onSelectUser={handleUserChange} />
         {assignedUser && (
           <div style={{ marginTop: '0.5rem' }}>
-            <Chip label={`Assigned to: ${assignedUser.name}`} onDelete={() => handleUserChange(null)} />
+            <Chip label={`Assigned to: ${assignedUser.firstName} ${assignedUser.lastName}`} onDelete={() => handleUserChange(null)} />
           </div>
         )}
       </div>
@@ -306,6 +453,3 @@ const MissionDetails = () => {
 };
 
 export default MissionDetails;
-
-
-

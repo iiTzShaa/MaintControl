@@ -203,18 +203,120 @@
 
 // module.exports = router;
 
+// const express = require('express');
+// const Mission = require('../models/Mission');
+ 
+// const router = express.Router();
+ 
+// // Route to create a new mission
+// router.post('/', async (req, res) => {
+//   console.log("post mission")
+//   try {
+//     const { title, address, city, area, description, created_date, priority, notes, status } = req.body;
+ 
+//     // Create a new mission
+//     const newMission = new Mission({
+//       title,
+//       address,
+//       city,
+//       area,
+//       description,
+//       created_date,
+//       priority,
+//       notes: notes || [], // Default to empty array if notes not provided
+//       status: status || 'To Do', // Default status to 'todo' if not provided
+//     });
+//     console.log(newMission);
+//     await newMission.save(); // Save the mission in MongoDB
+ 
+//     res.status(201).json({ message: 'Mission created successfully', mission: newMission });
+//   } catch (err) {
+//     console.error('Error creating mission:', err); // Log the actual error
+//     res.status(500).json({ error: 'Error creating mission' });
+//   }
+// });
+ 
+// // Route to get all missions
+// router.get('/', async (req, res) => {
+//   try {
+//     const missions = await Mission.find(); // Fetch all missions from the database
+//     res.status(200).json(missions);
+//   } catch (err) {
+//     res.status(500).json({ error: 'Error fetching missions' });
+//   }
+// });
+ 
+// // Route to get a mission by ID
+// router.get('/:id', async (req, res) => {
+//   try {
+//     const mission = await Mission.findById(req.params.id);
+//     if (!mission) {
+//       return res.status(404).json({ error: 'Mission not found' });
+//     }
+//     res.status(200).json(mission);
+//   } catch (err) {
+//     res.status(500).json({ error: 'Error fetching mission' });
+//   }
+// });
+ 
+// // Route to update a mission
+// router.put('/:id', async (req, res) => {
+//   try {
+//     const { title, address, city, area, description, created_date, priority, notes, status } = req.body;
+//     const mission = await Mission.findById(req.params.id);
+ 
+//     if (!mission) {
+//       return res.status(404).json({ error: 'Mission not found' });
+//     }
+ 
+//     // Update mission fields
+//     mission.title = title || mission.title;
+//     mission.address = address || mission.address;
+//     mission.city = city || mission.city;
+//     mission.area = area || mission.area;
+//     mission.description = description || mission.description;
+//     mission.created_date = created_date || mission.created_date;
+//     mission.priority = priority || mission.priority;
+//     mission.notes = notes || mission.notes; // Update notes if provided
+//     mission.status = status || mission.status; // Update status if provided
+ 
+//     await mission.save();
+//     res.status(200).json({ message: 'Mission updated successfully', mission });
+//   } catch (err) {
+//     console.error('Error updating mission:', err);
+//     res.status(500).json({ error: 'Error updating mission' });
+//   }
+// });
+ 
+// // Route to delete a mission
+// router.delete('/:id', async (req, res) => {
+//   try {
+//     const mission = await Mission.findByIdAndDelete(req.params.id);
+ 
+//     if (!mission) {
+//       return res.status(404).json({ error: 'Mission not found' });
+//     }
+ 
+//     res.status(200).json({ message: 'Mission deleted successfully' });
+//   } catch (err) {
+//     res.status(500).json({ error: 'Error deleting mission' });
+//   }
+// });
+ 
+// module.exports = router;
+ 
+
 const express = require('express');
 const Mission = require('../models/Mission');
- 
+const User = require('../models/User');
+const mongoose = require('mongoose');
 const router = express.Router();
- 
+
 // Route to create a new mission
 router.post('/', async (req, res) => {
-  console.log("post mission")
   try {
     const { title, address, city, area, description, created_date, priority, notes, status } = req.body;
- 
-    // Create a new mission
+
     const newMission = new Mission({
       title,
       address,
@@ -223,53 +325,80 @@ router.post('/', async (req, res) => {
       description,
       created_date,
       priority,
-      notes: notes || [], // Default to empty array if notes not provided
-      status: status || 'To Do', // Default status to 'todo' if not provided
+      notes: notes || [],
+      status: status || 'To Do',
     });
-    console.log(newMission);
-    await newMission.save(); // Save the mission in MongoDB
- 
+    await newMission.save();
     res.status(201).json({ message: 'Mission created successfully', mission: newMission });
   } catch (err) {
-    console.error('Error creating mission:', err); // Log the actual error
+    console.error('Error creating mission:', err);
     res.status(500).json({ error: 'Error creating mission' });
   }
 });
- 
+
 // Route to get all missions
 router.get('/', async (req, res) => {
   try {
-    const missions = await Mission.find(); // Fetch all missions from the database
+    const missions = await Mission.find();
     res.status(200).json(missions);
   } catch (err) {
     res.status(500).json({ error: 'Error fetching missions' });
   }
 });
- 
-// Route to get a mission by ID
+
+// Route to get a specific mission by ID
 router.get('/:id', async (req, res) => {
+  const missionId = req.params.id;
   try {
-    const mission = await Mission.findById(req.params.id);
+    const mission = await Mission.findById(missionId);
     if (!mission) {
       return res.status(404).json({ error: 'Mission not found' });
     }
     res.status(200).json(mission);
-  } catch (err) {
+  } catch (error) {
+    console.error('Error fetching mission:', error);
     res.status(500).json({ error: 'Error fetching mission' });
   }
 });
- 
-// Route to update a mission
+// Route to add a user to a mission and update both models
+router.put('/:missionId/add-user', async (req, res) => {
+  const { userId } = req.body;
+  const missionId = mongoose.Types.ObjectId(req.params.missionId);
+  const userObjectId = mongoose.Types.ObjectId(userId);
+
+  try {
+    const mission = await Mission.findById(missionId);
+    if (!mission) return res.status(404).json({ error: 'Mission not found' });
+
+    const user = await User.findById(userObjectId);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    // Add user to mission's users array and add mission to user's missions array
+    mission.users.addToSet(user._id);
+    user.missions.addToSet(mission._id);
+
+    await mission.save();
+    await user.save();
+
+    res.status(200).json({ message: 'User added to mission successfully', mission, user });
+  } catch (error) {
+    console.error('Error adding user to mission:', error);
+    res.status(500).json({ error: 'Error adding user to mission' });
+  }
+});
+
+
+
+// Other routes for updating, retrieving, and deleting missions
 router.put('/:id', async (req, res) => {
   try {
-    const { title, address, city, area, description, created_date, priority, notes, status } = req.body;
+    const { title, address, city, area, description, created_date, priority, notes, status, assignedUser } = req.body;
     const mission = await Mission.findById(req.params.id);
- 
+
     if (!mission) {
       return res.status(404).json({ error: 'Mission not found' });
     }
- 
-    // Update mission fields
+
     mission.title = title || mission.title;
     mission.address = address || mission.address;
     mission.city = city || mission.city;
@@ -277,31 +406,33 @@ router.put('/:id', async (req, res) => {
     mission.description = description || mission.description;
     mission.created_date = created_date || mission.created_date;
     mission.priority = priority || mission.priority;
-    mission.notes = notes || mission.notes; // Update notes if provided
-    mission.status = status || mission.status; // Update status if provided
- 
+    mission.notes = notes || mission.notes;
+    mission.status = status || mission.status;
+
     await mission.save();
+
+    if (assignedUser) {
+      await User.findByIdAndUpdate(assignedUser, { $addToSet: { missions: mission._id } });
+    }
+
     res.status(200).json({ message: 'Mission updated successfully', mission });
   } catch (err) {
     console.error('Error updating mission:', err);
     res.status(500).json({ error: 'Error updating mission' });
   }
 });
- 
+
 // Route to delete a mission
 router.delete('/:id', async (req, res) => {
   try {
     const mission = await Mission.findByIdAndDelete(req.params.id);
- 
     if (!mission) {
       return res.status(404).json({ error: 'Mission not found' });
     }
- 
     res.status(200).json({ message: 'Mission deleted successfully' });
   } catch (err) {
     res.status(500).json({ error: 'Error deleting mission' });
   }
 });
- 
+
 module.exports = router;
- 
