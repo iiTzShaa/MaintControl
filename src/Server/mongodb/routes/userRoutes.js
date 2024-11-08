@@ -857,9 +857,4 @@ router.delete('/:userId', authenticate, async (req, res) => {
   }
 });
 
-
-
-
-
-
 module.exports = router;

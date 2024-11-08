@@ -346,20 +346,38 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Route to get a specific mission by ID
+// // Route to get a specific mission by ID
+// router.get('/:id', async (req, res) => {
+//   const missionId = req.params.id;
+//   try {
+//     const mission = await Mission.findById(missionId);
+//     if (!mission) {
+//       return res.status(404).json({ error: 'Mission not found' });
+//     }
+//     res.status(200).json(mission);
+//   } catch (error) {
+//     console.error('Error fetching mission:', error);
+//     res.status(500).json({ error: 'Error fetching mission' });
+//   }
+// });
+
+
+// Route to get a specific mission by ID and populate users
 router.get('/:id', async (req, res) => {
-  const missionId = req.params.id;
   try {
-    const mission = await Mission.findById(missionId);
+    const mission = await Mission.findById(req.params.id).populate('users'); // Assumes 'users' is the field for assigned users
+ 
     if (!mission) {
-      return res.status(404).json({ error: 'Mission not found' });
+      return res.status(404).json({ message: 'Mission not found' });
     }
+ 
     res.status(200).json(mission);
   } catch (error) {
     console.error('Error fetching mission:', error);
-    res.status(500).json({ error: 'Error fetching mission' });
+    res.status(500).send('Server error');
   }
 });
+
 
 
 // Other routes for updating, retrieving, and deleting missions
