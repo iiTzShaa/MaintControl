@@ -15,6 +15,7 @@ const AddressList = (props) => {
                   props.setPicked(true);
                   props.setAddressVal(item.display_name);
                   props.setFullAddress(item);
+                  props.setListPlace([]);
                 }}
               >
                 {item.display_name}
@@ -22,6 +23,7 @@ const AddressList = (props) => {
             );
           })}
         </ul>
+        
       )}
     </>
   );
