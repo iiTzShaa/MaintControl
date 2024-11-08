@@ -195,7 +195,8 @@ const Login = () => {
       setError('Company ID must not be empty');
       return;
     }
- 
+    console.log('Username:', username, 'Password:', password, 'CompanyId:', companyId);
+
     try {
       const response = await fetch('http://localhost:3000/auth/login', { // 
         method: 'POST',

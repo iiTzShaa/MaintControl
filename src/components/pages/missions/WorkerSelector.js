@@ -151,6 +151,72 @@
 
 // export default WorkerSelector;
 
+// import React, { useState, useEffect } from 'react';
+// import PropTypes from 'prop-types';
+
+// const WorkerSelector = ({ missionId, onSelectUser }) => {
+//   const [users, setUsers] = useState([]);
+
+//   useEffect(() => {
+//     const fetchUsers = async () => {
+//       try {
+//         const response = await fetch('http://localhost:3000/users');
+//         if (!response.ok) throw new Error('Failed to fetch users');
+//         const data = await response.json();
+//         setUsers(data);
+//       } catch (error) {
+//         console.error('Error fetching users:', error);
+//       }
+//     };
+//     fetchUsers();
+//   }, []);
+
+//   const handleSelectUser = async (userId) => {
+//     if (!userId || !missionId) {
+//       console.error('User ID or Mission ID is missing');
+//       return;
+//     }
+
+//     try {
+//       const response = await fetch(`http://localhost:3000/users/${userId}/assign-mission/${missionId}`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//       });
+
+//       if (response.ok) {
+//         console.log('User assigned successfully');
+//         onSelectUser(userId); // Update the selected user ID in the parent component
+//       } else {
+//         console.error('Failed to assign user');
+//       }
+//     } catch (error) {
+//       console.error('Error:', error);
+//     }
+//   };
+
+//   return (
+//     <div className="worker-selector">
+
+//       <label htmlFor="userSelect" style={{ color: '#fff', marginRight: '10px' }}>Assigen to:</label>
+//       <select id="userSelect" onChange={(e) => onSelectUser(e.target.value)}>
+//         <option value="">Select User</option>
+//         {users.map((user) => (
+//           <option key={user._id} value={user._id}>
+//             {user.firstName} {user.lastName}
+//           </option>
+//         ))}
+//       </select>
+//     </div>
+//   );
+// };
+
+// WorkerSelector.propTypes = {
+//   missionId: PropTypes.string.isRequired,
+//   onSelectUser: PropTypes.func.isRequired,
+// };
+
+// export default WorkerSelector;
+
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
@@ -160,7 +226,12 @@ const WorkerSelector = ({ missionId, onSelectUser }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:3000/users');
+        const token = localStorage.getItem('token'); // קבלת ה-token מתוך localStorage
+        const response = await fetch('http://localhost:3000/users', {
+          headers: {
+            'Authorization': `Bearer ${token}` // הוספת ה-token לכותרת Authorization
+          }
+        });
         if (!response.ok) throw new Error('Failed to fetch users');
         const data = await response.json();
         setUsers(data);
@@ -193,12 +264,10 @@ const WorkerSelector = ({ missionId, onSelectUser }) => {
       console.error('Error:', error);
     }
   };
-
   return (
     <div className="worker-selector">
-
-      <label htmlFor="userSelect" style={{ color: '#fff', marginRight: '10px' }}>Assigen to:</label>
-      <select id="userSelect" onChange={(e) => onSelectUser(e.target.value)}>
+      <label htmlFor="userSelect" style={{ color: '#fff', marginRight: '10px' }}>Assign to:</label>
+      <select id="userSelect" onChange={(e) => handleSelectUser(e.target.value)}>
         <option value="">Select User</option>
         {users.map((user) => (
           <option key={user._id} value={user._id}>
@@ -216,4 +285,3 @@ WorkerSelector.propTypes = {
 };
 
 export default WorkerSelector;
-

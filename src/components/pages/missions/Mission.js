@@ -386,6 +386,606 @@
 
 // export default Mission;
 
+// import { useState } from 'react';
+// import { Link, useNavigate } from 'react-router-dom';
+// import Fab from '@mui/material/Fab';
+// import NextWeekIcon from '@mui/icons-material/NextWeek';
+// import EditIcon from '@mui/icons-material/Edit';
+// import WorkerSelector from './WorkerSelector';
+// import Checkbox from '@mui/material/Checkbox';
+// import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+// import './Mission.css';
+
+// const Mission = (props) => {
+//   const [showDescription, setShowDescription] = useState(false);
+//   const [isDone, setIsDone] = useState(false);
+//   const [selectedUser, setSelectedUser] = useState(null); // Track selected user ID
+//   const label = { inputProps: { 'aria-label': 'Mission Checkbox' } };
+
+//   const navigate = useNavigate();
+
+//   const toggleDescription = (event) => {
+//     setShowDescription(!showDescription);
+//     event.stopPropagation();
+//   };
+
+//   const missionChangeHandler = () => {
+//     navigate(`/missions/edit/${props.mission._id}`);
+//   };
+
+//   const checkBoxHandler = (event) => {
+//     event.stopPropagation();
+//     setIsDone((prevState) => !prevState);
+//   };
+
+//   const handleUserSelect = (userId) => {
+//     setSelectedUser(userId);
+//   };
+
+//   const priorityClass =
+//     props.mission.priority === 'High'
+//       ? 'UrgencyHigh'
+//       : props.mission.priority === 'Medium'
+//       ? 'UrgencyMed'
+//       : props.mission.priority === 'Low'
+//       ? 'UrgencyLow'
+//       : 'Priority';
+
+//   return (
+//     <div className={`MissionlistItem ${isDone ? 'done' : ''}`}>
+//       <div className="MissionlistItemContent">
+//         <div className="MissionLabel">
+//           <div className="MissionContent">
+//             <div className="missionTitle">
+//               <span className="MissionName">
+//                 {props.mission.title}
+//               </span>
+//               <div
+//                 className={showDescription ? 'expansionArrow' : 'expansionArrowUp'}
+//                 onClick={toggleDescription}
+//               >
+//                 <KeyboardArrowDownIcon />
+//               </div>
+//             </div>
+//             <div className="filters" >
+//               <div className="filterContent">
+//                 <span className="filterTitle">Priority:</span>
+//                 <span className={priorityClass}>
+//                   {props.mission.priority}
+//                 </span>
+//               </div>
+//               <div className="filterContent">
+//                 <span className="filterTitle">City:</span>
+//                 <span className="City">
+//                   {props.mission.city}
+//                 </span>
+//               </div>
+//               <div className="filterContent">
+//                 <span className="filterTitle">Area:</span>
+//                 <span className="Area">
+//                   {props.mission.area}
+//                 </span>
+//               </div>
+//               <div className="filterContent">
+//                 <span className="filterTitle">Date:</span>
+//                 <span className="Date">
+//                   {props.mission.formattedDate}
+//                 </span>
+//               </div>
+//             </div>
+//           </div>
+//           {/* WorkerSelector component to select a user for the mission */}
+//           <WorkerSelector
+//             missionId={props.mission._id} // Pass missionId to WorkerSelector
+//             onSelectUser={(userId) => setSelectedUser(userId)} // Update selectedUser when a user is assigned
+//           />
+//           <div className="buttonContainer">
+//             <Link className="taskBtn" to={`/task/mission/${props.mission._id}`} onClick={checkBoxHandler}>
+//               <Fab size="small" color="info" aria-label="add">
+//                 <NextWeekIcon />
+//               </Fab>
+//             </Link>
+//             <Fab
+//               size="small"
+//               color="info"
+//               aria-label="edit"
+//               onClick={missionChangeHandler}
+//             >
+//               <EditIcon />
+//             </Fab>
+//           </div>
+//         </div>
+//       </div>
+//       {showDescription && <div className="missionDesc">{props.mission.description}</div>}
+//     </div>
+//   );
+// };
+
+// export default Mission;
+
+// import { useState } from 'react';
+// import { Link, useNavigate } from 'react-router-dom';
+// import Fab from '@mui/material/Fab';
+// import NextWeekIcon from '@mui/icons-material/NextWeek';
+// import EditIcon from '@mui/icons-material/Edit';
+// import WorkerSelector from './WorkerSelector';
+// import Checkbox from '@mui/material/Checkbox';
+// import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+// import { Button, TextField } from '@mui/material';
+// import './Mission.css';
+
+// const Mission = (props) => {
+//   const [showDescription, setShowDescription] = useState(false);
+//   const [isDone, setIsDone] = useState(false);
+//   const [selectedUser, setSelectedUser] = useState(null);
+//   const [status, setStatus] = useState(props.mission.status || 'To Do');
+//   const [notes, setNotes] = useState(props.mission.notes || []);
+//   const [newNote, setNewNote] = useState('');
+//   const label = { inputProps: { 'aria-label': 'Mission Checkbox' } };
+
+//   const navigate = useNavigate();
+
+//   const toggleDescription = (event) => {
+//     setShowDescription(!showDescription);
+//     event.stopPropagation();
+//   };
+
+//   const missionChangeHandler = () => {
+//     navigate(`/missions/edit/${props.mission._id}`);
+//   };
+
+//   const checkBoxHandler = (event) => {
+//     event.stopPropagation();
+//     setIsDone((prevState) => !prevState);
+//   };
+
+//   const toggleStatus = () => {
+//     const newStatus = status === 'To Do' ? 'In Progress' : status === 'In Progress' ? 'Done' : 'To Do';
+//     setStatus(newStatus);
+//     // Optionally: Send update to server here
+//   };
+
+//   const addNote = () => {
+//     if (newNote.trim()) {
+//       setNotes((prevNotes) => [...prevNotes, newNote]);
+//       setNewNote('');
+//       // Optionally: Send new note to server here
+//     }
+//   };
+
+//   const deleteNote = (index) => {
+//     setNotes((prevNotes) => prevNotes.filter((_, i) => i !== index));
+//     // Optionally: Delete note from server here
+//   };
+
+//   const priorityClass =
+//     props.mission.priority === 'High'
+//       ? 'UrgencyHigh'
+//       : props.mission.priority === 'Medium'
+//       ? 'UrgencyMed'
+//       : props.mission.priority === 'Low'
+//       ? 'UrgencyLow'
+//       : 'Priority';
+
+//   return (
+//     <div className={`MissionlistItem ${isDone ? 'done' : ''}`}>
+//       <div className="MissionlistItemContent">
+//         <div className="MissionLabel">
+//           <div className="MissionContent">
+//             <div className="missionTitle">
+//               <span className="MissionName">{props.mission.title}</span>
+//               <div
+//                 className={showDescription ? 'expansionArrow' : 'expansionArrowUp'}
+//                 onClick={toggleDescription}
+//               >
+//                 <KeyboardArrowDownIcon />
+//               </div>
+//             </div>
+//             <div className="filters">
+//               <div className="filterContent">
+//                 <span className="filterTitle">Priority:</span>
+//                 <span className={priorityClass}>{props.mission.priority}</span>
+//               </div>
+//               <div className="filterContent">
+//                 <span className="filterTitle">City:</span>
+//                 <span className="City">{props.mission.city}</span>
+//               </div>
+//               <div className="filterContent">
+//                 <span className="filterTitle">Area:</span>
+//                 <span className="Area">{props.mission.area}</span>
+//               </div>
+//               <div className="filterContent">
+//                 <span className="filterTitle">Date:</span>
+//                 <span className="Date">{props.mission.formattedDate}</span>
+//               </div>
+//             </div>
+//           </div>
+//           <div>
+//             {/* Status Toggle Button */}
+//             <Button
+//               variant="contained"
+//               style={{
+//                 backgroundColor: status === 'To Do' ? 'blue' : status === 'In Progress' ? 'orange' : 'green',
+//                 color: '#fff',
+//                 marginTop: '0.5rem',
+//               }}
+//               onClick={toggleStatus}
+//             >
+//               {status.toUpperCase()}
+//             </Button>
+//           </div>
+//           <WorkerSelector
+//             missionId={props.mission._id}
+//             onSelectUser={(userId) => setSelectedUser(userId)}
+//           />
+//           <div className="buttonContainer">
+//           <Link className="taskBtn" to={`/missions/MissionDetails/${props.mission._id}`} onClick={checkBoxHandler}>
+//               <Fab size="small" color="info" aria-label="add">
+//                 <NextWeekIcon />
+//               </Fab>
+//             </Link>
+//             <Fab size="small" color="info" aria-label="edit" onClick={missionChangeHandler}>
+//               <EditIcon />
+//             </Fab>
+//           </div>
+//         </div>
+//       </div>
+//       {showDescription && (
+//         <div className="missionDesc">
+//           <div>{props.mission.description}</div>
+//           <div className="notesSection">
+//             <h4>Notes:</h4>
+//             <ul>
+//               {notes.map((note, index) => (
+//                 <li key={index}>
+//                   {note}
+//                   <Button
+//                     variant="outlined"
+//                     size="small"
+//                     color="secondary"
+//                     onClick={() => deleteNote(index)}
+//                     style={{ marginLeft: '0.5rem' }}
+//                   >
+//                     Delete
+//                   </Button>
+//                 </li>
+//               ))}
+//             </ul>
+//             <TextField
+//               label="Add Note"
+//               variant="outlined"
+//               size="small"
+//               value={newNote}
+//               onChange={(e) => setNewNote(e.target.value)}
+//             />
+//             <Button variant="contained" size="small" onClick={addNote} style={{ marginTop: '0.5rem' }}>
+//               Add Note
+//             </Button>
+//           </div>
+//         </div>
+//       )}
+//       {selectedUser && <div className="selectedUser">Selected User ID: {selectedUser}</div>}
+//     </div>
+//   );
+// };
+
+// export default Mission;
+
+// import React, { useState } from 'react';
+// import { Link } from 'react-router-dom'; // ייבוא Link מ-react-router-dom
+// import Fab from '@mui/material/Fab';
+// import EditIcon from '@mui/icons-material/Edit';
+// import NextWeekIcon from '@mui/icons-material/NextWeek';
+// import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'; // ייבוא של KeyboardArrowDownIcon
+// import './Mission.css';
+
+// const Mission = ({ mission, onEdit }) => {
+//   const [showDescription, setShowDescription] = useState(false);
+
+//   const toggleDescription = (event) => {
+//     setShowDescription(!showDescription);
+//     event.stopPropagation();
+//   };
+
+//   return (
+//     <div className="MissionlistItem">
+//       <div className="MissionlistItemContent">
+//         <div className="MissionLabel">
+//           <div className="MissionContent">
+//             <div className="missionTitle">
+//               <span className="MissionName">{mission.title}</span>
+//               <div
+//                 className={showDescription ? 'expansionArrow' : 'expansionArrowUp'}
+//                 onClick={toggleDescription}
+//               >
+//                 <KeyboardArrowDownIcon />
+//               </div>
+//             </div>
+//             <div className="filters">
+//               <div className="filterContent">
+//                 <span className="filterTitle">Priority:</span>
+//                 <span className={`Priority ${mission.priority}`}>{mission.priority}</span>
+//               </div>
+//               <div className="filterContent">
+//                 <span className="filterTitle">City:</span>
+//                 <span className="City">{mission.city}</span>
+//               </div>
+//               <div className="filterContent">
+//                 <span className="filterTitle">Date:</span>
+//                 <span className="Date">{mission.formattedDate}</span>
+//               </div>
+//             </div>
+//           </div>
+//           <div className="buttonContainer">
+//             {/* כפתור תיק (מעבר לדף MissionDetails) */}
+//             <Link to={`/missions/MissionDetails/${mission._id}`}>
+//               <Fab size="small" color="info" aria-label="add">
+//                 <NextWeekIcon />
+//               </Fab>
+//             </Link>
+//             {/* כפתור עיפרון לעריכה */}
+//             <Fab size="small" color="info" aria-label="edit" onClick={onEdit}>
+//               <EditIcon />
+//             </Fab>
+//           </div>
+//         </div>
+//       </div>
+//       {showDescription && (
+//         <div className="missionDesc">
+//           <div>{mission.description}</div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Mission;
+
+
+// import React, { useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import Fab from '@mui/material/Fab';
+// import EditIcon from '@mui/icons-material/Edit';
+// import NextWeekIcon from '@mui/icons-material/NextWeek';
+// import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+// import './Mission.css';
+
+// const Mission = ({ mission, onEdit }) => {
+//   const [showDescription, setShowDescription] = useState(false);
+
+//   const toggleDescription = (event) => {
+//     setShowDescription(!showDescription);
+//     event.stopPropagation();
+//   };
+
+//   // הגדרת צבעים עבור רמת הדחיפות
+//   const priorityClass = mission.priority === 'High' ? 'priorityHigh'
+//                      : mission.priority === 'Medium' ? 'priorityMedium'
+//                      : 'priorityLow';
+
+//   // הגדרת צבעים עבור הסטטוס
+//   const statusClass = mission.status === 'To Do' ? 'statusTodo'
+//                    : mission.status === 'In Progress' ? 'statusInProgress'
+//                    : 'statusDone';
+
+//   return (
+//     <div className="MissionlistItem">
+//       <div className="MissionlistItemContent">
+//         <div className="MissionLabel">
+//           <div className="MissionContent">
+//             <div className="missionTitle">
+//               <span className="MissionName">{mission.title}</span>
+//               <div
+//                 className={showDescription ? 'expansionArrow' : 'expansionArrowUp'}
+//                 onClick={toggleDescription}
+//               >
+//                 <KeyboardArrowDownIcon />
+//               </div>
+//             </div>
+//             <div className="filters">
+//               <div className="filterContent">
+//                 <span className="filterTitle">Priority:</span>
+//                 <span className={`Priority ${priorityClass}`}>{mission.priority}</span>
+//               </div>
+//               <div className="filterContent">
+//                 <span className="filterTitle">City:</span>
+//                 <span className="City">{mission.city}</span>
+//               </div>
+//               <div className="filterContent">
+//                 <span className="filterTitle">Date:</span>
+//                 <span className="Date">{mission.formattedDate}</span>
+//               </div>
+//             </div>
+//           </div>
+//           <div className="buttonContainer">
+//             <Link to={`/missions/MissionDetails/${mission._id}`}>
+//               <Fab size="small" color="info" aria-label="add">
+//                 <NextWeekIcon />
+//               </Fab>
+//             </Link>
+//             <Fab size="small" color="info" aria-label="edit" onClick={onEdit}>
+//               <EditIcon />
+//             </Fab>
+//           </div>
+//         </div>
+//         <div className={`MissionStatus ${statusClass}`}>
+//           {mission.status.toUpperCase()}
+//         </div>
+//       </div>
+//       {showDescription && (
+//         <div className="missionDesc">
+//           <div>{mission.description}</div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Mission;
+
+
+// import React, { useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import Fab from '@mui/material/Fab';
+// import EditIcon from '@mui/icons-material/Edit';
+// import NextWeekIcon from '@mui/icons-material/NextWeek';
+// import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+// import './Mission.css';
+
+// const Mission = ({ mission, onEdit }) => {
+//   const [showDescription, setShowDescription] = useState(false);
+
+//   const toggleDescription = (event) => {
+//     setShowDescription(!showDescription);
+//     event.stopPropagation();
+//   };
+
+//   const priorityClass = mission.priority === 'High' ? 'priorityHigh'
+//                      : mission.priority === 'Medium' ? 'priorityMedium'
+//                      : 'priorityLow';
+
+//   const statusClass = mission.status === 'To Do' ? 'statusTodo'
+//                    : mission.status === 'In Progress' ? 'statusInProgress'
+//                    : 'statusDone';
+
+//   return (
+//     <div className="MissionlistItem">
+//       <div className="MissionlistItemContent">
+//         <div className="MissionLabel">
+//           <div className="MissionContent">
+//             <div className="missionTitle">
+//               <span className="MissionName">{mission.title}</span>
+//               <div
+//                 className={showDescription ? 'expansionArrow' : 'expansionArrowUp'}
+//                 onClick={toggleDescription}
+//               >
+//                 <KeyboardArrowDownIcon />
+//               </div>
+//             </div>
+//             <div className="filters">
+//               <div className="filterContent">
+//                 <span className="filterTitle">Priority:</span>
+//                 <span className={`Priority ${priorityClass}`}>{mission.priority}</span>
+//               </div>
+//               <div className="filterContent">
+//                 <span className="filterTitle">City:</span>
+//                 <span className="City">{mission.city}</span>
+//               </div>
+//               <div className="filterContent">
+//                 <span className="filterTitle">Date:</span>
+//                 <span className="Date">{mission.formattedDate}</span>
+//               </div>
+//             </div>
+//           </div>
+//           <div className={`MissionStatus ${statusClass}`}>
+//             {mission.status.toUpperCase()}
+//           </div>
+//           <div className="buttonContainer">
+//             <Link to={`/missions/details/${mission._id}`}>
+//               <Fab size="small" color="primary" aria-label="details">
+//                 <NextWeekIcon />
+//               </Fab>
+//             </Link>
+//             <Fab size="small" color="secondary" aria-label="edit" onClick={onEdit}>
+//               <EditIcon />
+//             </Fab>
+//           </div>
+//         </div>
+//       </div>
+//       {showDescription && (
+//         <div className="missionDesc">
+//           <div>{mission.description}</div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Mission;
+
+
+// import React, { useState } from 'react';
+// import { Link, useNavigate } from 'react-router-dom';
+// import Fab from '@mui/material/Fab';
+// import EditIcon from '@mui/icons-material/Edit';
+// import NextWeekIcon from '@mui/icons-material/NextWeek';
+// import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+// import Checkbox from '@mui/material/Checkbox';
+// import { Button, TextField } from '@mui/material';
+// import './Mission.css';
+
+// const Mission = ({ mission, onEdit }) => {
+//   const [showDescription, setShowDescription] = useState(false);
+
+//   const toggleDescription = (event) => {
+//     setShowDescription(!showDescription);
+//     event.stopPropagation();
+//   };
+
+//   const priorityClass = mission.priority === 'High' ? 'priorityHigh'
+//                      : mission.priority === 'Medium' ? 'priorityMedium'
+//                      : 'priorityLow';
+
+//   const statusClass = mission.status === 'To Do' ? 'statusTodo'
+//                    : mission.status === 'In Progress' ? 'statusInProgress'
+//                    : 'statusDone';
+
+//   return (
+//     <div className="MissionlistItem">
+//       <div className="MissionlistItemContent">
+//         <div className="MissionLabel">
+//           <div className="MissionContent">
+//             <div className="missionTitle">
+//               <span className="MissionName">{mission.title}</span>
+//               <div
+//                 className={showDescription ? 'expansionArrow' : 'expansionArrowUp'}
+//                 onClick={toggleDescription}
+//               >
+//                 <KeyboardArrowDownIcon />
+//               </div>
+//             </div>
+//             <div className="filters">
+//               <div className="filterContent">
+//                 <span className="filterTitle">Priority:</span>
+//                 <span className={`Priority ${priorityClass}`}>{mission.priority}</span>
+//               </div>
+//               <div className="filterContent">
+//                 <span className="filterTitle">City:</span>
+//                 <span className="City">{mission.city}</span>
+//               </div>
+//               <div className="filterContent">
+//                 <span className="filterTitle">Date:</span>
+//                 <span className="Date">{mission.formattedDate}</span>
+//               </div>
+//             </div>
+//           </div>
+//           <div className={`MissionStatus ${statusClass}`}>
+//             {mission.status.toUpperCase()}
+//           </div>
+//           <div className="buttonContainer">
+//             {/* אייקון התיק שמפנה לדף פרטי המשימה */}
+//             <Link to={`/missions/details/${mission._id}`}>
+//               <Fab size="small" color="primary" aria-label="details">
+//                 <NextWeekIcon />
+//               </Fab>
+//             </Link>
+//             <Fab size="small" color="secondary" aria-label="edit" onClick={onEdit}>
+//               <EditIcon />
+//             </Fab>
+//           </div>
+//         </div>
+//       </div>
+//       {showDescription && (
+//         <div className="missionDesc">
+//           <div>{mission.description}</div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Mission;
+
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Fab from '@mui/material/Fab';
@@ -394,34 +994,53 @@ import EditIcon from '@mui/icons-material/Edit';
 import WorkerSelector from './WorkerSelector';
 import Checkbox from '@mui/material/Checkbox';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Button, TextField } from '@mui/material';
 import './Mission.css';
-
+ 
 const Mission = (props) => {
   const [showDescription, setShowDescription] = useState(false);
   const [isDone, setIsDone] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null); // Track selected user ID
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [status, setStatus] = useState(props.mission.status || 'To Do');
+  const [notes, setNotes] = useState(props.mission.notes || []);
+  const [newNote, setNewNote] = useState('');
   const label = { inputProps: { 'aria-label': 'Mission Checkbox' } };
-
+ 
   const navigate = useNavigate();
-
+ 
   const toggleDescription = (event) => {
     setShowDescription(!showDescription);
     event.stopPropagation();
   };
-
+ 
   const missionChangeHandler = () => {
     navigate(`/missions/edit/${props.mission._id}`);
   };
-
+ 
   const checkBoxHandler = (event) => {
     event.stopPropagation();
     setIsDone((prevState) => !prevState);
   };
-
-  const handleUserSelect = (userId) => {
-    setSelectedUser(userId);
+ 
+  const toggleStatus = () => {
+    const newStatus = status === 'To Do' ? 'In Progress' : status === 'In Progress' ? 'Done' : 'To Do';
+    setStatus(newStatus);
+    // Optionally: Send update to server here
   };
-
+ 
+  const addNote = () => {
+    if (newNote.trim()) {
+      setNotes((prevNotes) => [...prevNotes, newNote]);
+      setNewNote('');
+      // Optionally: Send new note to server here
+    }
+  };
+ 
+  const deleteNote = (index) => {
+    setNotes((prevNotes) => prevNotes.filter((_, i) => i !== index));
+    // Optionally: Delete note from server here
+  };
+ 
   const priorityClass =
     props.mission.priority === 'High'
       ? 'UrgencyHigh'
@@ -430,77 +1049,107 @@ const Mission = (props) => {
       : props.mission.priority === 'Low'
       ? 'UrgencyLow'
       : 'Priority';
-
+ 
   return (
-    <div className={`MissionlistItem ${isDone ? 'done' : ''}`}>
-      <div className="MissionlistItemContent">
-        <div className="MissionLabel">
-          <div className="MissionContent">
-            <div className="missionTitle">
-              <span className="MissionName">
-                {props.mission.title}
-              </span>
-              <div
+<div className={`MissionlistItem ${isDone ? 'done' : ''}`}>
+<div className="MissionlistItemContent">
+<div className="MissionLabel">
+<div className="MissionContent">
+<div className="missionTitle">
+<span className="MissionName">{props.mission.title}</span>
+<div
                 className={showDescription ? 'expansionArrow' : 'expansionArrowUp'}
                 onClick={toggleDescription}
-              >
-                <KeyboardArrowDownIcon />
-              </div>
-            </div>
-            <div className="filters" >
-              <div className="filterContent">
-                <span className="filterTitle">Priority:</span>
-                <span className={priorityClass}>
-                  {props.mission.priority}
-                </span>
-              </div>
-              <div className="filterContent">
-                <span className="filterTitle">City:</span>
-                <span className="City">
-                  {props.mission.city}
-                </span>
-              </div>
-              <div className="filterContent">
-                <span className="filterTitle">Area:</span>
-                <span className="Area">
-                  {props.mission.area}
-                </span>
-              </div>
-              <div className="filterContent">
-                <span className="filterTitle">Date:</span>
-                <span className="Date">
-                  {props.mission.formattedDate}
-                </span>
-              </div>
-            </div>
-          </div>
-          {/* WorkerSelector component to select a user for the mission */}
-          <WorkerSelector
-            missionId={props.mission._id} // Pass missionId to WorkerSelector
-            onSelectUser={(userId) => setSelectedUser(userId)} // Update selectedUser when a user is assigned
+>
+<KeyboardArrowDownIcon />
+</div>
+</div>
+<div className="filters">
+<div className="filterContent">
+<span className="filterTitle">Priority:</span>
+<span className={priorityClass}>{props.mission.priority}</span>
+</div>
+<div className="filterContent">
+<span className="filterTitle">City:</span>
+<span className="City">{props.mission.city}</span>
+</div>
+<div className="filterContent">
+<span className="filterTitle">Area:</span>
+<span className="Area">{props.mission.area}</span>
+</div>
+<div className="filterContent">
+<span className="filterTitle">Date:</span>
+<span className="Date">{props.mission.formattedDate}</span>
+</div>
+</div>
+</div>
+<div>
+            {/* Status Toggle Button */}
+<Button
+              variant="contained"
+              style={{
+                backgroundColor: status === 'To Do' ? 'blue' : status === 'In Progress' ? 'orange' : 'green',
+                color: '#fff',
+                marginTop: '0.5rem',
+              }}
+              onClick={toggleStatus}
+>
+              {status.toUpperCase()}
+</Button>
+</div>
+<WorkerSelector
+            missionId={props.mission._id}
+            onSelectUser={(userId) => setSelectedUser(userId)}
           />
-          <div className="buttonContainer">
-            <Link className="taskBtn" to={`/task/mission/${props.mission._id}`} onClick={checkBoxHandler}>
-              <Fab size="small" color="info" aria-label="add">
-                <NextWeekIcon />
-              </Fab>
-            </Link>
-            <Fab
+<div className="buttonContainer">
+<Link className="taskBtn" to={`/missions/MissionDetails/${props.mission._id}`} onClick={checkBoxHandler}>
+<Fab size="small" color="info" aria-label="add">
+<NextWeekIcon />
+</Fab>
+</Link>
+<Fab size="small" color="info" aria-label="edit" onClick={missionChangeHandler}>
+<EditIcon />
+</Fab>
+</div>
+</div>
+</div>
+      {showDescription && (
+<div className="missionDesc">
+<div>{props.mission.description}</div>
+<div className="notesSection">
+<h4>Notes:</h4>
+<ul>
+              {notes.map((note, index) => (
+<li key={index}>
+                  {note}
+<Button
+                    variant="outlined"
+                    size="small"
+                    color="secondary"
+                    onClick={() => deleteNote(index)}
+                    style={{ marginLeft: '0.5rem' }}
+>
+                    Delete
+</Button>
+</li>
+              ))}
+</ul>
+<TextField
+              label="Add Note"
+              variant="outlined"
               size="small"
-              color="info"
-              aria-label="edit"
-              onClick={missionChangeHandler}
-            >
-              <EditIcon />
-            </Fab>
-          </div>
-        </div>
-      </div>
-      {showDescription && <div className="missionDesc">{props.mission.description}</div>}
-    </div>
+              value={newNote}
+              onChange={(e) => setNewNote(e.target.value)}
+            />
+<Button variant="contained" size="small" onClick={addNote} style={{ marginTop: '0.5rem' }}>
+              Add Note
+</Button>
+</div>
+</div>
+      )}
+      {selectedUser && <div className="selectedUser">Selected User ID: {selectedUser}</div>}
+</div>
   );
 };
-
+ 
 export default Mission;
-
-

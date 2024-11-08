@@ -46,6 +46,8 @@ const Header = (props) => {
         return 'My Account Page';
       case 'map':
         return 'Management Map';
+      case 'MissionDetails':
+        return 'Mission Details Page';
       default:
         return 'Unknown Page';
     }
