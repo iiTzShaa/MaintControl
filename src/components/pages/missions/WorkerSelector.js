@@ -249,19 +249,14 @@ const WorkerSelector = ({ missionId, onSelectUser }) => {
     }
 
     try {
-      const token = localStorage.getItem('token'); // הוספת ה-token מה-localStorage
       const response = await fetch(`http://localhost:3000/users/${userId}/assign-mission/${missionId}`, {
-        method: 'PUT',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // הוספת הכותרת Authorization
-        },
-        body: JSON.stringify({ userId }),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
       });
 
       if (response.ok) {
-        const updatedUser = await response.json();
-        onSelectUser(updatedUser);
+        console.log('User assigned successfully');
+        onSelectUser(userId); // Update the selected user ID in the parent component
       } else {
         console.error('Failed to assign user');
       }
@@ -269,7 +264,6 @@ const WorkerSelector = ({ missionId, onSelectUser }) => {
       console.error('Error:', error);
     }
   };
-
   return (
     <div className="worker-selector">
       <label htmlFor="userSelect" style={{ color: '#fff', marginRight: '10px' }}>Assign to:</label>

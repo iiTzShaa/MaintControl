@@ -309,7 +309,7 @@
 const express = require('express');
 const Mission = require('../models/Mission');
 const User = require('../models/User');
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 const router = express.Router();
 
 // Route to create a new mission
@@ -360,33 +360,6 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ error: 'Error fetching mission' });
   }
 });
-// Route to add a user to a mission and update both models
-router.put('/:missionId/add-user', async (req, res) => {
-  const { userId } = req.body;
-  const missionId = mongoose.Types.ObjectId(req.params.missionId);
-  const userObjectId = mongoose.Types.ObjectId(userId);
-
-  try {
-    const mission = await Mission.findById(missionId);
-    if (!mission) return res.status(404).json({ error: 'Mission not found' });
-
-    const user = await User.findById(userObjectId);
-    if (!user) return res.status(404).json({ error: 'User not found' });
-
-    // Add user to mission's users array and add mission to user's missions array
-    mission.users.addToSet(user._id);
-    user.missions.addToSet(mission._id);
-
-    await mission.save();
-    await user.save();
-
-    res.status(200).json({ message: 'User added to mission successfully', mission, user });
-  } catch (error) {
-    console.error('Error adding user to mission:', error);
-    res.status(500).json({ error: 'Error adding user to mission' });
-  }
-});
-
 
 
 // Other routes for updating, retrieving, and deleting missions

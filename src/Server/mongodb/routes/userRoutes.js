@@ -779,6 +779,64 @@ router.put('/:userId', authenticate, async (req, res) => {
   }
 });
 
+
+
+//
+router.post('/:userId/assign-mission/:missionId', async (req, res) => {
+  const { userId, missionId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+    const mission = await Mission.findById(missionId);
+
+    if (!user || !mission) {
+      return res.status(404).json({ error: 'User or Mission not found' });
+    }
+
+    if (!user.missions.includes(missionId)) {
+      user.missions.push(missionId);
+    }
+
+    if (!mission.users.includes(userId)) {
+      mission.users.push(userId);
+    }
+
+    await user.save();
+    await mission.save();
+
+    res.status(200).json({ message: 'User assigned to mission successfully', user, mission });
+  } catch (err) {
+    res.status(500).json({ error: 'Error assigning user to mission' });
+  }
+});
+
+
+
+router.post('/:userId/release-mission/:missionId', async (req, res) => {
+  const { userId, missionId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+    const mission = await Mission.findById(missionId);
+
+    if (!user || !mission) {
+      return res.status(404).json({ error: 'User or Mission not found' });
+    }
+
+    user.missions = user.missions.filter(id => id.toString() !== missionId);
+    mission.users = mission.users.filter(id => id.toString() !== userId);
+
+    await user.save();
+    await mission.save();
+
+    res.status(200).json({ message: 'User released from mission successfully', user, mission });
+  } catch (err) {
+    res.status(500).json({ error: 'Error releasing user from mission' });
+  }
+});
+
+
+
 // Route to delete a specific user by ID
 router.delete('/:userId', authenticate, async (req, res) => {
   const { userId } = req.params;
@@ -801,69 +859,7 @@ router.delete('/:userId', authenticate, async (req, res) => {
 
 
 
-router.put('/:userId/assign-mission', async (req, res) => {
-  const { missionId } = req.body;
-  const userId = mongoose.Types.ObjectId(req.params.userId);
-  const missionObjectId = new mongoose.Types.ObjectId(missionId);
 
 
-
-  console.log(`Received request to assign mission ${missionId} to user ${userId}`); // בדיקת קבלת בקשה
-
-  try {
-    const user = await User.findById(userId);
-    if (!user) {
-      console.error('User not found');
-      return res.status(404).json({ error: 'User not found' });
-    }
-
-    const mission = await Mission.findById(missionObjectId);
-    if (!mission) {
-      console.error('Mission not found');
-      return res.status(404).json({ error: 'Mission not found' });
-    }
-
-    // הוספת משימה למערך המשימות של המשתמש
-    user.missions.addToSet(mission._id);
-    mission.users.addToSet(user._id);
-
-    await user.save();
-    await mission.save();
-
-    console.log(`Mission ${missionId} assigned to user ${userId} successfully`); // בדיקה להצלחת הפעולה
-    res.status(200).json({ message: 'Mission assigned to user successfully', user, mission });
-  } catch (error) {
-    console.error('Error assigning mission to user:', error);
-    res.status(500).json({ error: 'Error assigning mission to user' });
-  }
-});
 
 module.exports = router;
-
-
-// Route to assign a mission to a user and update both models
-// router.put('/:userId/assign-mission', async (req, res) => {
-//   const { missionId } = req.body;
-//   const userId = mongoose.Types.ObjectId(req.params.userId);
-//   const missionObjectId = mongoose.Types.ObjectId(missionId);
-
-//   try {
-//     const user = await User.findById(userId);
-//     if (!user) return res.status(404).json({ error: 'User not found' });
-
-//     const mission = await Mission.findById(missionObjectId);
-//     if (!mission) return res.status(404).json({ error: 'Mission not found' });
-
-//     // Add mission to user's missions array and add user to mission's users array
-//     user.missions.addToSet(mission._id);
-//     mission.users.addToSet(user._id);
-
-//     await user.save();
-//     await mission.save();
-
-//     res.status(200).json({ message: 'Mission assigned to user successfully', user, mission });
-//   } catch (error) {
-//     console.error('Error assigning mission to user:', error);
-//     res.status(500).json({ error: 'Error assigning mission to user' });
-//   }
-// });
