@@ -1147,7 +1147,7 @@ const Mission = (props) => {
 </div>
 </div>
       )}
-      {selectedUser && <div className="selectedUser">Selected User ID: {selectedUser}</div>}
+      {selectedUser && <div className="selectedUser">{selectedUser.firstName} {selectedUser.lastName} has been assigned successfully.</div>}
 </div>
   );
 };
