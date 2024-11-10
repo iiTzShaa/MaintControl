@@ -266,7 +266,7 @@ const WorkerSelector = ({ missionId, onSelectUser }) => {
   };
   return (
     <div className="worker-selector">
-      <label htmlFor="userSelect" style={{ color: '#fff', marginRight: '10px' }}>Assign to:</label>
+      <label htmlFor="userSelect" style={{ color: 'black', marginRight: '10px' }}>Assign to:</label>
       <select id="userSelect" onChange={(e) => handleSelectUser(e.target.value)}>
         <option value="">Select User</option>
         {users.map((user) => (

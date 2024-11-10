@@ -124,10 +124,6 @@ import { Routes, Route } from 'react-router-dom';
 import Forgot from './components/pages/login/forgot/Forgot';
 import Tasks from './components/pages/task/Tasks';
 import ManagementMap from './components/pages/ManagementMap/ManagementMap';
-import Guides from './components/pages/guides/Guides';
-import AddGuide from './components/pages/guides/addGuide/AddGuide';
-import EditGuide from './components/pages/guides/editGuide/EditGuide';
-import GuideDetails from './components/pages/guides/GuideDetails';
 import CartProvider from './store/CartProvider';
 import Admin from './components/pages/users/admin/Admin';
 import Missions from './components/pages/missions/Missions';
@@ -145,7 +141,6 @@ import { useEffect, useState } from 'react';
  
 function App() {
   const location = useLocation().pathname.replace('/', '');
-  const [guides, setGuides] = useState([]);
  
   const token = localStorage.getItem('token');
  
@@ -200,19 +195,6 @@ function App() {
           )}
           {token && (
             <Route path="missions/MissionDetails/:missionId" element={<MissionDetails />} /> // Add route for MissionDetails
-          )}
-          {token && (
-            <Route path="guides" element={<Guides guides={guides} setGuides={setGuides} />} />
-          )}
-          {token && <Route path="guides/addGuide" element={<AddGuide />} />}
-          {token && (
-            <Route path="guides/editGuide/:guideId" element={<EditGuide />} />
-          )}
-          {token && (
-            <Route
-              path="guides/details/:guideId"
-              element={<GuideDetails guides={guides} />}
-            />
           )}
           {token && <Route path="admin" element={<Admin />} />}
           {token && <Route path="admin/addUser" element={<AddUser />} />}
