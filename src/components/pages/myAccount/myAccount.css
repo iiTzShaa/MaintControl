@@ -10,11 +10,17 @@
     border-radius: 1.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0,0.2);
 }
-
+.dark-mode .myAccountBox {
+    background: #2b2b2b;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
 .leftSection {
     flex: 1;
     padding-right: 3rem;
     border-right: 3px solid #0f2c4d;
+}
+.dark-mode .leftSection {
+    border-right: 3px solid #444;
 }
 
 .rightSection {
@@ -34,7 +40,9 @@
     margin-bottom: 0.5rem;
     color: white;
 }
-
+.dark-mode .myAccountLabel {
+    color: #ddd;
+}
 
 .myAccountInput {
     background-color: rgba(255, 255, 255, 0.1);
@@ -48,7 +56,11 @@
     font-size: 1.1rem;
     outline: none;
 }
-
+.dark-mode .myAccountInput {
+    background-color: rgba(50, 50, 50, 0.8);
+    border: 1px solid #555;
+    color: #ddd;
+}
 .missionsTitle {
     color: #b0b0b0;
     font-size: 1.8rem;
@@ -58,7 +70,10 @@
     border-bottom: 2px solid #0f2c4d;
     padding-bottom: 10px;
 }
-
+.dark-mode .missionsTitle {
+    color: #fff;
+    border-bottom: 2px solid #444;
+}
 .missionsList {
     display: flex;
     flex-direction: column;
@@ -74,11 +89,24 @@
     transition: transform 0.2s ease-in-out;
     margin-left: -50px;
 }
+.dark-mode .missionItem {
+    background-color: #444;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
 .missionItem:hover {
     transform: translateY(-5px);
 }
 
+.dark-mode .missionItem:hover {
+    transform: translateY(-5px);
+    border: 1px solid #1a73e8;
+    box-shadow: 0 0 8px rgba(26, 115, 232, 0.6);
+      }
+
 .noMissions {
     color: #b0b0b0;
     font-style: italic;
+}
+.dark-mode .noMissions {
+    color: #999;
 }

@@ -42,6 +42,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: black;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4), 
+  4px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;;
 }
 
 .buttonsContent {

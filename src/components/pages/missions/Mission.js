@@ -1041,111 +1041,6 @@ const Mission = (props) => {
       : props.mission.priority === 'Low'
       ? 'UrgencyLow'
       : 'Priority';
- 
-<<<<<<< Updated upstream
-  return (
-<div className={`MissionlistItem ${isDone ? 'done' : ''}`}>
-<div className="MissionlistItemContent">
-<div className="MissionLabel">
-<div className="MissionContent">
-<div className="missionTitle">
-<span className="MissionName">{props.mission.title}</span>
-<div
-                className={showDescription ? 'expansionArrow' : 'expansionArrowUp'}
-                onClick={toggleDescription}
->
-<KeyboardArrowDownIcon />
-</div>
-</div>
-<div className="filters">
-<div className="filterContent">
-<span className="filterTitle">Priority:</span>
-<span className={priorityClass}>{props.mission.priority}</span>
-</div>
-<div className="filterContent">
-<span className="filterTitle">City:</span>
-<span className="City">{props.mission.city}</span>
-</div>
-<div className="filterContent">
-<span className="filterTitle">Area:</span>
-<span className="Area">{props.mission.area}</span>
-</div>
-<div className="filterContent">
-<span className="filterTitle">Date:</span>
-<span className="Date">{props.mission.formattedDate}</span>
-</div>
-</div>
-</div>
-<div>
-            {/* Status Toggle Button */}
-<Button
-              variant="contained"
-              style={{
-                backgroundColor: status === 'To Do' ? 'blue' : status === 'In Progress' ? 'orange' : 'green',
-                color: '#fff',
-                marginTop: '0.5rem',
-              }}
-              onClick={toggleStatus}
->
-              {status.toUpperCase()}
-</Button>
-</div>
-<WorkerSelector
-            missionId={props.mission._id}
-            onSelectUser={(userId) => setSelectedUser(userId)}
-          />
-<div className="buttonContainer">
-<Link className="taskBtn" to={`/missions/MissionDetails/${props.mission._id}`} onClick={checkBoxHandler}>
-<Fab size="small" color="info" aria-label="add">
-<NextWeekIcon />
-</Fab>
-</Link>
-<Fab size="small" color="info" aria-label="edit" onClick={missionChangeHandler}>
-<EditIcon />
-</Fab>
-</div>
-</div>
-</div>
-      {showDescription && (
-<div className="missionDesc">
-<div>{props.mission.description}</div>
-<div className="notesSection">
-<h4>Notes:</h4>
-<ul>
-              {notes.map((note, index) => (
-<li key={index}>
-                  {note}
-<Button
-                    variant="outlined"
-                    size="small"
-                    color="secondary"
-                    onClick={() => deleteNote(index)}
-                    style={{ marginLeft: '0.5rem' }}
->
-                    Delete
-</Button>
-</li>
-              ))}
-</ul>
-<TextField
-              label="Add Note"
-              variant="outlined"
-              size="small"
-              value={newNote}
-              onChange={(e) => setNewNote(e.target.value)}
-            />
-<Button variant="contained" size="small" onClick={addNote} style={{ marginTop: '0.5rem' }}>
-              Add Note
-</Button>
-</div>
-</div>
-      )}
-      {selectedUser && <div className="selectedUser">{selectedUser.firstName} {selectedUser.lastName} has been assigned successfully.</div>}
-</div>
-  );
-};
- 
-=======
  return (
         <div className={`MissionlistItem ${isDone ? 'done' : ''}`}>
           <div className="MissionlistItemContent">
@@ -1212,5 +1107,4 @@ const Mission = (props) => {
         </div>
       );
     };
->>>>>>> Stashed changes
 export default Mission;

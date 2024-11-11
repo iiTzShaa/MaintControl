@@ -204,6 +204,16 @@
   border: 1px solid #ccc;
   border-radius: 0.7rem;
 }
+.dark-mode .searchBarByCity {
+  background-color: #333;
+  color: #ddd;
+  border: 1px solid #555;
+  
+}
+
+.dark-mode .searchBarByCity::placeholder {
+  color: #888;
+}
 .light-mode .MissionsTableBox {
   background-color: #add8e6;
   color: black;

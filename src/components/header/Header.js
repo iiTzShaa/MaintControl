@@ -21,7 +21,7 @@ const Header = (props) => {
       case '/':
         return 'Main Page';
       case '/login':
-        return 'Login Page';
+        return 'Login';
       case '/forgot':
         return 'Password Reset';
       case '/missions':
@@ -33,7 +33,7 @@ const Header = (props) => {
       case '/admin/addUser':
         return 'Add a User';
       case '/myAccount':
-        return 'My Account Page';
+        return 'My Account';
       case '/map':
         return 'Management Map';
       default:
