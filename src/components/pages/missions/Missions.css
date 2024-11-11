@@ -198,9 +198,9 @@
   margin-left: 2rem;
 }
 
-.searchBar {
-  width: 300px; /* Set a fixed width */
-  padding: 10px;
+.searchBarByCity {
+  width: 500px !important;
+  padding: 10px !important;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -210,6 +210,7 @@
   color: black;
 }
 
+<<<<<<< Updated upstream
 .light-mode .Welcome {
   color: #13162b;
 }
@@ -221,3 +222,10 @@
 .dark-mode .Welcome {
   color: white;
 }
+=======
+.actionsContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Adjust this value to control spacing between items */
+}
+>>>>>>> Stashed changes
