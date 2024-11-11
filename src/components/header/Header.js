@@ -3,52 +3,43 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
 import Logo from '../../images/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import AccountMenu from '../menuComp/AccountMenu';
 
 const Header = (props) => {
+  const location = useLocation();
   const pageNameHandler = (pageName) => {
-    if (pageName.includes('task/mission') && !pageName.includes('/fill/')) {
-      return 'Task Page';
-    } else if (pageName.includes('guides/editGuide')) {
-      return 'Edit A Guide';
-    } else if (pageName.includes('guides/details')) {
-      return 'Guide details';
-    } else if (pageName.includes('admin/editUser')) {
-      return 'Edit A User';
-    } else if (pageName.includes('admin/showUser')) {
-      return 'User details';
-    } else if (pageName.includes('missions/edit')) {
-      return 'Edit a mission';
-    } else if (pageName.includes('/fill/')) {
-      return 'Filling a task';
-    }
-    switch (pageName) {
-      case 'login':
-        return 'Login Page';
-      case '':
+    const path = location.pathname;
+    if (path.includes('task/mission') && !path.includes('/fill/')) return 'Task Page';
+    if (path.includes('admin/editUser')) return 'Edit A User';
+    if (path.includes('admin/showUser')) return 'User Details';
+    if (path.includes('missions/edit')) return 'Edit a Mission';
+    if (path.includes('/fill/')) return 'Filling a Task';
+
+    if (path.startsWith('/missions/MissionDetails')) return 'Mission Details';
+    switch (path) {
+      case '/':
         return 'Main Page';
-      case 'forgot':
+      case '/login':
+        return 'Login Page';
+      case '/forgot':
         return 'Password Reset';
-      case 'missions':
+      case '/missions':
         return 'Daily Missions';
-      case 'missions/newMission':
+      case '/missions/newMission':
         return 'Create A New Mission';
-      case 'guides':
-        return 'Guides Page';
-      case 'guides/addGuide':
-        return 'Add A Guide';
-      case 'admin':
-        return 'Admin page';
-      case 'admin/addUser':
+      case '/admin':
+        return 'Admin Page';
+      case '/admin/addUser':
         return 'Add a User';
-      case 'map':
+      case '/myAccount':
+        return 'My Account Page';
+      case '/map':
         return 'Management Map';
       default:
         return 'Unknown Page';
     }
   };
-
   return (
     <div className="header">
       <div className="buttonsContent">

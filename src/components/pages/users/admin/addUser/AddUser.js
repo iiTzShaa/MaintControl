@@ -19,6 +19,7 @@ const AddUser = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
@@ -65,43 +66,43 @@ const AddUser = () => {
   const token = localStorage.getItem('token');
 
   async function addUserFetch() {
+    const userData = {
+      username: username,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNumber: phoneNumber,
+      livingAddress: address,
+      geographicArea: area,
+      authorization: authorization,
+      companyId: companyId,
+    };
+  
+    // Print the body to the console
+    console.log("Request Body:", JSON.stringify(userData, null, 2));
+  
     try {
       const response = await fetch(
-        'http://localhost:3000/users',
+        'http://localhost:3000/users', // Ensure this points to the correct endpoint
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            user_name: username,
-            first_name: firstName,
-            last_name: lastName,
-            email: email,
-            password: password,
-            phone: phoneNumber,
-            role: authorization,
-            company_id: companyId,
-            location: {
-              address_name: address,
-              zone_name: area,
-              city: 'Holon',
-              country: 'Israel',
-              latitude: 34.052235,
-              longitude: -118.243683,
-            },
-          }),
+          }, 
+          credentials: 'include',
+          body: JSON.stringify(userData), // Send the body
         }
       );
-
+  
       if (!response.ok) {
         if (response.statusText === 'Unauthorized') {
           setError('Please login again');
         }
         throw new Error(response.statusText);
       }
-
+  
       console.log(response);
       navigate('/admin');
       return true;
@@ -110,6 +111,7 @@ const AddUser = () => {
       throw err;
     }
   }
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -150,7 +152,7 @@ const AddUser = () => {
               value={username}
               onChange={handleUsernameChange}
               required
-              placeholder="Please enter a username"
+              placeholder="Please enter a Username"
             />
           </label>
           <label className="addUserLabel" htmlFor="pass">
@@ -163,7 +165,7 @@ const AddUser = () => {
                 value={password}
                 onChange={handlePasswordChange}
                 required
-                placeholder="Please enter an 8 characters password"
+                placeholder="Please enter an 8 characters Password"
               />
               {showPassword && (
                 <VisibilityIcon className="eye" onClick={handleShowPassword} />
@@ -185,7 +187,7 @@ const AddUser = () => {
               value={firstName}
               onChange={handleFirstNameChange}
               required
-              placeholder="Please enter a first name"
+              placeholder="Please enter a First Name"
             />
           </label>
           <label className="addUserLabel" htmlFor="LastName">
@@ -197,11 +199,11 @@ const AddUser = () => {
               value={lastName}
               onChange={handleLastNameChange}
               required
-              placeholder="Please enter a last name"
+              placeholder="Please enter a Last Name"
             />
           </label>
           <label className="addUserLabel" htmlFor="Email">
-            Email adress:
+            Email Address:
             <input
               id="email"
               className="addUserInput"
@@ -209,7 +211,7 @@ const AddUser = () => {
               value={email}
               onChange={handleEmailChange}
               required
-              placeholder="Please enter a valid email"
+              placeholder="Please enter a valid Email"
             />
           </label>
           <label className="addUserLabel" htmlFor="phoneNumber">
@@ -221,7 +223,7 @@ const AddUser = () => {
               value={phoneNumber}
               onChange={handlePhoneNumberChange}
               required
-              placeholder="Please enter a valid phone number"
+              placeholder="Please enter a valid Phone Number"
             />
           </label>
           <label className="addUserLabel" htmlFor="Address">
@@ -233,7 +235,7 @@ const AddUser = () => {
               value={address}
               onChange={handleAddressChange}
               required
-              placeholder="Please enter an address"
+              placeholder="Please enter an Address"
             />
           </label>
           <label className="addUserLabel" htmlFor="Area">
@@ -262,10 +264,10 @@ const AddUser = () => {
               onChange={handleAuthorizationChange}
               required
             >
-              <option value="choose">Choose authorization</option>
+              <option value="choose">Choose Authorization</option>
               <option value="administrator">Admin</option>
               <option value="manager">Manager</option>
-              <option value="maintenance">Maintenance man</option>
+              <option value="maintenance">Maintenance Man</option>
             </select>
           </label>
           <label className="addUserLabel" htmlFor="companyId">
@@ -277,7 +279,7 @@ const AddUser = () => {
               value={companyId}
               onChange={handleCompanyIdChange}
               required
-              placeholder="Please enter a company id"
+              placeholder="Please enter a company ID"
             />
           </label>
         </div>

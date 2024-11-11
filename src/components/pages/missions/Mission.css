@@ -1,0 +1,95 @@
+
+
+
+
+.MissionName {
+  font-size: 2rem; /* גודל פונט גדול יותר עבור כותרת המשימה */
+  color: #fff; /* צבע טקסט לבן לניגודיות */
+  padding-left: 2rem; /* רווח משמאל ליישור */
+}
+
+.filterContent {
+  font-size: 1.2rem; /* גודל פונט עבור תכני סינון */
+  color: #fff; /* צבע טקסט לבן */
+  margin-right: 20px; /* רווח מימין */
+}
+
+.priorityHigh {
+  font-size: 1.2rem;
+  color: red;
+  font-weight: bold;
+}
+
+.priorityMedium {
+  font-size: 1.2rem;
+  color: orange;
+  font-weight: bold;
+}
+
+.priorityLow {
+  font-size: 1.2rem;
+  color: green;
+  font-weight: bold;
+}
+
+.missionDesc {
+  font-size: 0.9rem; /* גודל פונט עבור תיאור המשימה */
+  color: #ffffff; /* צבע טקסט לבן */
+  margin-top: 10px; /* מרווח מעל התיאור */
+}
+
+.MissionlistItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #0d3b66; /* צבע רקע כהה */
+  color: #fff;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.MissionlistItemContent {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+}
+
+.MissionStatus {
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 5px;
+  color: #fff;
+  min-width: 80px;
+  text-align: center;
+  font-size: 1.2rem; /* גודל פונט מותאם */
+}
+
+.statusTodo {
+  background-color: blue;
+}
+
+.statusInProgress {
+  background-color: orange;
+}
+
+.statusDone {
+  background-color: green;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column; /* סידור כפתורים אנכי */
+  align-items: center;
+  gap: 8px; /* רווח בין כפתורים */
+}
+
+.taskBtn {
+  margin-right: 2rem; /* רווח מימין */
+}

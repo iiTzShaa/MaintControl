@@ -93,15 +93,11 @@ export default function AccountMenu(props) {
             Admin
           </MenuItem>
         </Link>
-        <Link className="link" to="/guides" onClick={handleLinkClick}>
+        <Link className="link" to="/myAccount" onClick={handleLinkClick}>
           <MenuItem>
-            <Avatar />
-            Guides
+            <Avatar /> My account
           </MenuItem>
         </Link>
-        <MenuItem>
-          <Avatar /> My account
-        </MenuItem>
         <Link to="/missions" onClick={handleLinkClick}>
           <MenuItem>
             <Avatar /> Daily Missions
@@ -121,14 +117,23 @@ export default function AccountMenu(props) {
             Add account
           </MenuItem>
         </Link>
-        <Link to="login" onClick={handleLinkClick}>
+        <Link to="/" onClick={handleLinkClick}>
+        <MenuItem>
+        <ListItemIcon>
+        <Logout fontSize="small" />
+        </ListItemIcon>
+         Logout
+       </MenuItem>
+        </Link>
+
+        {/* <Link to="login" onClick={handleLinkClick}>
           <MenuItem>
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>
             Logout
           </MenuItem>
-        </Link>
+        </Link> */}
       </Menu>
     </React.Fragment>
   );

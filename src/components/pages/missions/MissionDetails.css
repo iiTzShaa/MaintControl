@@ -1,0 +1,86 @@
+.missionDetailsContainer {
+    padding: 24px;
+    background-color: #f4f7fa;
+    color: #333;
+    border-radius: 12px;
+    max-width: 900px;
+    margin: 30px auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .missionTitle {
+    font-size: 36px; 
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4), 
+                 4px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+  }
+  .missionTitle:hover {
+    transform: scale(1.05);
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5), 
+                 6px 6px 15px rgba(0, 0, 0, 0.3);
+  }
+  .missionDescription {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .statusButtons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .assignedUsersTable {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+  
+  .assignedUsersTable th,
+  .assignedUsersTable td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .assignedUsersTable tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .notesSection {
+    margin-top: 30px;
+  }
+  
+  .notesSection h3 {
+    font-size: 22px;
+    color: #173f5f;
+    margin-bottom: 10px;
+    text-align: center;
+  
+}
+  
+  .noteItem {
+    background-color: lightblue;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 2rem;
+    list-style-type:disc;
+  }
+  
+  .addNoteSection {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: center;
+  }
