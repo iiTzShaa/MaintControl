@@ -197,10 +197,9 @@
 .taskBtn {
   margin-left: 2rem;
 }
-
-.searchBar {
-  width: 95%;
-  padding: 10px;
+.searchBarByCity {
+  width: 500px !important;
+  padding: 10px !important;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 0.7rem;
@@ -220,4 +219,9 @@
 
 .dark-mode .Welcome {
   color: white;
+}
+.actionsContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px; 
 }

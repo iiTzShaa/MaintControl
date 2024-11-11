@@ -191,18 +191,13 @@ const MyAccount = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    
     const token = localStorage.getItem('token');
-    console.log("Token from localStorage in useEffect:", token); 
-
     if (!token) {
       console.error("No token found in localStorage. Redirecting to login.");
       return;
     }
 
     setLoading(true);
-
-    
     async function getUserDetails() {
       try {
         const response = await fetch(`http://localhost:3000/users/current`, {
@@ -215,15 +210,13 @@ const MyAccount = () => {
           throw new Error(response.statusText);
         }
         const data = await response.json();
-        console.log("User data fetched from server:", data); 
         setUser(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching user data from server:", error); 
+        console.error("Error fetching user data:", error);
         setLoading(false);
       }
     }
-
     getUserDetails();
   }, []);
 
@@ -233,35 +226,37 @@ const MyAccount = () => {
 
   return (
     <div className="myAccountBox">
-      <form className="myAccountFormContent">
-        <label className="myAccountLabel">
-          Username:
-          <input className="myAccountInput" value={user.username} readOnly />
-        </label>
-        <label className="myAccountLabel">
-          Full Name:
-          <input className="myAccountInput" value={`${user.firstName} ${user.lastName}`} readOnly />
-        </label>
-        <label className="myAccountLabel">
-          Authorization:
-          <input className="myAccountInput" value={user.authorization} readOnly />
-        </label>
-        <label className="myAccountLabel">
-          Company ID:
-          <input className="myAccountInput" value={user.companyId} readOnly />
-        </label>
-        <label className="myAccountLabel">
-          Phone Number:
-          <input className="myAccountInput" value={user.phoneNumber} readOnly />
-        </label>
-      </form>
+      <div className="leftSection">
+        <form className="myAccountFormContent">
+          <label className="myAccountLabel">
+            Username:
+            <input className="myAccountInput" value={user.username} readOnly />
+          </label>
+          <label className="myAccountLabel">
+            Full Name:
+            <input className="myAccountInput" value={`${user.firstName} ${user.lastName}`} readOnly />
+          </label>
+          <label className="myAccountLabel">
+            Authorization:
+            <input className="myAccountInput" value={user.authorization} readOnly />
+          </label>
+          <label className="myAccountLabel">
+            Company ID:
+            <input className="myAccountInput" value={user.companyId} readOnly />
+          </label>
+          <label className="myAccountLabel">
+            Phone Number:
+            <input className="myAccountInput" value={user.phoneNumber} readOnly />
+          </label>
+        </form>
+      </div>
 
-      <div className="missionsList">
-        <h3>Assigned Missions:</h3>
+      <div className="rightSection">
+        <h3 className="missionsTitle">Assigned Missions:</h3>
         {user.missions && user.missions.length > 0 ? (
-          <ul>
+          <ul className="missionsList">
             {user.missions.map((mission) => (
-              <li key={mission._id}>
+              <li key={mission._id} className="missionItem">
                 {mission.title} - {mission.city}
               </li>
             ))}
@@ -275,4 +270,3 @@ const MyAccount = () => {
 };
 
 export default MyAccount;
-

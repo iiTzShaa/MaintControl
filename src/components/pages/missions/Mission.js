@@ -990,6 +990,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Fab from '@mui/material/Fab';
 import NextWeekIcon from '@mui/icons-material/NextWeek';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 import EditIcon from '@mui/icons-material/Edit';
 import WorkerSelector from './WorkerSelector';
 import Checkbox from '@mui/material/Checkbox';
@@ -1022,24 +1023,15 @@ const Mission = (props) => {
     setIsDone((prevState) => !prevState);
   };
  
-  const toggleStatus = () => {
-    const newStatus = status === 'To Do' ? 'In Progress' : status === 'In Progress' ? 'Done' : 'To Do';
-    setStatus(newStatus);
-    // Optionally: Send update to server here
-  };
  
-  const addNote = () => {
-    if (newNote.trim()) {
-      setNotes((prevNotes) => [...prevNotes, newNote]);
-      setNewNote('');
-      // Optionally: Send new note to server here
-    }
-  };
- 
-  const deleteNote = (index) => {
-    setNotes((prevNotes) => prevNotes.filter((_, i) => i !== index));
-    // Optionally: Delete note from server here
-  };
+  const MissionStatusBox = ({ status }) => {
+    const getStatusClass = () => {
+      if (status === 'To Do') return 'status-todo';
+      if (status === 'In Progress') return 'status-inprogress';
+      if (status === 'Completed') return 'status-completed';
+      return '';
+    };}
+
  
   const priorityClass =
     props.mission.priority === 'High'
@@ -1050,6 +1042,7 @@ const Mission = (props) => {
       ? 'UrgencyLow'
       : 'Priority';
  
+<<<<<<< Updated upstream
   return (
 <div className={`MissionlistItem ${isDone ? 'done' : ''}`}>
 <div className="MissionlistItemContent">
@@ -1147,9 +1140,77 @@ const Mission = (props) => {
 </div>
 </div>
       )}
-      {selectedUser && <div className="selectedUser">Selected User ID: {selectedUser}</div>}
+      {selectedUser && <div className="selectedUser">{selectedUser.firstName} {selectedUser.lastName} has been assigned successfully.</div>}
 </div>
   );
 };
  
+=======
+ return (
+        <div className={`MissionlistItem ${isDone ? 'done' : ''}`}>
+          <div className="MissionlistItemContent">
+            <div className="MissionLabel">
+              <div className="MissionContent">
+                <div className="missionTitle">
+                  <span className="MissionName">{props.mission.title}</span>
+                  <div
+                    className={showDescription ? 'expansionArrow' : 'expansionArrowUp'}
+                    onClick={toggleDescription}
+                  >
+                    <KeyboardArrowDownIcon />
+                  </div>
+                </div>
+                <div className="filters">
+                  <div className="filterContent">
+                    <span className="filterTitle">Priority:</span>
+                    <span className={priorityClass}>{props.mission.priority}</span>
+                  </div>
+                  <div className="filterContent">
+                    <span className="filterTitle">City:</span>
+                    <span className="City">{props.mission.city}</span>
+                  </div>
+                  <div className="filterContent">
+                    <span className="filterTitle">Area:</span>
+                    <span className="Area">{props.mission.area}</span>
+                  </div>
+                  <div className="filterContent">
+                    <span className="filterTitle">Date:</span>
+                    <span className="Date">{new Date(props.mission.created_date).toLocaleDateString()}</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div
+                  className={`status-box ${
+                    props.mission.status === 'To Do'
+                      ? 'status-todo'
+                      : props.mission.status === 'In Progress'
+                      ? 'status-inprogress'
+                      : 'status-completed'
+                  }`}
+                >
+                  {props.mission.status.toUpperCase()}
+                </div>
+              </div>
+              <div className="buttonContainer">
+                <Link className="taskBtn" to={`/missions/MissionDetails/${props.mission._id}`} onClick={props.checkBoxHandler}>
+                  <Fab size="small" color="info" aria-label="add">
+                    <AssignmentIcon />
+                  </Fab>
+                </Link>
+                <Fab size="small" color="info" aria-label="edit" onClick={props.missionChangeHandler}>
+                  <EditIcon />
+                </Fab>
+              </div>
+            </div>
+          </div>
+          {showDescription && (
+            <div className="missionDesc">
+              <div>{props.mission.description}</div>
+            </div>
+          )}
+        </div>
+      );
+    };
+>>>>>>> Stashed changes
 export default Mission;

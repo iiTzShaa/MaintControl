@@ -93,3 +93,30 @@
 .taskBtn {
   margin-right: 2rem; /* רווח מימין */
 }
+.status-box {
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  text-align: center;
+  font-weight: normal;
+  font-size: 0.9rem;
+  width: 100px; 
+  height: 50px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.status-todo {
+  background-color: blue;
+}
+
+.status-inprogress {
+  background-color: orange;
+}
+
+.status-completed {
+  background-color: green;
+}
