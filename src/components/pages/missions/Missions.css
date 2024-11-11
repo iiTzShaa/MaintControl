@@ -205,4 +205,19 @@
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+.light-mode .MissionsTableBox {
+  background-color: #add8e6;
+  color: black;
+}
 
+.light-mode .Welcome {
+  color: #13162b;
+}
+.dark-mode .MissionsTableBox {
+  background-color: #333;
+  color: white;
+}
+
+.dark-mode .Welcome {
+  color: white;
+}
