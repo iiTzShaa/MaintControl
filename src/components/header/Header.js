@@ -44,22 +44,6 @@ const Header = (props) => {
     <div className="header">
       <div className="buttonsContent">
         <AccountMenu icon={MenuIcon} />
-        <div className="searchBarContent">
-          <SearchIcon
-            className="Icon searchIcon"
-            onClick={(event) =>
-              event.currentTarget.nextSibling.firstChild.focus()
-            }
-          />
-          <div className="searchBarH">
-            <TextField
-              id="outlined-basic"
-              label="Search"
-              variant="filled"
-              size="small"
-            />
-          </div>
-        </div>
       </div>
       
       <div className="pageName">{pageNameHandler(props.location)}</div>

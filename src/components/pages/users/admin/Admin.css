@@ -1,4 +1,17 @@
+.listHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 10px;
+}
 
+.listSubHeader {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #173f5f;
+}
 .searchAndButtonContainer {
   display: flex;
   align-items: center;
@@ -19,27 +32,6 @@
   margin: 0;
 }
 
-.btnPages {
-  position: absolute;
-  bottom: 15px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.btnPrevious {
-  position: absolute;
-  left: 4px;
-  background-color: white;
-  color: #173f5f;
-  cursor: pointer;
-  border-radius: 20%;
-  bottom: 31.8rem;
-  z-index: 9999;
-  padding: 0.5rem 1rem; 
-  font-size: 0.9rem; 
-}
 
 .list {
   border-radius: 15px;
@@ -49,7 +41,10 @@
   overflow: hidden;
   width: 100%;
 }
-
+.dark-mode .list {
+  background-color: #333;
+  color: white;
+}
 .list li {
   padding: 1rem;
   font-size: 1rem;
@@ -58,25 +53,6 @@
 
 .list li:last-child {
   border-bottom: none;
-}
-
-.btnNext {
-  position: absolute;
-  left: 689px;
-  background-color: white;
-  color: #173f5f;
-  cursor: pointer;
-  border-radius: 20%;
-  bottom: 31.8rem;
-  z-index: 9999;
-  padding: 0.5rem 1rem; 
-  font-size: 0.9rem; 
-}
-
-.btnPrevious:hover,
-.btnNext:hover {
-  scale: 1.1;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .listContainer {
@@ -96,9 +72,19 @@
 .listItemText {
   cursor: pointer;
 }
-
+.iconContainer {
+  display: flex;
+  align-items: center; 
+  justify-content: flex-end;
+  gap: 15px;
+  margin-left: auto;
+}
 .listItem {
-  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .listItem:hover {
@@ -149,19 +135,27 @@
   transform: scale(1.2);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
-.editIconEditOff,
-.editIconEditOn,
-.deleteIconRemovingOn,
-.deleteIconRemovingOff {
+
+.editIcon,
+.deleteIcon {
+  cursor: pointer;
   color: black;
-  scale: 1.8;
-  margin: 1rem;
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-  padding: 0.3rem;
-  margin-right: 1.5rem;
+  font-size: 24px;
+  line-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+.editIcon:hover,
+.deleteIcon:hover {
+  transform: scale(1.1);
 }
 
+.dark-mode .editIcon,
+.dark-mode .deleteIcon {
+  color: white;
+}
 .userBtn {
   display: flex;
   justify-content: center;
@@ -181,6 +175,35 @@
   transition: 0.3s all;
 }
 
+.btnPages {
+  display: flex;
+  gap: 15px; 
+  justify-content: center; 
+  margin-top: -20px;
+  margin-bottom: 10px;
+}
+
+.btnPrevious,
+.btnNext {
+  cursor: pointer;
+  padding: 0px;
+  border-radius: 50%;
+  background-color: #173f5f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btnPrevious:hover,
+.btnNext:hover {
+  background-color: #1a8cc8;
+  transform: translateY(-3px);
+}
 a {
   text-decoration: none !important;
   color: black;
@@ -208,33 +231,11 @@ a {
     width: 80%;
   }
 
-  .deleteIconRemovingOn,
-  .deleteIconRemovingOff,
-  .editIconEditOn,
-  .editIconEditOff,
-  .addIcon {
-    scale: 2;
-  }
-
   .list {
     width: 80%;
   }
 
-  .btnPages {
-    position: relative;
-  }
-
-  .btnNext {
-    left: calc(100% - 2px);
-    transform: translateX(-100%);
-    z-index: 1;
-  }
-
-  .btnPrevious {
-    top: -4.55rem;
-    z-index: 1;
-  }
-
+  
   label.MuiFormControlLabel-root.MuiFormControlLabel-labelPlacementEnd.formControlLabel.css-14qnuji-MuiFormControlLabel-root {
     margin-bottom: 0rem;
   }
@@ -252,4 +253,17 @@ a {
     border-radius: 15px;
     max-width: 90%;
   }
+}
+.secondaryText {
+  color: #333;
+}
+
+.dark-mode .secondaryText {
+  color: white; 
+}
+
+.dark-mode .MuiListSubheader-root {
+  color: white;
+  background-color: #333;
+  border-bottom: 2px solid #444;
 }

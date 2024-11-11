@@ -64,14 +64,17 @@
   
   .notesSection h3 {
     font-size: 22px;
+    font-weight:bold;
     color: #173f5f;
     margin-bottom: 10px;
     text-align: center;
-  
 }
-  
+
+
   .noteItem {
     background-color: lightblue;
+    color: black;
+    font-weight: bold;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 2rem;
@@ -83,4 +86,53 @@
     gap: 10px;
     margin-top: 15px;
     justify-content: center;
+    position: relative;
+    top: -5px; 
+    
+  }
+  .dark-mode .missionDetailsContainer {
+    background-color: #333;
+    color: white;
+  }
+  
+  .dark-mode .statusButtons button {
+    background-color: #555;
+  }
+  
+  .dark-mode .assignedUsersTable, 
+  .dark-mode .notesSection {
+    background-color: #444;
+    color: white;
+  }
+  
+  .dark-mode .addNoteSection .MuiButton-root {
+    background-color: #555;
+    color: #fff;
+  }
+  .dark-mode .missionTitle {
+    color: white;
+  }
+  
+  .dark-mode .missionDescription {
+    color: white;
+  }
+  .dark-mode .MuiSvgIcon-root {
+    color: white;
+  }
+  .dark-mode .assignedUsersTable tr:hover {
+    background-color: #555;
+  }
+  .dark-mode .notesSection h3 {
+    color: white; 
+  }
+  .dark-mode .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border-color: white;
+  }
+  
+  .dark-mode .MuiInputLabel-outlined {
+    color: white;
+  }
+  
+  .dark-mode .MuiOutlinedInput-input {
+    color: white;
   }

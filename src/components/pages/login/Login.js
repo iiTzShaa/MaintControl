@@ -157,7 +157,7 @@ import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import CartContext from '../../../store/cart-context';
 import { DarkMode } from '@mui/icons-material';
-const Login = () => {
+const Login = ({ darkMode }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [companyId, setCompanyId] = useState('');
@@ -273,7 +273,9 @@ const Login = () => {
  
         {error && <div className="loginError">{error}</div>}
 <br />
-<Link to="/forgot">Forgot my password or username</Link>
+<Link to="/forgot" className={darkMode ? 'dark-link' : 'light-link'}>
+  {darkMode ? "Forgot my password or username (Dark Mode)" : "Forgot my password or username"}
+</Link>
 <br />
 <button className="loginButton" type="submit">
           Login

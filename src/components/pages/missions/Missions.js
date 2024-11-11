@@ -1386,7 +1386,12 @@ const Missions = () => {
           className="searchBar"
         />
         <Link to="/missions/newMission">
-          <Fab size="small" color="primary" aria-label="add">
+          <Fab 
+            size="small" 
+            color="primary" 
+            aria-label="add"
+            style={{ marginLeft: '10px', marginTop: '-10px' }}
+            >
             <AddIcon />
           </Fab>
         </Link>
@@ -1396,6 +1401,7 @@ const Missions = () => {
           aria-label="delete"
           onClick={deleteSelectedMissions}
           disabled={selectedMissions.length === 0}
+          style={{marginLeft: '10px', marginTop: '-10px' }}
         >
           <DeleteIcon />
         </Fab>

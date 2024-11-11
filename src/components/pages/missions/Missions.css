@@ -199,11 +199,11 @@
 }
 
 .searchBar {
-  width: 300px; /* Set a fixed width */
+  width: 95%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 0.7rem;
 }
 .light-mode .MissionsTableBox {
   background-color: #add8e6;
