@@ -16,7 +16,7 @@ const Header = (props) => {
     if (path.includes('missions/edit')) return 'Edit a Mission';
     if (path.includes('/fill/')) return 'Filling a Task';
 
-    if (path.startsWith('/missions/MissionDetails')) return 'Mission Details Page';
+    if (path.startsWith('/missions/MissionDetails')) return 'Mission Details';
     switch (path) {
       case '/':
         return 'Main Page';
