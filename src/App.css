@@ -48,7 +48,9 @@ body.dark-mode {
   background-color: #121212;
   color: white;
 }
-
+body.dark-mode a {
+  color: white;
+}
 .App.dark-mode {
   background-color: #121212;
   color: white;

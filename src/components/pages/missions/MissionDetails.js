@@ -188,7 +188,7 @@ import WorkerSelector from './WorkerSelector';
 import DeleteIcon from '@mui/icons-material/Delete';
 import './MissionDetails.css';
 
-const MissionDetails = () => {
+const MissionDetails = ({ darkMode }) => {
   const { missionId } = useParams();
   const [mission, setMission] = useState(null);
   const [status, setStatus] = useState('');
@@ -258,7 +258,7 @@ const MissionDetails = () => {
   if (!mission) return <div>Loading...</div>;
 
   return (
-    <div className="missionDetailsContainer">
+    <div className={`missionDetailsContainer ${darkMode ? 'dark-mode' : 'light-mode'}`}>
       <h1 className="missionTitle">{mission.title}</h1>
       <p className="missionDescription">{mission.description}</p>
       <p><strong>Address:</strong> {mission.address}, {mission.city}</p>

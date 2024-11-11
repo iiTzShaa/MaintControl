@@ -197,20 +197,18 @@
 .taskBtn {
   margin-left: 2rem;
 }
-
 .searchBarByCity {
   width: 500px !important;
   padding: 10px !important;
   margin-bottom: 15px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 0.7rem;
 }
 .light-mode .MissionsTableBox {
   background-color: #add8e6;
   color: black;
 }
 
-<<<<<<< Updated upstream
 .light-mode .Welcome {
   color: #13162b;
 }
@@ -222,10 +220,8 @@
 .dark-mode .Welcome {
   color: white;
 }
-=======
 .actionsContainer {
   display: flex;
   align-items: center;
-  gap: 8px; /* Adjust this value to control spacing between items */
+  gap: 8px; 
 }
->>>>>>> Stashed changes

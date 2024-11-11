@@ -1464,9 +1464,15 @@ const Missions = () => {
           onChange={(e) => setSearchCity(e.target.value)}
           className="searchBarByCity"
         />
+
         <div className="actionsContainer">
-  <Link to="/missions/newMission">
-    <Fab size="small" color="primary" aria-label="add">
+        <Link to="/missions/newMission">
+          <Fab 
+            size="small" 
+            color="primary" 
+            aria-label="add"
+            style={{ marginLeft: '10px', marginTop: '-10px' }}
+            >
       <AddIcon />
     </Fab>
   </Link>
@@ -1475,6 +1481,7 @@ const Missions = () => {
     aria-label="delete"
     onClick={deleteSelectedMissions}
     disabled={selectedMissions.length === 0}
+    style={{marginLeft: '10px', marginTop: '-10px' }}
   >
     <DeleteIcon />
   </Fab>

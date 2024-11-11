@@ -1,0 +1,11 @@
+
+.worker-selector {
+  color: black; 
+  padding: 10px;
+  border-radius: 8px;
+}
+
+
+.dark-mode .worker-selector {
+  color: white;
+}

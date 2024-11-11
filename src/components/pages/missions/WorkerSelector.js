@@ -219,6 +219,7 @@
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import './WorkerSelector.css';
 
 const WorkerSelector = ({ missionId, onSelectUser }) => {
   const [users, setUsers] = useState([]);
@@ -269,7 +270,7 @@ const WorkerSelector = ({ missionId, onSelectUser }) => {
   };
   return (
     <div className="worker-selector">
-      <label htmlFor="userSelect" style={{ color: 'black', marginRight: '10px' }}>Assign to:</label>
+      <label htmlFor="userSelect">Assign to:</label>
       <select id="userSelect" onChange={(e) => handleSelectUser(e.target.value)}>
         <option value="">Select User</option>
         {users.map((user) => (

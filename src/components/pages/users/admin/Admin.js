@@ -154,33 +154,7 @@ const Admin = () => {
           />
         </FormGroup>
       </div>
-
-      <List className="list">
-        <ListSubheader className="listSubHeader">Users</ListSubheader>
-        {displayedUsers.length === 0 ? (
-          <ListItemText primary="User not exist" />
-        ) : (
-          displayedUsers.map((user) => (
-            <ListItem className="listItem" key={user._id}>
-              <Link to={`/admin/showUser/${user._id}`}>
-                <ListItemText
-                  primary={`${user.firstName} ${user.lastName}`}
-                  secondary={`${user.authorization}`}
-                />
-              </Link>
-              <Link to={`/admin/editUser/${user._id}`} className="editIcon">
-                <EditIcon />
-              </Link>
-              <DeleteIcon
-                className="deleteIcon"
-                onClick={() => handleDeleteUser(user._id)}
-                style={{ cursor: 'pointer' }}
-              />
-            </ListItem>
-          ))
-        )}
-      </List>
-
+            
       <div className="btnPages">
         {page > 0 && (
           <ArrowLeftIcon className="btnPrevious" onClick={() => setPage(page - 1)} />
@@ -189,6 +163,34 @@ const Admin = () => {
           <ArrowRightIcon className="btnNext" onClick={() => setPage(page + 1)} />
         )}
       </div>
+      <List className="list">
+      <ListSubheader className="listSubHeader">Users</ListSubheader>
+        {displayedUsers.length === 0 ? (
+          <ListItemText primary="User not exist" />
+        ) : (
+          displayedUsers.map((user) => (
+            <ListItem className="listItem" key={user._id}>
+              <Link to={`/admin/showUser/${user._id}`}>
+                <ListItemText
+                  primary={`${user.firstName} ${user.lastName}`}
+                  secondary={ 
+                           <span className="secondaryText">{user.authorization}</span>
+                          }
+                />
+              </Link>
+              <div className="iconContainer">
+                <Link to={`/admin/editUser/${user._id}`} className="editIcon">
+                <EditIcon />
+              </Link>
+              <DeleteIcon
+                className="deleteIcon"
+                onClick={() => handleDeleteUser(user._id)}
+              />
+                  </div>
+            </ListItem>
+          ))
+        )}
+      </List>
     </div>
   );
 };

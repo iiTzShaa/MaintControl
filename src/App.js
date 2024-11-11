@@ -138,6 +138,7 @@ import TaskAddForm from './components/pages/task/TaskAddForm';
 import FillTask from './components/pages/task/fillTask/FillTask';
 import MyAccount from './components/pages/myAccount/myAccount';
 import { useEffect, useState } from 'react';
+
  
 function App() {
   const location = useLocation().pathname.replace('/', '');

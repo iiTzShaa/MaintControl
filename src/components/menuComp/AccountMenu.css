@@ -2,3 +2,40 @@
     text-decoration: none;
     color: black
 }
+.menu-item {
+    color: black;
+    background-color: white;
+  }
+  
+  .dark-mode .menu-item {
+    color: white; 
+    background-color: #333;
+  }
+  
+  .dark-mode .link {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .dark-mode .MuiMenu-paper {
+    background-color: #444;
+    color: white;
+  }
+  
+  .dark-mode .MuiAvatar-root {
+    background-color: #555;
+    color: white;
+  }
+  .Icon {
+    cursor: pointer;
+  }
+  
+  .light-mode .Icon {
+    background-color: white;
+    color: black;
+  }
+  
+  .dark-mode .Icon {
+    background-color: #333;
+    color: white;
+  }

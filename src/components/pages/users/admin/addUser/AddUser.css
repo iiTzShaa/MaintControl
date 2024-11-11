@@ -10,10 +10,23 @@
   border-radius: 1rem;
   box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 }
-
-.addUserForm {
-  width: 100%;
-  margin: 1rem auto;
+.dark-mode .addUserBox {
+  background: #333;
+  border: 1px solid #555;
+}
+.addUserLabel,
+.addAddressLabel {
+  font-size: 1.4rem;
+  font-weight: bold;
+  display: block;
+  width: 28rem;
+  padding: 0 2rem;
+  margin: 0.5rem auto;
+  color: white;
+}
+.dark-mode .addUserLabel,
+.dark-mode .addAddressLabel {
+  color: #ddd;
 }
 
 .addUserFormContent {
@@ -53,15 +66,29 @@
   padding: 0.5rem;
   text-align: center;
   width: 100%;
-  border-radius: 0.5rem;
+  border-radius: 0.7rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
+.dark-mode .addUserInput {
+  background-color: rgba(50, 50, 50, 0.8);
+  color: #ddd;
+  border: 1px solid #666;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  outline: none; 
+}
+.dark-mode .addUserInput:focus {
+  border: 1px solid #1a73e8;
+  box-shadow: 0 0 8px rgba(26, 115, 232, 0.6);
+}
 .addUserInput option {
   background: #173f5f;
   color: #fff;
 }
 
+.dark-mode .addUserInput option {
+  background: #444;
+  color: white;
+}
 .passContent {
   display: flex;
   justify-content: space-between;
@@ -69,14 +96,12 @@
   text-align: center;
 }
 
-.eye {
-  margin-top: 0.8rem;
-  margin-left: 0.8rem;
-}
-
+.eye,
 .eyeOff {
   margin-top: 0.8rem;
   margin-left: 0.8rem;
+  cursor: pointer;
+  color: white;
 }
 
 .addUserError {
@@ -96,9 +121,17 @@
   transition: background-color 0.2s ease-in-out;
   margin-top: 1rem;
 }
+.dark-mode .addUserButton {
+  background-color: #444;
+  color: white;
+}
 
 .addUserButton:hover {
   background-color: rgb(169, 196, 215);
+}
+
+.dark-mode .addUserButton:hover {
+  background-color: #666;
 }
 
 .addUserButton:active {
