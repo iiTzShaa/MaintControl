@@ -248,6 +248,9 @@ const WorkerSelector = ({ missionId, onSelectUser }) => {
       return;
     }
 
+    const selectedUser = users.find(user => user._id === userId);
+    if (!selectedUser) return;
+
     try {
       const response = await fetch(`http://localhost:3000/users/${userId}/assign-mission/${missionId}`, {
         method: 'POST',
@@ -256,7 +259,7 @@ const WorkerSelector = ({ missionId, onSelectUser }) => {
 
       if (response.ok) {
         console.log('User assigned successfully');
-        onSelectUser(userId); // Update the selected user ID in the parent component
+        onSelectUser(selectedUser);
       } else {
         console.error('Failed to assign user');
       }
