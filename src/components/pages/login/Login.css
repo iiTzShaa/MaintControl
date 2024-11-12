@@ -47,16 +47,17 @@
     text-align: center;
 }
 
-.eye {
+.eye, .eyeOff {
     margin-top: 0.8rem;
     margin-left: 0.8rem;
+    color: black !important;
 }
 
-.eyeOff {
-    margin-top: 0.8rem;
-    margin-left: 0.8rem;
-}
 
+.dark-mode .eye,
+.dark-mode .eyeOff {
+    color: white !important;
+}
 .loginError {
     color: red;
     font-weight: bold;
