@@ -79,38 +79,31 @@ router.post('/login', async (req, res) => {
 
   console.log("Login attempt:", { username, companyId });
 
-  // בדוק אם כל השדות קיימים
   if (!username || !password || !companyId) {
     return res.status(400).json({ message: 'Please provide username, password, and company ID.' });
   }
 
   try {
-    // חפש את המשתמש לפי שם משתמש ומזהה חברה
     const user = await User.findOne({ username, companyId });
 
     if (!user) {
-      // אם המשתמש לא נמצא, החזר שגיאה מתאימה
       return res.status(400).json({ message: 'Invalid username or company ID.' });
     }
 
-    // השוואת הסיסמה
-    // const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, user.password);
 
-    // if (!isMatch) {
-    //   // אם הסיסמה לא נכונה, החזר שגיאה
-    //   return res.status(400).json({ message: 'Invalid password.' });
-    // }
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid password.' });
+    }
  
-    // יצירת טוקן JWT עם מזהה המשתמש והרשאה
     const token = jwt.sign(
       { userId: user._id, authorization: user.authorization },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' }
+      { expiresIn: '3h' }
     );
 
     console.log("Token created:", token);
     
-    // שלח את הטוקן וההרשאה ללקוח
     res.json({ token, authorization: user.authorization });
 
   } catch (err) {

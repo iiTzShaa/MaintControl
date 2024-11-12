@@ -678,11 +678,11 @@ router.post('/', async (req, res) => {
     }
 
     // Hash the password before saving
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
       username,
-      password: hashedPassword,
+      password, //hashedPassword,
       firstName,
       lastName,
       email,
