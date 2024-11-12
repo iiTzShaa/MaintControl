@@ -1093,7 +1093,7 @@ const Mission = (props) => {
                     <AssignmentIcon />
                   </Fab>
                 </Link>
-                <Fab size="small" color="info" aria-label="edit" onClick={props.missionChangeHandler}>
+                <Fab size="small" color="info" aria-label="edit"  onClick={missionChangeHandler}>
                   <EditIcon />
                 </Fab>
               </div>
