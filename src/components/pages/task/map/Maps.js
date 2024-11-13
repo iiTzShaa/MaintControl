@@ -23,14 +23,14 @@ const position = [51.505, -0.09];
 const position2 = [32.1098, 34.8382];
 const NOMINATIM_REVERSE_URL = 'https://nominatim.openstreetmap.org/reverse';
 
-// ------------------------------------------------------
+
 
 function ResetsCenterView(props) {
   const { selectedPosition } = props;
   const map = useMap();
 
   useEffect(() => {
-    // console.log(selectedPosition?.lat, selectedPosition?.lon);
+  
     if (selectedPosition) {
       map.flyTo(L.latLng(selectedPosition?.lat, selectedPosition?.lon), 17, {
         animate: true,
@@ -44,7 +44,7 @@ function ResetsCenterView(props) {
   return null;
 }
 
-// ------------------------------------------------------
+
 
 const LocationMarker = (props) => {
   const fetchCurrentInfo = (latlng) => {
@@ -81,7 +81,7 @@ const LocationMarker = (props) => {
       map.flyTo(e.latlng, 17);
       fetchCurrentInfo(e.latlng);
 
-      //checks if location 2 in radius to current location
+      
       isMarkerInsideCircle(L.latLng(position2), L.latLng(e.latlng), 100);
     },
   });
@@ -94,8 +94,7 @@ const isMarkerInsideCircle = (
   circleCenterLatLng,
   circleRadius
 ) => {
-  // markerLatLng and circleCenterLatLng must be instance of L.latlng class.
-  // you can create an instance like this L.latLng(lat, lng);
+  
   if (markerLatLng.distanceTo(circleCenterLatLng) <= circleRadius) {
     console.log('true');
     return true;
@@ -105,7 +104,7 @@ const isMarkerInsideCircle = (
   }
 };
 
-// ------------------------------------------------------
+
 
 export default function Maps(props) {
   const [updatedLocation, setUpdatedLocation] = useState(position);

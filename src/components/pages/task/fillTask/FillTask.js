@@ -12,7 +12,7 @@ const FillTask = () => {
   const { taskId } = useParams();
   const [currentSubtask, setCurrentSubtask] = useState(0);
 
-  //finding subtasks
+
   const currentSubtasks = subtasksJson.find((subtask) => {
     return +subtask.father_task_id === +taskId;
   });
@@ -20,7 +20,7 @@ const FillTask = () => {
     currentSubtasks ? currentSubtasks.subtasks : []
   );
 
-  //tabs handler
+  
   const tabHandler = (subtaskIndex) => {
     setCurrentSubtask(subtaskIndex);
   };

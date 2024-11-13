@@ -7,7 +7,7 @@ import './AddUser.css';
 const AddUser = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // new state to track whether to show or hide the password
+  const [showPassword, setShowPassword] = useState(false); 
   const [companyId, setCompanyId] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -53,7 +53,7 @@ const AddUser = () => {
   };
 
   const handleShowPassword = () => {
-    setShowPassword(!showPassword); // toggle showPassword state
+    setShowPassword(!showPassword); 
   };
 
   const handleAddressChange = (event) => {
@@ -79,12 +79,12 @@ const AddUser = () => {
       companyId: companyId,
     };
   
-    // Print the body to the console
+    
     console.log("Request Body:", JSON.stringify(userData, null, 2));
   
     try {
       const response = await fetch(
-        'http://localhost:3000/users', // Ensure this points to the correct endpoint
+        'http://localhost:3000/users', 
         {
           method: 'POST',
           headers: {
@@ -92,7 +92,7 @@ const AddUser = () => {
             Authorization: `Bearer ${token}`,
           }, 
           credentials: 'include',
-          body: JSON.stringify(userData), // Send the body
+          body: JSON.stringify(userData), 
         }
       );
   
@@ -161,7 +161,7 @@ const AddUser = () => {
               <input
                 id="pass"
                 className="addUserInput"
-                type={showPassword ? 'text' : 'password'} // show text if showPassword is true, otherwise show password
+                type={showPassword ? 'text' : 'password'} 
                 value={password}
                 onChange={handlePasswordChange}
                 required

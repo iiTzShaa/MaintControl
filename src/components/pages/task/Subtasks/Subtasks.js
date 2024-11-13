@@ -75,10 +75,10 @@ const Subtasks = () => {
       <div className="subtaskTabBox">
         {subtasks &&
           subtasks.map((subtask, subtaskIndex) => {
-            const isActive = currentSubtask === subtaskIndex; // Check if current subtask is active
+            const isActive = currentSubtask === subtaskIndex; 
             return (
               <div
-                className={`subtaskTab ${isActive ? 'active' : ''}`} // Add "active" class to active tab
+                className={`subtaskTab ${isActive ? 'active' : ''}`} 
                 key={subtaskIndex}
                 tabNum={subtaskIndex}
                 onClick={tabHandler.bind(this, subtaskIndex)}

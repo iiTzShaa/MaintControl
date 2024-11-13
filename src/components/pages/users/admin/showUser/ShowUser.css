@@ -170,34 +170,6 @@
         box-shadow: -24px 0 #FFF, 24px 0 #173f5f;
     }
 }
-
-/* @media screen and (max-width: 900px) {
-  .editUserBox {
-    width: 80%;
-    margin: 30px auto;
-  }
-
-  .editUserInput {
-    display: block;
-    min-width: 100%;
-    border: none;
-    height: 2rem;
-    margin: 0 auto;
-    margin-top: 0.8rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding: 0.5rem;
-    width: 100%;
-    text-align: center;
-  }
-
-  .editUserForm {
-    width: 50%;
-    margin: 0rem auto;
-    min-width: 14rem;
-  }
-} */
-
 @media (max-width: 767px) {
     .showUserBox {
         display: flex;
