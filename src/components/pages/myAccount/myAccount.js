@@ -262,7 +262,7 @@ const MyAccount = () => {
             ))}
           </ul>
         ) : (
-          <p>No missions assigned</p>
+            <p style={{ color: 'white' }}>No missions assigned</p>
         )}
       </div>
     </div>
