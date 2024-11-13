@@ -3,8 +3,12 @@
   color: black; 
   padding: 10px;
   border-radius: 8px;
+  
 }
 
+.worker-selector label {
+  margin-right: 10px; 
+}
 
 .dark-mode .worker-selector {
   color: white;
