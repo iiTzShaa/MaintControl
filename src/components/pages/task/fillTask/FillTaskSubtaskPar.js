@@ -13,7 +13,7 @@ const FillTaskSubtaskPar = ({
 }) => {
   const [paragraphNotes, setParagraphNotes] = useState([]);
 
-  // Add note handler
+  
   function handleAddNote() {
     setSubtasks((prevSubtasks) => {
       const newSubtasks = [...prevSubtasks];
@@ -33,7 +33,7 @@ const FillTaskSubtaskPar = ({
     });
   }
 
-  // Add photo handler
+  
   function handleAddPhoto(subtaskIndex, paragraphIndex, event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -58,7 +58,7 @@ const FillTaskSubtaskPar = ({
     reader.readAsDataURL(file);
   }
 
-  // Remove photo handler
+  
   const handleRemoveImage = (subtaskIndex, paragraphIndex, index) => {
     setSubtasks((prevSubtasks) => {
       const newSubtasks = [...prevSubtasks];

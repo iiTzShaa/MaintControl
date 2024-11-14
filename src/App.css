@@ -90,7 +90,7 @@ body.dark-mode a {
 }
 
 .toggle-switch.active::before {
-  left: 27px;
+  left: 22px;
 }
 
 .toggle-label {
@@ -109,17 +109,11 @@ body.dark-mode a {
 .dark-mode .toggle-switch::before {
   background-color: #bbb;
 }
-.dark-mode .toggle-switch {
-  background-color: #555; 
-}
 
 .dark-mode .toggle-switch::before {
   background-color: #bbb;
 }
 
-.dark-mode .toggle-label {
-  color: white;
-}
 
 .toggle-switch {
   width: 50px;

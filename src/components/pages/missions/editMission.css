@@ -7,11 +7,15 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     font-family: Arial, sans-serif;
 }
-
+.dark-mode .edit-mission-form-container {
+    background: #2a2a2a;
+}
 .edit-mission-form-container .form-group {
     margin-bottom: 1.5rem;
 }
-
+.dark-mode .edit-mission-form-container .form-group label {
+    color: #ddd;
+}
 .edit-mission-form-container .form-group label {
     display: block;
     font-size: 1rem;
@@ -35,6 +39,21 @@
     caret-color: #fff;
     text-align: start;
 }
+.dark-mode .edit-mission-form-container .form-group input[type="text"],
+.dark-mode .edit-mission-form-container .form-group textarea,
+.dark-mode .edit-mission-form-container .form-group input[type="date"],
+.dark-mode .edit-mission-form-container .form-group select {
+    background-color: rgba(50, 50, 50, 0.8);
+    color: #ddd;
+    border: 1px solid #555;
+}
+.dark-mode .edit-mission-form-container .form-group input[type="text"]:focus,
+.dark-mode .edit-mission-form-container .form-group textarea:focus,
+.dark-mode .edit-mission-form-container .form-group input[type="date"]:focus,
+.dark-mode .edit-mission-form-container .form-group select:focus {
+    background-color: rgba(70, 70, 70, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 
 .edit-mission-form-container .form-group input[type="text"]:focus,
 .edit-mission-form-container .form-group textarea:focus,
@@ -52,6 +71,10 @@
     background: #173f5f;
     color: #fff;
 }
+.dark-mode .edit-mission-form-container .form-group select option {
+    background: #444;
+    color: #ddd;
+}
 
 .create-mission-btn {
     background-color: white;
@@ -65,7 +88,15 @@
     transition: background-color 0.2s ease-in-out;
     margin-top: 1rem;
 }
-
+.dark-mode .create-mission-btn {
+    background-color: #444;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 .create-mission-btn:hover {
     background-color: rgb(169, 196, 215);
+}
+
+.dark-mode .create-mission-btn:hover {
+    background-color: #5b86e5;
 }

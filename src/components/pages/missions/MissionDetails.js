@@ -116,7 +116,7 @@ const MissionDetails = ({ darkMode }) => {
           <tbody>
             {mission.users?.map((user) => (
               <tr key={user._id}>
-                <td>{user.firstName}</td>
+                <td style={{ fontWeight: 'normal' }}>{user.firstName}</td>
                 <td>{user.lastName}</td>
                 <td>{user.phoneNumber}</td>
                 <td>

@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import './Forgot.css';
 
 const Forgot = () => {
-  const [email, setEmail] = useState(''); // email state to track the email entered in the form
-  const [success, setSuccess] = useState(false); // success state to track whether the reset request was successful
-  const [error, setError] = useState(''); // error state to track any errors during the reset process
-
+  const [email, setEmail] = useState(''); 
+  const [success, setSuccess] = useState(false); 
+  const [error, setError] = useState(''); 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -34,13 +33,13 @@ const Forgot = () => {
       return;
     }
 
-    // Send the reset request
+  
     sendResetRequest(email)
       .then(() => {
-        setSuccess(true); // set success to true if the reset request was successful
+        setSuccess(true);
       })
       .catch((err) => {
-        setError(err.message); // set the error message if there was an error
+        setError(err.message); 
       });
   };
 

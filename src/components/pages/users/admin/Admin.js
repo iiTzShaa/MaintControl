@@ -17,7 +17,7 @@ import './Admin.css';
 
 const token = localStorage.getItem('token');
 
-// פונקציה לשליפת משתמשים מהשרת
+
 async function getUsers() {
   try {
     const response = await fetch('http://localhost:3000/users', {
@@ -37,7 +37,7 @@ async function getUsers() {
   }
 }
 
-// פונקציה למחיקת משתמש לפי ID
+
 async function deleteUser(userId) {
   try {
     const response = await fetch(`http://localhost:3000/users/${userId}`, {
@@ -78,7 +78,7 @@ const Admin = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  // סינון משתמשים לפי תפקיד ומונח חיפוש
+  
   const filteredUsers = users.filter(
     (user) =>
       (checkedRoles.administrator && user.authorization === 'administrator') ||
@@ -92,7 +92,7 @@ const Admin = () => {
 
   const displayedUsers = filteredUsers.slice(startIndex, endIndex);
 
-  // פונקציה לטיפול במחיקת משתמש
+  
   const handleDeleteUser = (userId) => {
     deleteUser(userId)
       .then(() => {
