@@ -34,8 +34,6 @@ const Header = (props) => {
         return 'Add a User';
       case '/myAccount':
         return 'My Account';
-      case '/map':
-        return 'Management Map';
       default:
         return 'Unknown Page';
     }
