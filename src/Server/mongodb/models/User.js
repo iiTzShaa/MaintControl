@@ -57,6 +57,14 @@ const userSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Mission'
     }],
+    resetToken: {
+      type: String,
+      default: null,
+    },
+    resetTokenExpiration: {
+      type: Date,
+      default: null,
+    },
 });
 
 // Hash the password before saving

@@ -1,4 +1,5 @@
 
+
 import './App.css';
 import Header from './components/header/Header';
 import Login from './components/pages/login/Login';
@@ -18,7 +19,6 @@ import ShowUser from './components/pages/users/admin/showUser/ShowUser';
 import MyAccount from './components/pages/myAccount/myAccount';
 import { useEffect, useState } from 'react';
 
- 
 function App() {
   const location = useLocation().pathname.replace('/', '');
   const [guides, setGuides] = useState([]);
@@ -33,6 +33,7 @@ function App() {
       document.body.classList.remove('dark-mode');
     }
   };
+
   useEffect(() => {
     var currentDate = new Date();
     var currentDateWithoutTime = currentDate.toISOString().split('T')[0];
@@ -46,8 +47,7 @@ function App() {
   
   return (
     <CartProvider>
-
-        <div className={`App ${darkMode ? 'dark-mode' : 'light-mode'}`}>
+      <div className={`App ${darkMode ? 'dark-mode' : 'light-mode'}`}>
         <Header 
           location={location} 
           darkMode={darkMode} 
@@ -57,6 +57,8 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="login" element={<Login />} />
           <Route path="forgot" element={<Forgot />} />
+          <Route path="reset-password/:token" element={<Forgot />} />
+
         
           {token && <Route path="missions" element={<Missions />} />}
           {token && (
@@ -66,7 +68,7 @@ function App() {
             <Route path="missions/edit/:missionId" element={<EditMission />} />
           )}
           {token && (
-            <Route path="missions/MissionDetails/:missionId" element={<MissionDetails />} /> // Add route for MissionDetails
+            <Route path="missions/MissionDetails/:missionId" element={<MissionDetails />} />
           )}
           {token && <Route path="admin" element={<Admin />} />}
           {token && <Route path="admin/addUser" element={<AddUser />} />}
@@ -80,9 +82,7 @@ function App() {
         </Routes>
       </div>
     </CartProvider>
-
   );
 }
- 
+
 export default App;
- 
