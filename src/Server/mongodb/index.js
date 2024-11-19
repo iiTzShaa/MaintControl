@@ -6,6 +6,7 @@ const userRoutes = require('./routes/userRoutes');
 const missionRoutes = require('./routes/missionRoutes');
 const authRoutes = require('./routes/auth'); 
 const cors = require('cors');
+const passwordReset = require('./routes/passwordReset');
 
 const app = express();
 app.use(express.json()); // Middleware to parse JSON
@@ -47,6 +48,8 @@ connectDB();
 app.use('/users', userRoutes);  // Users without /api prefix
 app.use('/api/missions', missionRoutes); // Missions with /api prefix
 app.use('/auth', authRoutes); // Authentication without /api prefix
+app.use('/api/password-reset', passwordReset);
+
 
 // Example route
 app.get('/', (req, res) => {
