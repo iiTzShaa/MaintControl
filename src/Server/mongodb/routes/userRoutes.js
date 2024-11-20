@@ -177,7 +177,7 @@ router.post('/:userId/release-mission/:missionId', async (req, res) => {
 
 
 // Route to delete a specific user by ID
-router.delete('/:userId', authenticate, async (req, res) => {
+router.delete('/:userId', async (req, res) => {
   const { userId } = req.params;
   console.log(`Attempting to delete user with ID: ${userId}`);
 

@@ -44,7 +44,7 @@ async function deleteUser(userId) {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+       // Authorization: `Bearer ${token}`,
       },
     });
     if (!response.ok) {
