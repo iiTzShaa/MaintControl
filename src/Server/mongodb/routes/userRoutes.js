@@ -1,7 +1,6 @@
 const express = require('express');
 const User = require('../models/User');
 const Mission = require('../models/Mission');
-const bcrypt = require('bcrypt');
 const authenticate = require('./middlewareAuth');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -20,12 +19,9 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'User with this username or email already exists' });
     }
 
-    // Hash the password before saving
-    // const hashedPassword = await bcrypt.hash(password, 10);
-
     const newUser = new User({
       username,
-      password, //hashedPassword,
+      password,
       firstName,
       lastName,
       email,

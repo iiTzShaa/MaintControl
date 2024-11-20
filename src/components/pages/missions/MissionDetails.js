@@ -50,10 +50,9 @@ const MissionDetails = ({ darkMode }) => {
   };
 
   const handleUserChange = (selectedUser) => {
-    // בדיקה אם המשתמש כבר קיים ברשימה
     if (mission.users.some((user) => user._id === selectedUser._id)) {
       console.log('User already assigned to mission');
-      return; // עצור את ההוספה אם המשתמש כבר קיים
+      return; 
     }
   
     setMission((prevMission) => ({

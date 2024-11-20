@@ -5,8 +5,8 @@ const express = require('express');
 const userRoutes = require('./routes/userRoutes');
 const missionRoutes = require('./routes/missionRoutes');
 const authRoutes = require('./routes/auth'); 
-const cors = require('cors');
 const passwordReset = require('./routes/passwordReset');
+const cors = require('cors');
 
 const app = express();
 app.use(express.json()); // Middleware to parse JSON

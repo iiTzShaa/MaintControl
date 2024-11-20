@@ -28,7 +28,7 @@ const Mission = (props) => {
   };
  
   const missionChangeHandler = () => {
-    navigate(`/missions/edit/${props.mission._id}`);
+    navigate(`/missions/edit/${props.mission._id}`); //editmission
   };
  
   const checkBoxHandler = (event) => {
