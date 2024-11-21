@@ -3,7 +3,6 @@ const User = require('../models/User');
 const Mission = require('../models/Mission');
 const authenticate = require('./middlewareAuth');
 const router = express.Router();
-const mongoose = require('mongoose');
 
 
 // Route to create a new user

@@ -15,13 +15,12 @@ console.log('JWT_SECRET:', process.env.JWT_SECRET);
 const uri = process.env.MONGODB_URI;
 
 app.use(cors({
-  origin: 'http://localhost:3001', // Replace this with the port your React app is running on
+  origin: 'http://localhost:3001', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
 
-app.options('*', cors()); // Enable preflight requests for all routes
-
+app.options('*', cors()); 
 if (!uri) {
   console.error('MongoDB URI is not defined! Make sure to configure .env file.');
   process.exit(1);
@@ -51,7 +50,6 @@ app.use('/auth', authRoutes); // Authentication without /api prefix
 app.use('/api/password-reset', passwordReset);
 
 
-// Example route
 app.get('/', (req, res) => {
   res.send('API is running!');
 });
