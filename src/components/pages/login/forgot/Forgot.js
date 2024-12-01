@@ -10,6 +10,8 @@ const Forgot = () => {
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
+/*בדיקה בדיקה*/
+
 
   async function sendResetRequest(email) {
     try {
