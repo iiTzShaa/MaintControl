@@ -83,7 +83,9 @@ function EditMission() {
             required
           />
         </div>
-        <SearchAddress setPicked={setPicked} setAddressVal={setAddressVal} />
+        <SearchAddress setPicked={setPicked} setAddressVal={setAddressVal}
+        setFullAddress={(value) => {/* עדכון אם נדרש */}} />
+        
         <div className="form-group">
           <label htmlFor="city">City</label>
           <input
